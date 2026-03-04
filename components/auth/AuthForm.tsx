@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -47,8 +46,7 @@ export function AuthForm({ mode, message, next: nextProp }: AuthFormProps) {
     const [error, setError] = useState<string | null>(message || null)
     const supabase = createClient()
     const router = useRouter()
-    const searchParams = useSearchParams()
-    const next = nextProp ?? searchParams.get('next') ?? '/app'
+    const next = nextProp ?? '/app'
 
     // ── sign-up state ──────────────────────────────────────────
     const [password, setPassword] = useState('')
