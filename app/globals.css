@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ===== IPTV Premium Dark Theme ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --radius: 0.625rem;
+  /* Dark mode first — these are the defaults */
+  --background: #0a0f1a;
+  --foreground: #e8edf5;
+  --card: #111827;
+  --card-foreground: #e8edf5;
+  --popover: #111827;
+  --popover-foreground: #e8edf5;
+  --primary: #00d4ff;
+  --primary-foreground: #0a0f1a;
+  --secondary: #1a2332;
+  --secondary-foreground: #e8edf5;
+  --muted: #1a2332;
+  --muted-foreground: #8899aa;
+  --accent: #00d4ff;
+  --accent-foreground: #0a0f1a;
+  --destructive: #ff4d6a;
+  --destructive-foreground: #e8edf5;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #00d4ff;
+
+  /* Chart colors */
+  --chart-1: #00d4ff;
+  --chart-2: #00e5a0;
+  --chart-3: #fbbf24;
+  --chart-4: #a855f7;
+  --chart-5: #ff4d6a;
+
+  /* Sidebar (admin) */
+  --sidebar: #111827;
+  --sidebar-foreground: #e8edf5;
+  --sidebar-primary: #00d4ff;
+  --sidebar-primary-foreground: #0a0f1a;
+  --sidebar-accent: #1a2332;
+  --sidebar-accent-foreground: #e8edf5;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #00d4ff;
+
+  /* Custom IPTV tokens */
+  --glow-primary: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 60px rgba(0, 212, 255, 0.15);
+  --glow-gold: 0 0 20px rgba(251, 191, 36, 0.4), 0 0 60px rgba(251, 191, 36, 0.15);
+  --gradient-hero: linear-gradient(135deg, #0a0f1a 0%, #0f172a 40%, #1a1040 100%);
+  --gradient-accent: linear-gradient(135deg, #00d4ff 0%, #00e5a0 100%);
+  --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  --glass-bg: rgba(17, 24, 39, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.06);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
+
+/* ===== Utility Classes ===== */
+
+.glow-primary {
+  box-shadow: var(--glow-primary);
+}
+
+.glow-gold {
+  box-shadow: var(--glow-gold);
+}
+
+.gradient-text {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Smooth hover transitions */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glow-primary);
+}
+
+/* Pulse animation for badges */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 24px rgba(0, 212, 255, 0.7);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Gradient borders */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-accent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Section divider gradient */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+}
