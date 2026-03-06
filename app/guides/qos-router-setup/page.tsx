@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, Wifi, ShieldCheckText, Settings } from 'lucide-react'
+import { ArrowRight, Wifi, Settings } from 'lucide-react'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
 
