@@ -49,3 +49,5 @@ create_components.js
 
 # Claude Code local tools (skills, settings)
 .claude/
+
+.vercel

@@ -13,6 +13,7 @@ import {
     Tv,
     LogOut,
     Tag,
+    MessageSquare,
 } from 'lucide-react'
 
 const navItems = [
@@ -20,6 +21,7 @@ const navItems = [
     { href: '/admin/orders', label: 'Orders', icon: ClipboardList, exact: false },
     { href: '/admin/pool', label: 'Activation Pool', icon: Database, exact: false },
     { href: '/admin/promo', label: 'Promo Codes', icon: Tag, exact: false },
+    { href: '/admin/messages', label: 'Messages', icon: MessageSquare, exact: false },
     { href: '/admin/stats', label: 'Statistics', icon: BarChart3, exact: false },
 ]
 

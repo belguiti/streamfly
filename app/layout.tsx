@@ -1,13 +1,19 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+/* Pro Max UI UX Design System: Righteous (headings via CSS import) + Poppins (body) */
+const poppins = Poppins({
+    subsets: ['latin'],
+    weight: ['300', '400', '500', '600', '700'],
+    display: 'swap',
+    variable: '--font-poppins',
+})
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
 
 export const viewport: Viewport = {
-    themeColor: '#0a0f1a',
+    themeColor: '#0F0F23',
     colorScheme: 'dark',
     width: 'device-width',
     initialScale: 1,
@@ -32,7 +38,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={`${inter.className} min-h-screen flex flex-col antialiased`}>
+            <head>
+                {/* Pro Max UI UX: Righteous heading font */}
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet" />
+            </head>
+            <body className={`${poppins.variable} font-sans min-h-screen flex flex-col antialiased`}>
                 {children}
             </body>
         </html>
