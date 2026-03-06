@@ -21,7 +21,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 // ─── Config ───────────────────────────────────────────────────────────────────
 // Set NEXT_PUBLIC_WHATSAPP_NUMBER to your WhatsApp number (digits only, with country code)
 // e.g.  NEXT_PUBLIC_WHATSAPP_NUMBER=12025550123
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? ''
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '447520695452'
 const WA_TEXT = encodeURIComponent('Hello! I need help with Streamtly.')
 const WA_HREF = WA_NUMBER ? `https://wa.me/${WA_NUMBER}?text=${WA_TEXT}` : '#'
 

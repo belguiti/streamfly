@@ -181,7 +181,7 @@ export default async function LandingPage() {
                 {/* ══ HERO ══════════════════════════════════════════════════════ */}
                 <section
                     aria-label="Welcome to Streamtly"
-                    className="w-full relative overflow-hidden min-h-[92vh] flex items-center"
+                    className="w-full relative overflow-hidden min-h-screen flex items-center"
                     style={{ background: 'var(--gradient-hero)' }}
                 >
                     {/* Mesh dot grid */}
@@ -192,7 +192,7 @@ export default async function LandingPage() {
                     <Particles className="absolute inset-0 z-[1]" quantity={30} color="#22C55E" speed={0.18} minSize={0.4} maxSize={1.2} />
 
                     {/* Ambient video */}
-                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-[0.10]" aria-hidden="true">
+                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-25" aria-hidden="true">
                         <source src="/hero-bg.mp4" type="video/mp4" />
                     </video>
 
@@ -204,7 +204,7 @@ export default async function LandingPage() {
                     <div className="absolute bottom-1/4 right-[8%] w-[600px] h-[600px] bg-[#8B5CF6]/7 rounded-full blur-[150px] animate-float-slow pointer-events-none" aria-hidden="true" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#22C55E]/4 rounded-full blur-[170px] pointer-events-none" aria-hidden="true" />
 
-                    <div className="relative z-10 container mx-auto px-4 py-28 md:py-44 flex flex-col items-center text-center w-full">
+                    <div className="relative z-10 container mx-auto px-4 pt-24 pb-16 flex flex-col items-center text-center w-full">
 
                         {/* Live badge */}
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/25 text-sm text-[#22C55E] mb-8 font-medium">
