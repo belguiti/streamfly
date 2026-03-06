@@ -261,7 +261,7 @@ export default function SettingsPage() {
                                 Permanently delete your account and all associated data.
                             </p>
                         </div>
-                        <a href="mailto:support@stream4u.com?subject=Account%20Deletion%20Request&body=Please%20delete%20my%20account.%20My%20email%20is%3A%20">
+                        <a href="mailto:support@streamtly.com?subject=Account%20Deletion%20Request&body=Please%20delete%20my%20account.%20My%20email%20is%3A%20">
                             <Button
                                 variant="outline"
                                 size="sm"

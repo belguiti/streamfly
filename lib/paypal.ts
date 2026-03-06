@@ -51,7 +51,7 @@ export async function createPayPalSubscription(
             },
             custom_id: JSON.stringify({ userId, planId }),
             application_context: {
-                brand_name: 'Stream4U',
+                brand_name: 'Streamtly',
                 locale: 'en-US',
                 shipping_preference: 'NO_SHIPPING',
                 user_action: 'SUBSCRIBE_NOW',

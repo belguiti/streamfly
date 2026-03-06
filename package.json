@@ -1,5 +1,5 @@
 {
-  "name": "stream4u",
+  "name": "streamtly",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -23,6 +23,7 @@
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "resend": "^6.9.3",
     "stripe": "^20.3.1",
     "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7"

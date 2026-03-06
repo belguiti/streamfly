@@ -51,7 +51,7 @@ export default async function DashboardPage() {
                             <Button variant="outline">Manage Billing (PayPal)</Button>
                         </a>
                     ) : null}
-                    <a href="mailto:support@stream4u.com">
+                    <a href="mailto:support@streamtly.com">
                         <Button>Contact Support</Button>
                     </a>
                 </div>

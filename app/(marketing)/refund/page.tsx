@@ -47,7 +47,7 @@ const sections = [
         badge: 'Easy Process',
         badgeColor: '#a855f7',
         content:
-            'To request a refund, please send an email to support@stream4u.com with your Invoice ID, account email, and the reason for the request. Our team will review your case and respond within 12 hours.',
+            'To request a refund, please send an email to support@streamtly.com with your Invoice ID, account email, and the reason for the request. Our team will review your case and respond within 12 hours.',
     },
 ]
 
@@ -150,7 +150,7 @@ export default function RefundPolicy() {
             <div className="mt-12 text-center p-8 rounded-2xl bg-gradient-to-r from-[#00e5a0]/5 to-[#00d4ff]/5 border border-white/5">
                 <p className="text-[#8899aa] text-sm">
                     Need a refund?{' '}
-                    <a href="mailto:support@stream4u.com" className="text-[#00e5a0] hover:text-[#00d4ff] font-semibold transition-colors">support@stream4u.com →</a>
+                    <a href="mailto:support@streamtly.com" className="text-[#00e5a0] hover:text-[#00d4ff] font-semibold transition-colors">support@streamtly.com →</a>
                 </p>
             </div>
 

@@ -46,3 +46,6 @@ build_ci.log
 error_output.txt
 shadcn_error.txt
 create_components.js
+
+# Claude Code local tools (skills, settings)
+.claude/

@@ -10,43 +10,43 @@ import FAQAccordion from '@/components/marketing/FAQAccordion'
 // ─── ISR: revalidate every hour ───────────────────────────────────────────────
 export const revalidate = 3600
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://stream4u.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
 
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
-    title: 'Stream4U | Premium IPTV – 35,000+ Live Channels & 150,000+ VODs',
+    title: 'Streamtly | Premium IPTV – 35,000+ Live Channels & 150,000+ VODs',
     description:
-        'Stream4U is the #1 premium IPTV service with 35,000+ live channels, 150,000+ movies & series, and every PPV event in 4K quality. Instant activation. 24/7 support. 14-day money-back guarantee.',
+        'Streamtly is the #1 premium IPTV service with 35,000+ live channels, 150,000+ movies & series, and every PPV event in 4K quality. Instant activation. 24/7 support. 14-day money-back guarantee.',
     keywords: [
         'IPTV service', 'best IPTV', 'premium IPTV', 'live TV streaming',
         '4K IPTV', 'IPTV subscription', 'IPTV Firestick', 'IPTV Android TV',
         'IPTV Smart TV', 'watch live TV online', 'IPTV channels', 'VOD streaming',
         'buy IPTV', 'IPTV provider', 'streaming subscription', 'PPV IPTV 2025',
     ],
-    authors: [{ name: 'Stream4U', url: SITE_URL }],
-    creator: 'Stream4U',
-    publisher: 'Stream4U',
+    authors: [{ name: 'Streamtly', url: SITE_URL }],
+    creator: 'Streamtly',
+    publisher: 'Streamtly',
     openGraph: {
         type: 'website',
         locale: 'en_US',
         url: SITE_URL,
-        siteName: 'Stream4U',
-        title: 'Stream4U | Premium IPTV – 35,000+ Live Channels & 150,000+ VODs',
+        siteName: 'Streamtly',
+        title: 'Streamtly | Premium IPTV – 35,000+ Live Channels & 150,000+ VODs',
         description:
-            'Stream4U delivers 35,000+ live TV channels, 150,000+ movies and series, and every PPV event in stunning 4K quality. Instant activation. 14-day money-back guarantee.',
+            'Streamtly delivers 35,000+ live TV channels, 150,000+ movies and series, and every PPV event in stunning 4K quality. Instant activation. 14-day money-back guarantee.',
         images: [{
             url: `${SITE_URL}/og-image.jpg`,
             width: 1200,
             height: 630,
-            alt: 'Stream4U Premium IPTV Service – 35,000+ Channels in 4K',
+            alt: 'Streamtly Premium IPTV Service – 35,000+ Channels in 4K',
         }],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Stream4U | Premium IPTV – 35,000+ Live Channels & 150,000+ VODs',
+        title: 'Streamtly | Premium IPTV – 35,000+ Live Channels & 150,000+ VODs',
         description:
-            'Stream4U delivers 35,000+ live TV channels, 150,000+ movies and series, and every PPV event in stunning 4K quality.',
+            'Streamtly delivers 35,000+ live TV channels, 150,000+ movies and series, and every PPV event in stunning 4K quality.',
         images: [`${SITE_URL}/og-image.jpg`],
     },
     alternates: { canonical: SITE_URL },
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
 const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Stream4U',
+    name: 'Streamtly',
     url: SITE_URL,
     logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
     description: 'Premium IPTV service with 35,000+ live channels and 150,000+ VODs in 4K quality.',
@@ -85,7 +85,7 @@ const organizationSchema = {
 const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Stream4U',
+    name: 'Streamtly',
     url: SITE_URL,
     potentialAction: {
         '@type': 'SearchAction',
@@ -97,10 +97,10 @@ const websiteSchema = {
 const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'Stream4U IPTV Streaming Service',
+    name: 'Streamtly IPTV Streaming Service',
     description:
         'Premium IPTV streaming service with 35,000+ live channels, 150,000+ movies & series, and all PPV events. Compatible with Firestick, Android TV, Smart TV, iOS, Android, PC.',
-    provider: { '@type': 'Organization', name: 'Stream4U', url: SITE_URL },
+    provider: { '@type': 'Organization', name: 'Streamtly', url: SITE_URL },
     areaServed: 'Worldwide',
     url: `${SITE_URL}/pricing`,
     offers: {
@@ -120,28 +120,28 @@ const serviceSchema = {
 
 const faqItems = [
     {
-        q: 'What is IPTV and how does Stream4U work?',
-        a: 'IPTV (Internet Protocol Television) delivers live TV channels and on-demand video content over the internet. With Stream4U, you subscribe to a plan, receive your activation details instantly, and start streaming 35,000+ channels and 150,000+ VODs on any compatible device — no satellite dish or cable box required.',
+        q: 'What is IPTV and how does Streamtly work?',
+        a: 'IPTV (Internet Protocol Television) delivers live TV channels and on-demand video content over the internet. With Streamtly, you subscribe to a plan, receive your activation details instantly, and start streaming 35,000+ channels and 150,000+ VODs on any compatible device — no satellite dish or cable box required.',
     },
     {
-        q: 'Which devices are compatible with Stream4U?',
-        a: 'Stream4U supports Amazon Firestick & Fire TV, Android TV & Google TV, Samsung & LG Smart TVs, iPhones & iPads, Android smartphones & tablets, Windows PC, Mac, MAG boxes, and Nvidia Shield. Visit our Installation Guides for step-by-step setup instructions for each device.',
+        q: 'Which devices are compatible with Streamtly?',
+        a: 'Streamtly supports Amazon Firestick & Fire TV, Android TV & Google TV, Samsung & LG Smart TVs, iPhones & iPads, Android smartphones & tablets, Windows PC, Mac, MAG boxes, and Nvidia Shield. Visit our Installation Guides for step-by-step setup instructions for each device.',
     },
     {
         q: 'How long does activation take after payment?',
         a: 'Activation is instant. As soon as your payment is confirmed, your subscription credentials and setup instructions are delivered automatically to your email and dashboard. Most users start streaming within 5 minutes of signing up.',
     },
     {
-        q: 'Do I need a VPN to use Stream4U?',
-        a: 'No. A VPN is not required. Our servers use advanced encryption and security protocols that keep your connection private and secure. You may optionally use a VPN for additional privacy, but Stream4U works flawlessly without one.',
+        q: 'Do I need a VPN to use Streamtly?',
+        a: 'No. A VPN is not required. Our servers use advanced encryption and security protocols that keep your connection private and secure. You may optionally use a VPN for additional privacy, but Streamtly works flawlessly without one.',
     },
     {
         q: 'What video quality can I expect?',
-        a: 'Stream4U streams in 4K Ultra HD, Full HD (1080p), and HD (720p) depending on your internet connection and channel source. Our adaptive bitrate technology automatically adjusts quality to ensure smooth, buffer-free playback on any connection speed.',
+        a: 'Streamtly streams in 4K Ultra HD, Full HD (1080p), and HD (720p) depending on your internet connection and channel source. Our adaptive bitrate technology automatically adjusts quality to ensure smooth, buffer-free playback on any connection speed.',
     },
     {
         q: 'Are sports and PPV events included in the subscription?',
-        a: "Yes! Every Stream4U subscription includes access to all major live sports events — NFL, NBA, Premier League, Champions League, UFC, and Boxing — plus all Pay-Per-View (PPV) events at no extra cost. You'll never pay separately for a PPV fight again.",
+        a: "Yes! Every Streamtly subscription includes access to all major live sports events — NFL, NBA, Premier League, Champions League, UFC, and Boxing — plus all Pay-Per-View (PPV) events at no extra cost. You'll never pay separately for a PPV fight again.",
     },
     {
         q: 'What is the refund policy?',
@@ -177,7 +177,7 @@ const FEATURES = [
     { icon: Play, title: '150,000+ VOD Library', desc: 'New theatrical releases, award-winning series, classic films, and documentaries — all on demand, zero ads, instant playback.', color: '#00e5a0' },
     { icon: Award, title: 'All PPV Events Included', desc: 'UFC, boxing, NFL, NBA, Premier League, Formula 1 — every Pay-Per-View event is included in every plan at absolutely no extra cost.', color: '#fbbf24' },
     { icon: Zap, title: '4K Ultra HD Quality', desc: 'Crystal-clear 4K, FHD, and HD streams with adaptive bitrate technology that automatically adjusts to your connection speed.', color: '#a855f7' },
-    { icon: Shield, title: '14-Day Money-Back Guarantee', desc: "Try Stream4U completely risk-free. If you're not satisfied within the first 14 days, we'll issue a full refund — no questions asked.", color: '#00e5a0' },
+    { icon: Shield, title: '14-Day Money-Back Guarantee', desc: "Try Streamtly completely risk-free. If you're not satisfied within the first 14 days, we'll issue a full refund — no questions asked.", color: '#00e5a0' },
     { icon: Headphones, title: '24/7 Expert Support', desc: 'Our dedicated support team is available around the clock via live chat, email, and ticket system to resolve any issue quickly.', color: '#00d4ff' },
     { icon: Clock, title: 'Instant Activation', desc: 'Receive your subscription credentials and setup instructions the moment your payment is confirmed. Start streaming in under 5 minutes.', color: '#fbbf24' },
     { icon: RefreshCw, title: 'Weekly Content Updates', desc: 'New channels, movies, and series are added every week. Your library keeps growing automatically — no manual updates needed.', color: '#a855f7' },
@@ -195,12 +195,12 @@ const DEVICES = [
 ]
 
 const TESTIMONIALS = [
-    { name: 'Sarah M.', location: 'United States', rating: 5, text: "Used Stream4U for over a year. Crystal-clear 4K, zero buffering even on PPV fight nights. Absolutely worth every penny." },
+    { name: 'Sarah M.', location: 'United States', rating: 5, text: "Used Streamtly for over a year. Crystal-clear 4K, zero buffering even on PPV fight nights. Absolutely worth every penny." },
     { name: 'James T.', location: 'United Kingdom', rating: 5, text: "Cancelled my cable and saving $120 a month. The channel selection is insane — sports, movies, international. Nothing compares." },
     { name: 'Maria L.', location: 'Canada', rating: 5, text: "Setup took 5 minutes on my Firestick. The support team walked me through everything on live chat. Best streaming service I've used." },
     { name: 'David K.', location: 'Australia', rating: 5, text: "150,000+ VOD titles and I'm always finding something new. Found rare films here I couldn't locate anywhere else. Incredible library." },
     { name: 'Chen W.', location: 'Singapore', rating: 5, text: "Asian channels in perfect quality alongside international content. Replaced 3 subscriptions with just one. The 14-day guarantee made it easy to try." },
-    { name: 'Fatima R.', location: 'UAE', rating: 5, text: "Arabic channels, sports, and international content all in one place. Stream4U replaced multiple subscriptions for our whole family." },
+    { name: 'Fatima R.', location: 'UAE', rating: 5, text: "Arabic channels, sports, and international content all in one place. Streamtly replaced multiple subscriptions for our whole family." },
 ]
 
 const PLAN_INCLUDED = [
@@ -218,25 +218,25 @@ const WHY_US = [
     {
         icon: Server,
         title: 'Enterprise-Grade Infrastructure — Zero Buffering',
-        desc: "Stream4U runs on a network of premium server clusters across multiple continents. Our anti-buffering technology uses intelligent load balancing to distribute traffic, ensuring zero lag even during peak hours — UFC fight nights, World Cup matches, or Super Bowl Sundays. We guarantee 99.9% uptime backed by redundant failover systems. Unlike smaller providers that disappear overnight, we've invested in infrastructure built to last.",
+        desc: "Streamtly runs on a network of premium server clusters across multiple continents. Our anti-buffering technology uses intelligent load balancing to distribute traffic, ensuring zero lag even during peak hours — UFC fight nights, World Cup matches, or Super Bowl Sundays. We guarantee 99.9% uptime backed by redundant failover systems. Unlike smaller providers that disappear overnight, we've invested in infrastructure built to last.",
         color: '#00d4ff',
     },
     {
         icon: Tv,
         title: 'Purpose-Built Apps for Every Platform',
-        desc: "We don't hand you a generic M3U link and leave you to figure it out. Stream4U provides dedicated, polished apps for Amazon Firestick, Android TV, Smart TVs, iOS, and Android — each featuring Electronic Program Guide (EPG) integration, favorites management, catch-up TV, and an intuitive channel browser. The experience rivals Netflix in usability.",
+        desc: "We don't hand you a generic M3U link and leave you to figure it out. Streamtly provides dedicated, polished apps for Amazon Firestick, Android TV, Smart TVs, iOS, and Android — each featuring Electronic Program Guide (EPG) integration, favorites management, catch-up TV, and an intuitive channel browser. The experience rivals Netflix in usability.",
         color: '#00e5a0',
     },
     {
         icon: Globe,
         title: 'Truly Global Content Library',
-        desc: "With channels from over 100 countries and content in 50+ languages, Stream4U is the only streaming service you'll ever need. Watch Arabic news, Bollywood films, Korean dramas, UK football, American sports, and French cinema — all in one place. Our content team curates and updates the lineup weekly to ensure you always have the best global programming.",
+        desc: "With channels from over 100 countries and content in 50+ languages, Streamtly is the only streaming service you'll ever need. Watch Arabic news, Bollywood films, Korean dramas, UK football, American sports, and French cinema — all in one place. Our content team curates and updates the lineup weekly to ensure you always have the best global programming.",
         color: '#a855f7',
     },
     {
         icon: Award,
         title: 'Every PPV Event — No Extra Charges',
-        desc: "Other providers charge extra for PPV events. Stream4U includes every major PPV fight, match, and live event in your standard subscription — UFC, boxing, wrestling, Formula 1, and major championship bouts. Combined with our 150,000+ VOD library featuring new releases within 30 days of theatrical debut, you'll never need another streaming subscription again.",
+        desc: "Other providers charge extra for PPV events. Streamtly includes every major PPV fight, match, and live event in your standard subscription — UFC, boxing, wrestling, Formula 1, and major championship bouts. Combined with our 150,000+ VOD library featuring new releases within 30 days of theatrical debut, you'll never need another streaming subscription again.",
         color: '#fbbf24',
     },
 ]
@@ -261,7 +261,7 @@ export default async function LandingPage() {
 
                 {/* ══ HERO ══════════════════════════════════════════════════════ */}
                 <section
-                    aria-label="Welcome to Stream4U"
+                    aria-label="Welcome to Streamtly"
                     className="w-full relative overflow-hidden"
                     style={{ background: 'var(--gradient-hero)' }}
                 >
@@ -353,7 +353,7 @@ export default async function LandingPage() {
                                 Flexible Plans
                             </div>
                             <h2 id="pricing-heading" className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-                                Choose Your Stream4U Plan
+                                Choose Your Streamtly Plan
                             </h2>
                             <p className="text-[#8899aa] text-lg max-w-xl mx-auto">
                                 Simple, transparent pricing with no hidden fees. All plans include every channel,
@@ -452,7 +452,7 @@ export default async function LandingPage() {
                                 Everything Included
                             </div>
                             <h2 id="features-heading" className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-                                Everything You Get With Stream4U
+                                Everything You Get With Streamtly
                             </h2>
                             <p className="text-[#8899aa] text-lg max-w-xl mx-auto">
                                 From the moment you subscribe, you get full unlimited access to every feature —
@@ -494,7 +494,7 @@ export default async function LandingPage() {
                                 Stream on Any Device, Anywhere
                             </h2>
                             <p className="text-[#8899aa] text-lg max-w-xl mx-auto">
-                                One subscription, every screen. Stream4U works natively on all major devices
+                                One subscription, every screen. Streamtly works natively on all major devices
                                 with dedicated apps and step-by-step setup guides included free.
                             </p>
                         </div>
@@ -535,10 +535,10 @@ export default async function LandingPage() {
                                 Our Difference
                             </div>
                             <h2 id="why-heading" className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-                                Why 50,000+ Customers Choose Stream4U
+                                Why 50,000+ Customers Choose Streamtly
                             </h2>
                             <p className="text-[#8899aa] text-lg max-w-xl mx-auto">
-                                We&apos;re not just another IPTV provider. Here&apos;s what makes Stream4U the last streaming service you&apos;ll ever need.
+                                We&apos;re not just another IPTV provider. Here&apos;s what makes Streamtly the last streaming service you&apos;ll ever need.
                             </p>
                         </div>
 
@@ -642,7 +642,7 @@ export default async function LandingPage() {
                                 Frequently Asked Questions
                             </h2>
                             <p className="text-[#8899aa] text-lg">
-                                Everything you need to know about Stream4U before you subscribe.
+                                Everything you need to know about Streamtly before you subscribe.
                             </p>
                         </div>
 

@@ -12,12 +12,14 @@ import {
     X,
     Tv,
     LogOut,
+    Tag,
 } from 'lucide-react'
 
 const navItems = [
     { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
     { href: '/admin/orders', label: 'Orders', icon: ClipboardList, exact: false },
     { href: '/admin/pool', label: 'Activation Pool', icon: Database, exact: false },
+    { href: '/admin/promo', label: 'Promo Codes', icon: Tag, exact: false },
     { href: '/admin/stats', label: 'Statistics', icon: BarChart3, exact: false },
 ]
 
@@ -74,7 +76,7 @@ export default function AdminSidebar({ initials, email, fullName }: AdminSidebar
                             <Tv className="w-4 h-4 text-[#0a0f1a]" />
                         </div>
                         <div>
-                            <p className="font-bold text-white text-sm leading-none">Stream4U</p>
+                            <p className="font-bold text-white text-sm leading-none">Streamtly</p>
                             <p className="text-[10px] text-amber-400 font-semibold tracking-wide mt-0.5">ADMIN PANEL</p>
                         </div>
                     </Link>
@@ -109,7 +111,7 @@ export default function AdminSidebar({ initials, email, fullName }: AdminSidebar
                         <Tv className="w-3.5 h-3.5 text-[#0a0f1a]" />
                     </div>
                     <div>
-                        <p className="font-bold text-white text-xs leading-none">Stream4U</p>
+                        <p className="font-bold text-white text-xs leading-none">Streamtly</p>
                         <p className="text-[9px] text-amber-400 font-semibold">ADMIN</p>
                     </div>
                 </Link>

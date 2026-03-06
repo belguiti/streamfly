@@ -1,6 +1,6 @@
-# Stream4U
+# Streamtly
 
-Stream4U is a licensed streaming subscription and activation-delivery platform.
+Streamtly is a licensed streaming subscription and activation-delivery platform.
 
 ## PRD (Product Requirements Document)
 
@@ -59,7 +59,7 @@ PAYPAL_MODE=sandbox
    `UPDATE profiles SET role = 'admin' WHERE email = 'your-email@example.com';`
 
 ### 2. Stripe Setup
-1. Create a Stripe Product called "Stream4U Subscription".
+1. Create a Stripe Product called "Streamtly Subscription".
 2. Create 4 recurring prices (1m, 3m, 6m, 12m).
 3. Copy the created Price IDs and update the `plans` table in Supabase.
 4. Enable the Stripe Customer Portal.
@@ -89,7 +89,7 @@ PAYPAL_MODE=sandbox
 2. Import the project in Vercel.
 3. Configure **ALL** Environment Variables in the Vercel dashboard.
 4. Deploy the project.
-5. Go to Vercel Settings > Domains. Add `stream4u.com`. Update your DNS records as instructed.
+5. Go to Vercel Settings > Domains. Add `streamtly.com`. Update your DNS records as instructed.
 
 ### QA Checklist
 - [ ] Users can sign up / log in.

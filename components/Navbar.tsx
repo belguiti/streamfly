@@ -27,7 +27,7 @@ export default async function Navbar() {
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00d4ff] to-[#00e5a0] flex items-center justify-center group-hover:shadow-[0_0_16px_rgba(0,212,255,0.5)] transition-shadow">
                         <Tv className="w-4 h-4 text-[#0a0f1a]" />
                     </div>
-                    <span className="font-bold text-xl tracking-tight gradient-text">Stream4U</span>
+                    <span className="font-bold text-xl tracking-tight gradient-text">Streamtly</span>
                 </Link>
 
                 {/* Desktop Nav */}

@@ -12,15 +12,15 @@ export default function Footer() {
                             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00d4ff] to-[#00e5a0] flex items-center justify-center">
                                 <Tv className="w-4 h-4 text-[#0a0f1a]" />
                             </div>
-                            <span className="font-bold text-xl tracking-tight gradient-text">Stream4U</span>
+                            <span className="font-bold text-xl tracking-tight gradient-text">Streamtly</span>
                         </Link>
                         <p className="text-sm text-[#8899aa] mb-4 leading-relaxed">
                             Your premier streaming subscription platform. 35,000+ live channels and 150,000+ VODs delivered with instant activation and 24/7 expert support.
                         </p>
                         <div className="flex items-center gap-2 text-sm">
                             <Mail className="w-4 h-4 text-[#00d4ff]" />
-                            <a href="mailto:support@stream4u.com" className="text-[#00d4ff] hover:text-[#00e5a0] transition-colors">
-                                support@stream4u.com
+                            <a href="mailto:support@streamtly.com" className="text-[#00d4ff] hover:text-[#00e5a0] transition-colors">
+                                support@streamtly.com
                             </a>
                         </div>
                     </div>
@@ -148,7 +148,7 @@ export default function Footer() {
 
                         {/* Copyright */}
                         <p className="text-xs text-[#8899aa]">
-                            &copy; {new Date().getFullYear()} Stream4U. All rights reserved.
+                            &copy; {new Date().getFullYear()} Streamtly. All rights reserved.
                         </p>
                     </div>
                 </div>

@@ -17,7 +17,7 @@ stripe listen --forward-to localhost:3000/api/stripe/webhook
 
 ## Architecture
 
-Stream4U is a Next.js 16 (App Router) subscription platform backed by Supabase and Stripe, with PayPal as Phase 2.
+Streamtly is a Next.js 16 (App Router) subscription platform backed by Supabase and Stripe, with PayPal as Phase 2.
 
 ### Route Groups
 

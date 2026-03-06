@@ -141,7 +141,7 @@ export default function ProfilePage() {
                             </div>
                             <p className="text-xs text-[#555]">
                                 Email cannot be changed here.{' '}
-                                <a href="mailto:support@stream4u.com" className="text-[#00d4ff] hover:underline">
+                                <a href="mailto:support@streamtly.com" className="text-[#00d4ff] hover:underline">
                                     Contact support
                                 </a>{' '}
                                 to update it.

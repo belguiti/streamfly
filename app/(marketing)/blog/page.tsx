@@ -24,7 +24,7 @@ const posts = [
         color: '#00d4ff',
         readTime: '6 min read',
         date: 'Feb 20, 2026',
-        author: 'Stream4U Team',
+        author: 'Streamtly Team',
     },
     {
         slug: 'setup-iptv-firestick-2026',
@@ -34,7 +34,7 @@ const posts = [
             'The Amazon Firestick is the most popular device for IPTV streaming. This step-by-step guide walks you through the entire setup process — from enabling developer options to entering your login credentials.',
         content: [
             'The Amazon Firestick remains the #1 device for IPTV in 2026, and for good reason. It\'s affordable, portable (just plug it into any HDMI port), and powerful enough to handle 4K streaming without breaking a sweat.',
-            'Step 1: Navigate to Settings → My Fire TV → Developer Options and enable "Install Unknown Apps" for the Downloader app. Step 2: Install the free "Downloader" app from the Amazon App Store. Step 3: Open Downloader and enter the download URL provided in your Stream4U dashboard.',
+            'Step 1: Navigate to Settings → My Fire TV → Developer Options and enable "Install Unknown Apps" for the Downloader app. Step 2: Install the free "Downloader" app from the Amazon App Store. Step 3: Open Downloader and enter the download URL provided in your Streamtly dashboard.',
             'Step 4: Install the downloaded APK file. Step 5: Open the app, select "Xtream Codes API", and enter your server URL, username, and password. That\'s it — your channels and VOD library will load automatically.',
             'Troubleshooting: If channels don\'t load, double-check your credentials and make sure your Firestick is connected to a stable internet connection. For the best experience, we recommend a minimum of 25 Mbps download speed for 4K content.',
         ],
@@ -42,7 +42,7 @@ const posts = [
         color: '#ff9900',
         readTime: '4 min read',
         date: 'Feb 18, 2026',
-        author: 'Stream4U Team',
+        author: 'Streamtly Team',
     },
     {
         slug: 'iptv-buffering-fix-guide',
@@ -60,7 +60,7 @@ const posts = [
         color: '#00e5a0',
         readTime: '5 min read',
         date: 'Feb 15, 2026',
-        author: 'Stream4U Team',
+        author: 'Streamtly Team',
     },
     {
         slug: 'setup-iptv-smart-tv-2026',
@@ -70,7 +70,7 @@ const posts = [
             'Smart TVs from Samsung and LG have built-in app stores that make IPTV setup simple. Learn how to install and configure your IPTV player directly on your Smart TV without any additional devices.',
         content: [
             'If you own a Samsung or LG Smart TV manufactured after 2017, you can run IPTV apps directly without needing a Firestick or Android box. This makes for a cleaner setup and one less remote to deal with.',
-            'For Samsung TVs: Open the Smart Hub, search for "IPTV Smarters" or "Smart IPTV", and install it. Once installed, open the app and select the Xtream Codes API login method. Enter your server URL, username, and password from your Stream4U dashboard.',
+            'For Samsung TVs: Open the Smart Hub, search for "IPTV Smarters" or "Smart IPTV", and install it. Once installed, open the app and select the Xtream Codes API login method. Enter your server URL, username, and password from your Streamtly dashboard.',
             'For LG TVs: Open the LG Content Store, search for "Smart IPTV" or "IPTV Smarters", and install it. The setup process is identical — enter your Xtream Codes credentials and wait for the channel list to load.',
             'Note: The initial channel load may take 1-2 minutes as the EPG data is downloaded. After the first load, channels will appear almost instantly on subsequent launches.',
         ],
@@ -78,7 +78,7 @@ const posts = [
         color: '#1428a0',
         readTime: '5 min read',
         date: 'Feb 12, 2026',
-        author: 'Stream4U Team',
+        author: 'Streamtly Team',
     },
     {
         slug: 'iptv-vs-cable-comparison',
@@ -88,15 +88,15 @@ const posts = [
             'Cable TV costs keep rising while IPTV offers more channels at a fraction of the price. We break down the real differences in cost, content library, device support, and overall value.',
         content: [
             'The average cable TV bill in 2026 has surpassed $150/month in the US and £75/month in the UK. Meanwhile, a premium IPTV subscription delivers 10x the content for a fraction of the cost. But is IPTV really better? Let\'s compare.',
-            'Content: Cable typically offers 200-500 channels depending on your package. IPTV services like Stream4U offer 35,000+ live channels from 100+ countries, plus 150,000+ movies and series on demand. There\'s simply no comparison in terms of volume.',
-            'Cost: A basic cable package runs $50-80/month, while a premium package with sports and movies can exceed $200/month. Stream4U starts at just $29.99 for 3 months — that\'s less than $10/month for full access to everything.',
+            'Content: Cable typically offers 200-500 channels depending on your package. IPTV services like Streamtly offer 35,000+ live channels from 100+ countries, plus 150,000+ movies and series on demand. There\'s simply no comparison in terms of volume.',
+            'Cost: A basic cable package runs $50-80/month, while a premium package with sports and movies can exceed $200/month. Streamtly starts at just $29.99 for 3 months — that\'s less than $10/month for full access to everything.',
             'Flexibility: Cable locks you into a TV in your living room. IPTV works on any device, anywhere — your phone, tablet, laptop, Firestick, Smart TV, even your car. Plus, there are no contracts, no installation fees, and no equipment rental charges.',
         ],
         icon: Flame,
         color: '#fbbf24',
         readTime: '7 min read',
         date: 'Feb 8, 2026',
-        author: 'Stream4U Team',
+        author: 'Streamtly Team',
     },
     {
         slug: 'do-you-need-vpn-for-iptv',
@@ -105,7 +105,7 @@ const posts = [
         excerpt:
             'VPNs are heavily marketed alongside IPTV services, but do you actually need one? We cut through the noise and give you a straightforward, honest answer based on your specific situation.',
         content: [
-            'The short answer: No, you don\'t need a VPN to use Stream4U. Our servers are equipped with enterprise-grade security and encryption. Your connection is private and protected without any additional software.',
+            'The short answer: No, you don\'t need a VPN to use Streamtly. Our servers are equipped with enterprise-grade security and encryption. Your connection is private and protected without any additional software.',
             'However, there are situations where a VPN can be beneficial. If your ISP actively throttles streaming traffic, a VPN can bypass this and restore your full internet speed. This is particularly common with certain ISPs in the UK, Germany, and Australia.',
             'Another use case is privacy. While we don\'t log your viewing activity, a VPN adds an extra layer of anonymity by encrypting all your internet traffic and masking your IP address from your ISP.',
             'If you do choose to use a VPN, we recommend NordVPN, ExpressVPN, or Surfshark — all of which offer fast speeds optimized for streaming. Avoid free VPNs as they often introduce buffering and may sell your data.',
@@ -114,7 +114,7 @@ const posts = [
         color: '#a855f7',
         readTime: '4 min read',
         date: 'Feb 5, 2026',
-        author: 'Stream4U Team',
+        author: 'Streamtly Team',
     },
 ]
 

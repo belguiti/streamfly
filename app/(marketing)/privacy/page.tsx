@@ -44,7 +44,7 @@ const sections = [
         title: '6. Contact Us',
         color: '#00d4ff',
         content:
-            'If you have any questions about this Privacy Policy or want to exercise your data rights (access, correction, deletion), please contact us at support@stream4u.com. We respond to all privacy-related inquiries within 48 hours.',
+            'If you have any questions about this Privacy Policy or want to exercise your data rights (access, correction, deletion), please contact us at support@streamtly.com. We respond to all privacy-related inquiries within 48 hours.',
     },
 ]
 
@@ -124,7 +124,7 @@ export default function PrivacyPolicy() {
             <div className="mt-12 text-center p-8 rounded-2xl bg-gradient-to-r from-[#a855f7]/5 to-[#00d4ff]/5 border border-white/5">
                 <p className="text-[#8899aa] text-sm">
                     Privacy concerns?{' '}
-                    <a href="mailto:support@stream4u.com" className="text-[#a855f7] hover:text-[#00d4ff] font-semibold transition-colors">support@stream4u.com →</a>
+                    <a href="mailto:support@streamtly.com" className="text-[#a855f7] hover:text-[#00d4ff] font-semibold transition-colors">support@streamtly.com →</a>
                 </p>
             </div>
 

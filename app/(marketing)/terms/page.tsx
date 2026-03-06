@@ -9,7 +9,7 @@ const sections = [
         title: '1. Service Description',
         color: '#00d4ff',
         content:
-            'Stream4U provides a generic subscription and activation-delivery platform for licensed streaming services. We are not responsible for creating or hosting the content itself; we facilitate access via authorized licenses.',
+            'Streamtly provides a generic subscription and activation-delivery platform for licensed streaming services. We are not responsible for creating or hosting the content itself; we facilitate access via authorized licenses.',
     },
     {
         icon: Users,
@@ -37,14 +37,14 @@ const sections = [
         title: '5. Limitation of Liability',
         color: '#ff4d6a',
         content:
-            'Stream4U shall not be liable for any indirect, incidental, special, or consequential damages resulting from the use or inability to use our service. Our total liability shall not exceed the amount paid by you for the current subscription period.',
+            'Streamtly shall not be liable for any indirect, incidental, special, or consequential damages resulting from the use or inability to use our service. Our total liability shall not exceed the amount paid by you for the current subscription period.',
     },
     {
         icon: Mail,
         title: '6. Contact & Disputes',
         color: '#00d4ff',
         content:
-            'For any questions regarding these Terms, please contact us at support@stream4u.com. We encourage resolving any disputes through direct communication before pursuing formal actions.',
+            'For any questions regarding these Terms, please contact us at support@streamtly.com. We encourage resolving any disputes through direct communication before pursuing formal actions.',
     },
 ]
 
@@ -81,7 +81,7 @@ export default function TermsOfService() {
                     Terms of <span className="gradient-text">Service</span>
                 </h1>
                 <p className="text-[#8899aa] text-lg max-w-xl mx-auto">
-                    By using Stream4U, you agree to the following terms and conditions.
+                    By using Streamtly, you agree to the following terms and conditions.
                 </p>
                 <div className="inline-flex items-center gap-2 mt-4 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-[#8899aa]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00e5a0]"></span>

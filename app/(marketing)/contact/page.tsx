@@ -29,8 +29,8 @@ export default function ContactPage() {
                         icon: Mail,
                         title: 'Email Support',
                         desc: 'Get a response within 2 hours',
-                        action: 'support@stream4u.com',
-                        href: 'mailto:support@stream4u.com',
+                        action: 'support@streamtly.com',
+                        href: 'mailto:support@streamtly.com',
                         color: '#00d4ff',
                     },
                     {

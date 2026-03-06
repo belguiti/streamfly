@@ -4,7 +4,7 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://stream4u.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
 
 export const viewport: Viewport = {
     themeColor: '#0a0f1a',
@@ -16,13 +16,13 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
-        default: 'Stream4U | Premium IPTV Streaming Service',
-        template: '%s | Stream4U',
+        default: 'Streamtly | Premium IPTV Streaming Service',
+        template: '%s | Streamtly',
     },
     description:
-        'Stream4U is the #1 premium IPTV service with 35,000+ live channels, 150,000+ movies & series, and every PPV event in 4K quality. Instant activation, 24/7 support.',
+        'Streamtly is the #1 premium IPTV service with 35,000+ live channels, 150,000+ movies & series, and every PPV event in 4K quality. Instant activation, 24/7 support.',
     openGraph: {
-        siteName: 'Stream4U',
+        siteName: 'Streamtly',
         locale: 'en_US',
         type: 'website',
     },

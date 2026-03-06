@@ -42,10 +42,25 @@ export async function autoProvision(subscriptionId: string, planId: string): Pro
         value: poolEntry.value,
     })
 
-    // 4. Update subscription to active
+    // 4. Update subscription to active + set start/end dates
+    const { data: planData } = await supabaseAdmin
+        .from('plans')
+        .select('duration_months')
+        .eq('id', planId)
+        .single()
+
+    const durationMonths = planData?.duration_months ?? 1
+    const startDate = new Date()
+    const endDate = new Date(startDate)
+    endDate.setMonth(endDate.getMonth() + durationMonths)
+
     await supabaseAdmin
         .from('subscriptions')
-        .update({ status: 'active' })
+        .update({
+            status: 'active',
+            start_date: startDate.toISOString(),
+            end_date: endDate.toISOString(),
+        })
         .eq('id', subscriptionId)
 
     console.log(`[AutoProvision] Successfully provisioned subscription ${subscriptionId}`)
