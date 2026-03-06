@@ -14,12 +14,11 @@ async function submitToGoogle(url, type = 'URL_UPDATED') {
     }
 
     try {
-        const jwtClient = new google.auth.JWT(
-            process.env.GOOGLE_CLIENT_EMAIL,
-            null,
-            process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-            ['https://www.googleapis.com/auth/indexing']
-        );
+        const jwtClient = new google.auth.JWT({
+            email: process.env.GOOGLE_CLIENT_EMAIL,
+            key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+            scopes: ['https://www.googleapis.com/auth/indexing'],
+        });
 
         await jwtClient.authorize();
         const indexing = google.indexing({ version: 'v3', auth: jwtClient });
