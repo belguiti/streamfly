@@ -204,7 +204,7 @@ export default async function LandingPage() {
                     <div className="absolute bottom-1/4 right-[8%] w-[600px] h-[600px] bg-[#8B5CF6]/7 rounded-full blur-[150px] animate-float-slow pointer-events-none" aria-hidden="true" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#22C55E]/4 rounded-full blur-[170px] pointer-events-none" aria-hidden="true" />
 
-                    <div className="relative z-10 container mx-auto px-4 pt-24 pb-16 flex flex-col items-center text-center w-full">
+                    <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center w-full" style={{ paddingTop: '96px', paddingBottom: '64px' }}>
 
                         {/* Live badge */}
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/25 text-sm text-[#22C55E] mb-8 font-medium">
