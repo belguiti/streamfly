@@ -43,6 +43,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet" />
+
+                {/* 2026 Core Web Vitals Optimization - Speculation Rules API for INP */}
+                <script
+                    type="speculationrules"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            prerender: [{ source: "document", where: { href_matches: "/*" } }]
+                        })
+                    }}
+                />
             </head>
             <body className={`${poppins.variable} font-sans min-h-screen flex flex-col antialiased`}>
                 {children}
