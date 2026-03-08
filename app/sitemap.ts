@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { supabaseAdmin } from '@/lib/supabase/server'
+import { blogPosts } from '@/lib/blog-posts'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
 
@@ -27,6 +28,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${SITE_URL}/guides/diagnosing-buffer-bloat`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.85 },
         { url: `${SITE_URL}/reviews`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.70 },
         { url: `${SITE_URL}/blog`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.70 },
+        ...blogPosts.map(p => ({
+            url: `${SITE_URL}/blog/${p.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.75,
+        })),
         { url: `${SITE_URL}/contact`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.55 },
         { url: `${SITE_URL}/terms`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.30 },
         { url: `${SITE_URL}/privacy`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.30 },
