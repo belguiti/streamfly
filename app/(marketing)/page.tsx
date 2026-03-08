@@ -93,6 +93,21 @@ const faqSchema = {
     mainEntity: faqItems.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
 }
 
+const reviewsSchema = {
+    '@context': 'https://schema.org', '@type': 'Service',
+    name: 'Streamtly IPTV Streaming Service',
+    url: SITE_URL,
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '50000', bestRating: '5', worstRating: '1' },
+    review: TESTIMONIALS.map(({ name, rating, text, location }) => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name },
+        reviewRating: { '@type': 'Rating', ratingValue: String(rating), bestRating: '5', worstRating: '1' },
+        reviewBody: text,
+        locationCreated: { '@type': 'Place', name: location },
+        itemReviewed: { '@type': 'Service', name: 'Streamtly IPTV Streaming Service', url: SITE_URL },
+    })),
+}
+
 // ─── Static Content ───────────────────────────────────────────────────────────
 const CHANNEL_CATEGORIES = [
     '🏈 NFL & College Football', '⚽ Premier League', '🥊 UFC & Boxing PPV',
@@ -175,6 +190,7 @@ export default async function LandingPage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }} />
 
             <div className="flex flex-col items-center flex-1">
 
