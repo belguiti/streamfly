@@ -93,20 +93,6 @@ const faqSchema = {
     mainEntity: faqItems.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
 }
 
-const reviewsSchema = {
-    '@context': 'https://schema.org', '@type': 'Service',
-    name: 'Streamtly IPTV Streaming Service',
-    url: SITE_URL,
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '50000', bestRating: '5', worstRating: '1' },
-    review: TESTIMONIALS.map(({ name, rating, text, location }) => ({
-        '@type': 'Review',
-        author: { '@type': 'Person', name },
-        reviewRating: { '@type': 'Rating', ratingValue: String(rating), bestRating: '5', worstRating: '1' },
-        reviewBody: text,
-        locationCreated: { '@type': 'Place', name: location },
-        itemReviewed: { '@type': 'Service', name: 'Streamtly IPTV Streaming Service', url: SITE_URL },
-    })),
-}
 
 // ─── Static Content ───────────────────────────────────────────────────────────
 const CHANNEL_CATEGORIES = [
@@ -156,6 +142,21 @@ const TESTIMONIALS = [
     { name: 'Chen W.', location: 'Singapore', rating: 5, text: "Asian channels in perfect quality alongside international content. Replaced 3 subscriptions with just one. The 14-day guarantee made it easy to try." },
     { name: 'Fatima R.', location: 'UAE', rating: 5, text: "Arabic channels, sports, and international content all in one place. Streamtly replaced multiple subscriptions for our whole family." },
 ]
+
+const reviewsSchema = {
+    '@context': 'https://schema.org', '@type': 'Service',
+    name: 'Streamtly IPTV Streaming Service',
+    url: SITE_URL,
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '50000', bestRating: '5', worstRating: '1' },
+    review: TESTIMONIALS.map(({ name, rating, text, location }) => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name },
+        reviewRating: { '@type': 'Rating', ratingValue: String(rating), bestRating: '5', worstRating: '1' },
+        reviewBody: text,
+        locationCreated: { '@type': 'Place', name: location },
+        itemReviewed: { '@type': 'Service', name: 'Streamtly IPTV Streaming Service', url: SITE_URL },
+    })),
+}
 
 const PLAN_INCLUDED = [
     'All 35,000+ live channels',
