@@ -417,11 +417,20 @@ export function AuthForm({ mode, message, next: nextProp }: AuthFormProps) {
                             <Input
                                 id="password"
                                 name="password"
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 placeholder="••••••••"
                                 required
-                                className="bg-white/5 border-white/10 text-white pl-10 focus:ring-[#00d4ff] focus:border-[#00d4ff] h-12"
+                                className="bg-white/5 border-white/10 text-white pl-10 pr-10 focus:ring-[#00d4ff] focus:border-[#00d4ff] h-12"
                             />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(v => !v)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#555] hover:text-[#8899aa] transition-colors cursor-pointer"
+                                tabIndex={-1}
+                                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                            >
+                                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                            </button>
                         </div>
                     </div>
 
