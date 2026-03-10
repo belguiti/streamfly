@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Poppins } from 'next/font/google'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
 /* Pro Max UI UX Design System: Righteous (headings via CSS import) + Poppins (body) */
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </head>
             <body className={`${poppins.variable} font-sans min-h-screen flex flex-col antialiased`}>
                 {children}
+                <SpeedInsights />
             </body>
         </html>
     )
