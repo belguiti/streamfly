@@ -30,8 +30,14 @@ export default async function ActivateSubscriptionPage({
 
     if (!subscription) redirect('/admin/orders')
 
+    // Extract values at render time (avoids closure serialization issues in server actions)
+    const planId = (subscription as any).plan?.id ?? ''
+    const planName = (subscription as any).plan?.name ?? 'Streamtly Plan'
+    const durationMonths = (subscription as any).plan?.duration_months ?? 1
+    const userEmail = (subscription as any).profile?.email ?? ''
+    const userName = userEmail ? userEmail.split('@')[0] : 'Customer'
+
     // Fetch an available pool entry for this plan
-    const planId = (subscription as any).plan?.id
     const { data: poolEntry } = planId
         ? await supabaseAdmin
             .from('activation_pool')
@@ -49,50 +55,58 @@ export default async function ActivateSubscriptionPage({
         const payloadType = formData.get('type') as string
         const payloadValue = formData.get('value') as string
         const poolEntryId = formData.get('pool_entry_id') as string
+        const subId = formData.get('sub_id') as string
+        const adminId = formData.get('admin_id') as string
+        const toEmail = formData.get('user_email') as string
+        const toName = formData.get('user_name') as string
+        const pName = formData.get('plan_name') as string
+        const durMonths = parseInt(formData.get('duration_months') as string) || 1
 
-        if (!payloadType || !payloadValue) return
+        if (!payloadType || !payloadValue || !subId) return
 
         // Create activation record
-        await supabaseAdmin.from('activations').insert({
-            subscription_id: id,
+        const { error: actError } = await supabaseAdmin.from('activations').insert({
+            subscription_id: subId,
             type: payloadType,
             value: payloadValue,
-            activated_by: user!.id,
+            activated_by: adminId || null,
         })
+        if (actError) console.error('[ManualActivation] Activation insert error:', actError)
 
         // Calculate start/end dates based on plan duration
-        const durationMonths = (subscription as any).plan?.duration_months ?? 1
         const startDate = new Date()
         const endDate = new Date(startDate)
-        endDate.setMonth(endDate.getMonth() + durationMonths)
+        endDate.setMonth(endDate.getMonth() + durMonths)
 
         // Update subscription status to active with dates
-        await supabaseAdmin.from('subscriptions').update({
+        const { error: subError } = await supabaseAdmin.from('subscriptions').update({
             status: 'active',
             start_date: startDate.toISOString(),
             end_date: endDate.toISOString(),
-        }).eq('id', id)
+        }).eq('id', subId)
+        if (subError) console.error('[ManualActivation] Subscription update error:', subError)
 
         // Delete the used pool entry
         if (poolEntryId) {
-            await supabaseAdmin
+            const { error: delError } = await supabaseAdmin
                 .from('activation_pool')
                 .delete()
                 .eq('id', poolEntryId)
+            if (delError) console.error('[ManualActivation] Pool delete error:', delError)
         }
 
         // Send activation email to the user
-        const userEmail = (subscription as any).profile?.email
-        const userName = userEmail?.split('@')[0] ?? 'Customer'
-        const planName = (subscription as any).plan?.name ?? 'Streamtly Plan'
+        console.log(`[ManualActivation] Attempting to send email to: "${toEmail}" (name: "${toName}", plan: "${pName}", type: "${payloadType}")`)
 
-        if (userEmail) {
+        if (toEmail && toEmail.length > 0) {
             try {
-                await sendActivationSuccessEmail(userEmail, userName, planName, payloadValue, payloadType)
-                console.log(`[ManualActivation] Email sent to ${userEmail}`)
-            } catch (emailErr) {
-                console.error('[ManualActivation] Failed to send activation email:', emailErr)
+                await sendActivationSuccessEmail(toEmail, toName, pName, payloadValue, payloadType)
+                console.log(`[ManualActivation] ✅ Email SENT to ${toEmail}`)
+            } catch (emailErr: any) {
+                console.error(`[ManualActivation] ❌ Email FAILED to ${toEmail}:`, emailErr?.message ?? emailErr)
             }
+        } else {
+            console.error('[ManualActivation] ❌ No email address found for user — skipping email')
         }
 
         redirect('/admin/orders')
@@ -104,9 +118,9 @@ export default async function ActivateSubscriptionPage({
                 <CardHeader>
                     <CardTitle>Activate Subscription</CardTitle>
                     <CardDescription>
-                        User: {subscription.profile?.email} <br />
-                        Plan: {subscription.plan?.name} <br />
-                        ID: {subscription.id}
+                        User: {userEmail || 'Unknown'} <br />
+                        Plan: {planName} ({durationMonths} month{durationMonths > 1 ? 's' : ''}) <br />
+                        ID: {id}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -132,7 +146,13 @@ export default async function ActivateSubscriptionPage({
                     )}
 
                     <form action={handleActivate} className="space-y-6">
-                        {/* Hidden field to track which pool entry to delete */}
+                        {/* Hidden fields — pass all needed data via form to avoid closure serialization issues */}
+                        <input type="hidden" name="sub_id" value={id} />
+                        <input type="hidden" name="admin_id" value={user.id} />
+                        <input type="hidden" name="user_email" value={userEmail} />
+                        <input type="hidden" name="user_name" value={userName} />
+                        <input type="hidden" name="plan_name" value={planName} />
+                        <input type="hidden" name="duration_months" value={durationMonths} />
                         {poolEntry && (
                             <input type="hidden" name="pool_entry_id" value={poolEntry.id} />
                         )}
