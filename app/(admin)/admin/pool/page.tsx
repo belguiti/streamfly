@@ -23,8 +23,8 @@ export default async function AdminPoolPage() {
     // Fetch plans for the selector
     const { data: plans } = await supabase.from('plans').select('*').eq('is_active', true).order('duration_months')
 
-    // Fetch pool inventory grouped by plan
-    const { data: poolEntries } = await supabase
+    // Fetch pool inventory grouped by plan (use admin client to bypass RLS)
+    const { data: poolEntries } = await supabaseAdmin
         .from('activation_pool')
         .select('*, plan:plans(name)')
         .order('created_at', { ascending: false })
