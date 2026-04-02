@@ -23,7 +23,7 @@ export default async function AdminOrdersPage() {
     }
 
     // Fetch all subscriptions, order by pending first, then created_at
-    const { data: subscriptions } = await supabase
+    const { data: subscriptions } = await supabaseAdmin
         .from('subscriptions')
         .select(`
       *,

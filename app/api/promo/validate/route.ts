@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { supabaseAdmin } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 
 export async function GET(req: Request) {
@@ -9,15 +9,7 @@ export async function GET(req: Request) {
         return NextResponse.json({ valid: false, error: 'No code provided' }, { status: 400 })
     }
 
-    const supabase = await createClient()
-
-    // Must be logged in to validate
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) {
-        return NextResponse.json({ valid: false, error: 'Unauthorized' }, { status: 401 })
-    }
-
-    const { data: promo, error } = await supabase
+    const { data: promo, error } = await supabaseAdmin
         .from('promo_codes')
         .select('id, code, discount_percent, max_uses, uses_count, expires_at, is_active')
         .eq('code', code)

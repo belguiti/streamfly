@@ -122,7 +122,7 @@ export function AuthForm({ mode, message, next: nextProp }: AuthFormProps) {
                 password: passwordVal,
                 options: {
                     data: { full_name: fullName },
-                    emailRedirectTo: `${window.location.origin}/auth/callback`,
+                    emailRedirectTo: `${window.location.origin}/auth/callback${next !== '/app' ? `?next=${encodeURIComponent(next)}` : ''}`,
                 },
             })
             if (error) throw error

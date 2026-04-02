@@ -37,6 +37,20 @@ export default async function AdminPoolPage() {
         return { plan, available, used, total: entries.length }
     }) || []
 
+    // Helper: parse M3U URL to server|username|password format
+    function parseM3uUrl(url: string): string | null {
+        try {
+            const parsed = new URL(url)
+            const username = parsed.searchParams.get('username')
+            const password = parsed.searchParams.get('password')
+            if (username && password) {
+                const server = `${parsed.protocol}//${parsed.host}`
+                return `${server}|${username}|${password}`
+            }
+        } catch { /* not a valid URL */ }
+        return null
+    }
+
     const handleAddCodes = async (formData: FormData) => {
         'use server'
         const planId = formData.get('planId') as string
@@ -45,10 +59,25 @@ export default async function AdminPoolPage() {
 
         if (!planId || !type || !codesRaw) return
 
-        const codes = codesRaw.split('\n').map(c => c.trim()).filter(c => c.length > 0)
-        if (codes.length === 0) return
+        const lines = codesRaw.split('\n').map(c => c.trim()).filter(c => c.length > 0)
+        if (lines.length === 0) return
 
-        const supabaseAdmin = await createClient()
+        // Auto-convert M3U URLs to server|username|password format for 'account' type
+        const codes = lines.map(line => {
+            if (type === 'account' && line.startsWith('http')) {
+                try {
+                    const parsed = new URL(line)
+                    const username = parsed.searchParams.get('username')
+                    const password = parsed.searchParams.get('password')
+                    if (username && password) {
+                        const server = `${parsed.protocol}//${parsed.host}`
+                        return `${server}|${username}|${password}`
+                    }
+                } catch { /* not a URL, use as-is */ }
+            }
+            return line
+        })
+
         const rows = codes.map(value => ({
             plan_id: planId,
             type,
@@ -130,9 +159,12 @@ export default async function AdminPoolPage() {
                                 name="codes"
                                 required
                                 rows={6}
-                                placeholder={"ABC-DEF-123\nGHI-JKL-456\nMNO-PQR-789"}
+                                placeholder={"Activation Code → ABC-DEF-123\nAccount (Xtream) → http://server:port|username|password\nM3U URL → http://server/get.php?username=xxx&password=yyy&type=m3u_plus\nNote / Link → https://..."}
                                 className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 font-mono"
                             />
+                            <p className="text-xs text-muted-foreground">
+                                For <strong>Account</strong> type: use <code className="bg-muted px-1 rounded">http://server:port|username|password</code> format, or simply <strong>paste M3U URLs</strong> — they will be auto-parsed. All IPTV links (M3U, M3U+, EPG, Portal) are auto-generated in the email.
+                            </p>
                         </div>
                         <Button type="submit">Add to Pool</Button>
                     </form>

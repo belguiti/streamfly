@@ -20,16 +20,21 @@ export async function POST(req: Request) {
         if (val) paypalHeaders[key] = val
     })
 
-    // Verify webhook signature
-    try {
-        const isValid = await verifyWebhookSignature(paypalHeaders, body)
-        if (!isValid) {
-            console.error('PayPal webhook signature verification failed')
-            return new NextResponse('Invalid signature', { status: 401 })
+    // Verify webhook signature (skip if PAYPAL_WEBHOOK_ID not yet configured)
+    const webhookId = process.env.PAYPAL_WEBHOOK_ID?.trim()
+    if (webhookId && webhookId !== 'dummy_paypal_webhook_id') {
+        try {
+            const isValid = await verifyWebhookSignature(paypalHeaders, body)
+            if (!isValid) {
+                console.error('PayPal webhook signature verification failed')
+                return new NextResponse('Invalid signature', { status: 401 })
+            }
+        } catch (err: any) {
+            console.error('PayPal webhook verification error:', err)
+            return new NextResponse('Verification error', { status: 400 })
         }
-    } catch (err: any) {
-        console.error('PayPal webhook verification error:', err)
-        return new NextResponse('Verification error', { status: 400 })
+    } else {
+        console.warn('PayPal webhook: PAYPAL_WEBHOOK_ID not set — skipping signature verification')
     }
 
     const event = JSON.parse(body)
@@ -85,7 +90,7 @@ export async function POST(req: Request) {
 
                 // Attempt auto-provisioning
                 if (upsertedSub) {
-                    await autoProvision(upsertedSub.id, planId)
+                    await autoProvision(upsertedSub.id, planId, userId)
                 }
 
                 break

@@ -172,36 +172,6 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect }: PromoChec
                                 <span className="text-xs text-[#8899aa] font-semibold">AES-256 Encrypted Payment</span>
                             </div>
 
-                            {/* Stripe */}
-                            <form action="/api/stripe/checkout" method="POST" className="w-full">
-                                <input type="hidden" name="priceId" value={plan.stripe_price_id} />
-                                <input type="hidden" name="planId" value={plan.id} />
-                                {appliedPromo && (
-                                    <>
-                                        <input type="hidden" name="promoId" value={appliedPromo.promoId} />
-                                        <input type="hidden" name="promoCode" value={appliedPromo.code} />
-                                        <input type="hidden" name="discountPercent" value={appliedPromo.discountPercent} />
-                                    </>
-                                )}
-                                <Button
-                                    type="submit"
-                                    className="w-full h-14 text-base font-black bg-[#635BFF] hover:bg-[#5249E0] text-white transition-all transform hover:scale-[1.02] active:scale-[0.98] rounded-xl shadow-[0_4px_20px_rgba(99,91,255,0.3)]"
-                                >
-                                    Pay with Credit Card
-                                    {appliedPromo && <span className="ml-2 text-sm opacity-80">(${priceTotal})</span>}
-                                </Button>
-                                <p className="text-[10px] text-center text-[#555] mt-2">Cards, Apple Pay, Google Pay</p>
-                            </form>
-
-                            <div className="relative py-2">
-                                <div className="absolute inset-0 flex items-center">
-                                    <span className="w-full border-t border-white/5" />
-                                </div>
-                                <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-widest">
-                                    <span className="bg-[#111827] px-3 text-[#555]">Secure Gateway</span>
-                                </div>
-                            </div>
-
                             {/* PayPal */}
                             {plan.paypal_plan_id && (
                                 <form action="/api/paypal/checkout" method="POST" className="w-full">
@@ -222,6 +192,20 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect }: PromoChec
                                     </Button>
                                 </form>
                             )}
+
+                            {/* Crypto — NOWPayments */}
+                            <form action="/api/nowpayments/checkout" method="POST" className="w-full">
+                                <input type="hidden" name="planId" value={plan.id} />
+                                <Button
+                                    type="submit"
+                                    className="w-full h-14 text-base font-black bg-[#1a1a2e] hover:bg-[#16213e] text-white border border-[#f7931a]/40 hover:border-[#f7931a]/80 transition-all transform hover:scale-[1.02] active:scale-[0.98] rounded-xl shadow-[0_4px_20px_rgba(247,147,26,0.15)]"
+                                >
+                                    <span className="mr-2 text-lg">₿</span>
+                                    Pay with Crypto
+                                    {appliedPromo && <span className="ml-2 text-sm opacity-70">(${priceTotal})</span>}
+                                </Button>
+                                <p className="text-[10px] text-center text-[#555] mt-2">BTC, ETH, USDT, LTC & 100+ coins</p>
+                            </form>
                         </>
                     ) : (
                         <div className="space-y-3">
@@ -233,7 +217,7 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect }: PromoChec
                             </Link>
                             <p className="text-[11px] text-center text-[#555]">
                                 Don&apos;t have an account?{' '}
-                                <Link href="/sign-up" className="text-[#00d4ff] hover:underline font-semibold">
+                                <Link href={`/sign-up?next=/pricing/${plan.id}`} className="text-[#00d4ff] hover:underline font-semibold">
                                     Sign up free
                                 </Link>
                             </p>

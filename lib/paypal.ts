@@ -1,4 +1,4 @@
-const PAYPAL_BASE_URL = process.env.PAYPAL_MODE === 'live'
+const PAYPAL_BASE_URL = process.env.PAYPAL_MODE?.trim() === 'live'
     ? 'https://api-m.paypal.com'
     : 'https://api-m.sandbox.paypal.com'
 
@@ -6,8 +6,8 @@ const PAYPAL_BASE_URL = process.env.PAYPAL_MODE === 'live'
  * Get a PayPal OAuth2 access token using client credentials.
  */
 async function getAccessToken(): Promise<string> {
-    const clientId = process.env.PAYPAL_CLIENT_ID!
-    const clientSecret = process.env.PAYPAL_CLIENT_SECRET!
+    const clientId = process.env.PAYPAL_CLIENT_ID!.trim()
+    const clientSecret = process.env.PAYPAL_CLIENT_SECRET!.trim()
 
     const response = await fetch(`${PAYPAL_BASE_URL}/v1/oauth2/token`, {
         method: 'POST',

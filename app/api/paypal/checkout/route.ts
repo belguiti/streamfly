@@ -11,9 +11,6 @@ export async function POST(req: Request) {
             return NextResponse.redirect(new URL('/sign-in', req.url))
         }
 
-        const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single()
-        if (!profile) throw new Error('Profile not found')
-
         const formData = await req.formData()
         const planId = formData.get('planId') as string
 
@@ -23,13 +20,13 @@ export async function POST(req: Request) {
         if (!plan) throw new Error('Invalid plan')
         if (!plan.paypal_plan_id) throw new Error('PayPal is not configured for this plan')
 
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || req.headers.get('origin') || 'http://localhost:3000'
+        const baseUrl = 'https://www.streamtly.com'
 
         const { approvalUrl } = await createPayPalSubscription(
             plan.paypal_plan_id,
             user.id,
             plan.id,
-            profile.email,
+            user.email ?? '',
             `${baseUrl}/app?success=true&provider=paypal`,
             `${baseUrl}/pricing?canceled=true`
         )

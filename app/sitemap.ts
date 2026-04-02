@@ -1,8 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { supabaseAdmin } from '@/lib/supabase/server'
 import { blogPosts } from '@/lib/blog-posts'
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
+import { SITE_URL } from '@/lib/site-config'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const { data: plans } = await supabaseAdmin

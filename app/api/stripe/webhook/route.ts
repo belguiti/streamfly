@@ -52,7 +52,7 @@ export async function POST(req: Request) {
 
                 // Attempt auto-provisioning from the activation pool
                 if (upsertedSub) {
-                    await autoProvision(upsertedSub.id, planId)
+                    await autoProvision(upsertedSub.id, planId, userId)
                 }
 
                 break

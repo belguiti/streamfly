@@ -221,16 +221,16 @@ export default async function LandingPage() {
                     <div className="absolute bottom-1/4 right-[8%] w-[600px] h-[600px] bg-[#8B5CF6]/7 rounded-full blur-[150px] animate-float-slow pointer-events-none" aria-hidden="true" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-[#22C55E]/4 rounded-full blur-[170px] pointer-events-none" aria-hidden="true" />
 
-                    <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center w-full" style={{ paddingTop: '96px', paddingBottom: '64px' }}>
+                    <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center w-full" style={{ paddingTop: '80px', paddingBottom: '40px' }}>
 
                         {/* Live badge */}
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/25 text-sm text-[#22C55E] mb-8 font-medium">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/25 text-sm text-[#22C55E] mb-5 font-medium">
                             <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" aria-hidden="true" />
                             Live Now —&nbsp;<strong className="text-white">50,000+</strong>&nbsp;active subscribers worldwide
                         </div>
 
                         {/* Main headline — Righteous font applied globally to h1 */}
-                        <h1 className="mb-6 max-w-5xl">
+                        <h1 className="mb-4 max-w-5xl">
                             <span className="text-white block">The World&apos;s</span>
                             <span className="shimmer-text block">#1 IPTV Service</span>
                         </h1>
@@ -239,12 +239,12 @@ export default async function LandingPage() {
                             Access <strong className="text-white">35,000+ Live Channels</strong> &amp;{' '}
                             <strong className="text-white">150,000+ Movies &amp; Series</strong> in stunning 4K quality
                         </p>
-                        <p className="text-base text-[#64748B] mb-10 max-w-xl">
+                        <p className="text-base text-[#64748B] mb-6 max-w-xl">
                             Every PPV event included · Instant activation · No contracts · Cancel anytime
                         </p>
 
                         {/* Trust pills */}
-                        <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+                        <div className="flex flex-wrap items-center justify-center gap-3 mb-7">
                             {[
                                 { icon: Shield, label: '14-Day Money-Back', color: '#22C55E' },
                                 { icon: Zap, label: 'Instant Activation', color: '#4338CA' },
@@ -263,7 +263,7 @@ export default async function LandingPage() {
                         </div>
 
                         {/* CTA buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 items-center mb-16">
+                        <div className="flex flex-col sm:flex-row gap-4 items-center mb-8">
                             <Link
                                 href="/pricing"
                                 className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-[#4338CA] to-[#22C55E] text-white font-black text-lg hover:scale-105 active:scale-95 transition-all"

@@ -3,7 +3,7 @@ import { AuthForm } from '@/components/auth/AuthForm'
 export default function SignUpPage({
     searchParams,
 }: {
-    searchParams: { message: string }
+    searchParams: { message?: string; next?: string }
 }) {
     return (
         <div className="flex-1 flex items-center justify-center p-4 bg-[#0a0f1a]">
@@ -13,7 +13,7 @@ export default function SignUpPage({
                 <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#a855f7]/5 blur-[120px] rounded-full" />
             </div>
 
-            <AuthForm mode="sign-up" message={searchParams?.message} />
+            <AuthForm mode="sign-up" message={searchParams?.message} next={searchParams?.next} />
         </div>
     )
 }

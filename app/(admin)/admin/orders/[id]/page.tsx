@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { sendActivationSuccessEmail } from '@/lib/activation-emails'
 
 export default async function ActivateSubscriptionPage({
     params,
@@ -20,9 +21,9 @@ export default async function ActivateSubscriptionPage({
     const { data: profile } = await supabaseAdmin.from('profiles').select('role').eq('id', user.id).single()
     if (profile?.role !== 'admin') redirect('/app')
 
-    const { data: subscription } = await supabase
+    const { data: subscription } = await supabaseAdmin
         .from('subscriptions')
-        .select('*, plan:plans(name), profile:profiles(email)')
+        .select('*, plan:plans(name, duration_months), profile:profiles(email)')
         .eq('id', id)
         .single()
 
@@ -35,20 +36,40 @@ export default async function ActivateSubscriptionPage({
 
         if (!payloadType || !payloadValue) return
 
-        const supabaseAdmin = await createClient()
-
         // Create activation record
         await supabaseAdmin.from('activations').insert({
             subscription_id: id,
             type: payloadType,
             value: payloadValue,
-            activated_by: user.id,
+            activated_by: user!.id,
         })
 
-        // Update subscription status to active
+        // Calculate start/end dates based on plan duration
+        const durationMonths = (subscription as any).plan?.duration_months ?? 1
+        const startDate = new Date()
+        const endDate = new Date(startDate)
+        endDate.setMonth(endDate.getMonth() + durationMonths)
+
+        // Update subscription status to active with dates
         await supabaseAdmin.from('subscriptions').update({
             status: 'active',
+            start_date: startDate.toISOString(),
+            end_date: endDate.toISOString(),
         }).eq('id', id)
+
+        // Send activation email to the user
+        const userEmail = (subscription as any).profile?.email
+        const userName = userEmail?.split('@')[0] ?? 'Customer'
+        const planName = (subscription as any).plan?.name ?? 'Streamtly Plan'
+
+        if (userEmail) {
+            try {
+                await sendActivationSuccessEmail(userEmail, userName, planName, payloadValue, payloadType)
+                console.log(`[ManualActivation] Email sent to ${userEmail}`)
+            } catch (emailErr) {
+                console.error('[ManualActivation] Failed to send activation email:', emailErr)
+            }
+        }
 
         redirect('/admin/orders')
     }

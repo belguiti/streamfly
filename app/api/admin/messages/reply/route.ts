@@ -156,16 +156,31 @@ export async function POST(req: NextRequest) {
     }
 
     // Send reply email
-    const { error: sendError } = await resend.emails.send({
-        from: FROM,
-        to: [to],
-        subject,
-        html: buildEmailHtml(toName, body, subject),
-    })
+    let sendError: unknown = null
+    try {
+        const result = await resend.emails.send({
+            from: FROM,
+            to: [to],
+            subject,
+            html: buildEmailHtml(toName, body, subject),
+        })
+        sendError = result.error
+        console.log('resend result:', JSON.stringify({ data: result.data, error: String(result.error) }))
+    } catch (e: unknown) {
+        sendError = e
+        console.error('resend threw:', String(e))
+    }
 
     if (sendError) {
-        console.error('reply send error:', sendError)
-        return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
+        const errDetail = {
+            v: 'v4',
+            name: (sendError as any).name,
+            message: (sendError as any).message,
+            statusCode: (sendError as any).statusCode,
+            str: String(sendError),
+        }
+        console.error('reply send error final:', JSON.stringify(errDetail))
+        return NextResponse.json({ error: 'Failed to send email', detail: errDetail }, { status: 500 })
     }
 
     // Mark message as read after replying

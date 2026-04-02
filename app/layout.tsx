@@ -10,7 +10,7 @@ const poppins = Poppins({
     variable: '--font-poppins',
 })
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
+import { SITE_URL } from '@/lib/site-config'
 
 export const viewport: Viewport = {
     themeColor: '#0F0F23',

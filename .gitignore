@@ -51,3 +51,4 @@ create_components.js
 .claude/
 
 .vercel
+.env*.local

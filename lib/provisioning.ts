@@ -1,10 +1,31 @@
 import { supabaseAdmin } from '@/lib/supabase/server'
+import {
+    sendActivationSuccessEmail,
+    sendActivationDelayEmail,
+    sendAdminPoolEmptyAlert,
+} from '@/lib/activation-emails'
 
 /**
  * Auto-provision a subscription by assigning an unused activation code from the pool.
- * If no codes are available, the subscription remains in 'pending_activation' for manual admin handling.
+ * Sends email to the client (and admin if pool is empty).
  */
-export async function autoProvision(subscriptionId: string, planId: string): Promise<boolean> {
+export async function autoProvision(subscriptionId: string, planId: string, userId: string): Promise<boolean> {
+    // Fetch user info
+    const { data: { user } } = await supabaseAdmin.auth.admin.getUserById(userId)
+    const userEmail = user?.email ?? ''
+    const userName = (user?.user_metadata?.full_name as string | undefined)
+        ?? user?.email?.split('@')[0]
+        ?? 'Customer'
+
+    // Fetch plan info (name + duration)
+    const { data: planData } = await supabaseAdmin
+        .from('plans')
+        .select('name, duration_months')
+        .eq('id', planId)
+        .single()
+    const planName = planData?.name ?? 'Streamtly Plan'
+    const durationMonths = planData?.duration_months ?? 1
+
     // 1. Find an unused activation code for the given plan
     const { data: poolEntry, error: poolError } = await supabaseAdmin
         .from('activation_pool')
@@ -17,6 +38,17 @@ export async function autoProvision(subscriptionId: string, planId: string): Pro
 
     if (poolError || !poolEntry) {
         console.log(`[AutoProvision] No available codes for plan ${planId}. Manual activation required.`)
+
+        // Notify admin + client
+        try {
+            await Promise.all([
+                sendAdminPoolEmptyAlert(planName, userEmail),
+                userEmail ? sendActivationDelayEmail(userEmail, userName, planName) : Promise.resolve(),
+            ])
+        } catch (emailErr) {
+            console.error('[AutoProvision] Failed to send pool-empty emails:', emailErr)
+        }
+
         return false
     }
 
@@ -43,13 +75,6 @@ export async function autoProvision(subscriptionId: string, planId: string): Pro
     })
 
     // 4. Update subscription to active + set start/end dates
-    const { data: planData } = await supabaseAdmin
-        .from('plans')
-        .select('duration_months')
-        .eq('id', planId)
-        .single()
-
-    const durationMonths = planData?.duration_months ?? 1
     const startDate = new Date()
     const endDate = new Date(startDate)
     endDate.setMonth(endDate.getMonth() + durationMonths)
@@ -64,5 +89,15 @@ export async function autoProvision(subscriptionId: string, planId: string): Pro
         .eq('id', subscriptionId)
 
     console.log(`[AutoProvision] Successfully provisioned subscription ${subscriptionId}`)
+
+    // 5. Send activation code to client
+    if (userEmail) {
+        try {
+            await sendActivationSuccessEmail(userEmail, userName, planName, poolEntry.value, poolEntry.type)
+        } catch (emailErr) {
+            console.error('[AutoProvision] Failed to send success email:', emailErr)
+        }
+    }
+
     return true
 }

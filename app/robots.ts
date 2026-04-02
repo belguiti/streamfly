@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next'
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
+import { SITE_URL } from '@/lib/site-config'
 
 export default function robots(): MetadataRoute.Robots {
     return {
@@ -8,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/app/', '/admin/', '/api/', '/auth/', '/*?*', '/search/', '/tag/', '/author/', '/cdn-cgi/'],
+                disallow: ['/app/', '/admin/', '/api/', '/auth/', '/search/', '/tag/', '/author/', '/cdn-cgi/'],
             },
             {
                 userAgent: ['CCBot', 'GPTBot'],
