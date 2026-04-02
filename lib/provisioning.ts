@@ -52,18 +52,15 @@ export async function autoProvision(subscriptionId: string, planId: string, user
         return false
     }
 
-    // 2. Mark the pool entry as used
-    const { error: updatePoolError } = await supabaseAdmin
+    // 2. Delete the pool entry (remove after use)
+    const { error: deletePoolError } = await supabaseAdmin
         .from('activation_pool')
-        .update({
-            is_used: true,
-            assigned_to: subscriptionId,
-        })
+        .delete()
         .eq('id', poolEntry.id)
         .eq('is_used', false) // Optimistic concurrency: avoid double-assigning
 
-    if (updatePoolError) {
-        console.error('[AutoProvision] Failed to claim pool entry:', updatePoolError)
+    if (deletePoolError) {
+        console.error('[AutoProvision] Failed to claim pool entry:', deletePoolError)
         return false
     }
 

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { sendActivationSuccessEmail } from '@/lib/activation-emails'
 
 export default async function ActivateSubscriptionPage({
@@ -23,16 +24,31 @@ export default async function ActivateSubscriptionPage({
 
     const { data: subscription } = await supabaseAdmin
         .from('subscriptions')
-        .select('*, plan:plans(name, duration_months), profile:profiles(email)')
+        .select('*, plan:plans(id, name, duration_months), profile:profiles(email)')
         .eq('id', id)
         .single()
 
     if (!subscription) redirect('/admin/orders')
 
+    // Fetch an available pool entry for this plan
+    const planId = (subscription as any).plan?.id
+    const { data: poolEntry } = planId
+        ? await supabaseAdmin
+            .from('activation_pool')
+            .select('*')
+            .eq('plan_id', planId)
+            .eq('is_used', false)
+            .is('assigned_to', null)
+            .order('created_at', { ascending: true })
+            .limit(1)
+            .single()
+        : { data: null }
+
     const handleActivate = async (formData: FormData) => {
         'use server'
         const payloadType = formData.get('type') as string
         const payloadValue = formData.get('value') as string
+        const poolEntryId = formData.get('pool_entry_id') as string
 
         if (!payloadType || !payloadValue) return
 
@@ -56,6 +72,14 @@ export default async function ActivateSubscriptionPage({
             start_date: startDate.toISOString(),
             end_date: endDate.toISOString(),
         }).eq('id', id)
+
+        // Delete the used pool entry
+        if (poolEntryId) {
+            await supabaseAdmin
+                .from('activation_pool')
+                .delete()
+                .eq('id', poolEntryId)
+        }
 
         // Send activation email to the user
         const userEmail = (subscription as any).profile?.email
@@ -86,14 +110,40 @@ export default async function ActivateSubscriptionPage({
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
+                    {/* Pool status indicator */}
+                    {poolEntry ? (
+                        <div className="mb-6 p-4 rounded-lg border border-green-500/30 bg-green-500/5">
+                            <div className="flex items-center gap-2 mb-1">
+                                <Badge variant="default" className="bg-green-600">✓ Pool Code Found</Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground mt-2">
+                                Auto-filled from pool. Code will be <strong>deleted from pool</strong> after activation.
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="mb-6 p-4 rounded-lg border border-amber-500/30 bg-amber-500/5">
+                            <div className="flex items-center gap-2 mb-1">
+                                <Badge variant="secondary" className="bg-amber-600/20 text-amber-400">⚠ No Pool Codes</Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground mt-2">
+                                No available codes in pool for this plan. Enter credentials manually below.
+                            </p>
+                        </div>
+                    )}
+
                     <form action={handleActivate} className="space-y-6">
+                        {/* Hidden field to track which pool entry to delete */}
+                        {poolEntry && (
+                            <input type="hidden" name="pool_entry_id" value={poolEntry.id} />
+                        )}
+
                         <div className="space-y-2">
                             <Label htmlFor="type">Activation Type</Label>
                             <select
                                 id="type"
                                 name="type"
                                 required
-                                defaultValue="activation_code"
+                                defaultValue={poolEntry?.type ?? 'activation_code'}
                                 className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 <option value="activation_code">Activation Code</option>
@@ -104,7 +154,19 @@ export default async function ActivateSubscriptionPage({
 
                         <div className="space-y-2">
                             <Label htmlFor="value">Activation Value (Code, Credentials, etc.)</Label>
-                            <Input id="value" name="value" required placeholder="Enter the activation details..." className="font-mono" />
+                            <Input
+                                id="value"
+                                name="value"
+                                required
+                                defaultValue={poolEntry?.value ?? ''}
+                                placeholder="Enter the activation details..."
+                                className="font-mono"
+                            />
+                            {poolEntry && (
+                                <p className="text-xs text-green-400">
+                                    ↑ Pre-filled from pool: <code className="bg-muted px-1 rounded">{poolEntry.type}</code>
+                                </p>
+                            )}
                         </div>
 
                         <Button type="submit" className="w-full">Complete Provisioning</Button>
