@@ -238,6 +238,13 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect, isRenewal =
                                 </button>
                             ))}
                         </div>
+                        <p className="text-[11px] text-[#8899aa] leading-relaxed pt-1">
+                            💬 Don&apos;t see your country? You can request any other channel package after subscribing by contacting our support team via{' '}
+                            <a href="mailto:support@streamtly.com" className="text-[#00d4ff] hover:underline font-semibold">email</a>
+                            {' '}or{' '}
+                            <a href="https://wa.me/447520695452" className="text-[#25D366] hover:underline font-semibold">WhatsApp</a>
+                            {' '}— we&apos;ll switch it for free.
+                        </p>
                     </div>
                 )}
 
