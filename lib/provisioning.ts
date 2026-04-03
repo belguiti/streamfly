@@ -13,11 +13,14 @@ import {
 /**
  * Auto-provision a subscription via the Gold Panel API.
  * Called immediately after a successful payment webhook.
+ * @param packageIdOverride - Package ID selected by the user at checkout.
+ *   If provided, it takes precedence over the plan's default provider_pack_id.
  */
 export async function autoProvision(
     subscriptionId: string,
     planId: string,
     userId: string,
+    packageIdOverride?: string,
 ): Promise<boolean> {
     // ── 1. Load user info ─────────────────────────────────────────────────────
     const { data: { user } } = await supabaseAdmin.auth.admin.getUserById(userId)
@@ -35,11 +38,12 @@ export async function autoProvision(
 
     const planName      = plan?.name             ?? 'Streamtly Plan'
     const durationMonths = plan?.duration_months ?? 1
-    const packId        = plan?.provider_pack_id ?? null
+    // User-selected package takes precedence over the plan's default package
+    const packId        = packageIdOverride ?? plan?.provider_pack_id ?? null
     const country       = (plan?.provider_country ?? 'ALL').trim()
 
     if (!packId) {
-        console.error(`[AutoProvision] Plan ${planId} has no provider_pack_id configured`)
+        console.error(`[AutoProvision] No provider_pack_id: plan ${planId} has no default and user selected none`)
         try { await sendAdminPoolEmptyAlert(planName, userEmail) } catch {}
         return false
     }

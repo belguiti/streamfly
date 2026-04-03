@@ -31,14 +31,16 @@ export async function POST(req: Request) {
 
     // Parse metadata from order_id
     // Formats:
-    //   legacy: "userId__planId__timestamp"
-    //   new:    "userId__planId__deviceType__isRenewal__existingSubId__timestamp"
+    //   legacy (3):  "userId__planId__timestamp"
+    //   v2 (6):      "userId__planId__deviceType__isRenewal__existingSubId__timestamp"
+    //   v3 (7):      "userId__planId__deviceType__isRenewal__existingSubId__packageId__timestamp"
     const parts = orderId.split('__')
     const userId = parts[0]
     const planId = parts[1]
-    const deviceType = parts.length >= 6 ? (parts[2] === 'none' ? null : parts[2]) : null
-    const isRenewal = parts.length >= 6 ? parts[3] === 'true' : false
+    const deviceType    = parts.length >= 6 ? (parts[2] === 'none' ? null : parts[2]) : null
+    const isRenewal     = parts.length >= 6 ? parts[3] === 'true' : false
     const existingSubId = parts.length >= 6 && parts[4] !== 'null' ? parts[4] : null
+    const packageId     = parts.length >= 7 && parts[5] !== 'none' ? parts[5] : null
 
     if (!userId || !planId) {
         console.error('NOWPayments IPN: cannot parse userId/planId from order_id', orderId)
@@ -93,13 +95,14 @@ export async function POST(req: Request) {
                 status: 'pending_activation',
                 nowpayments_payment_id: paymentId,
                 device_type: deviceType,
+                provider_pack_id: packageId,
             }, { onConflict: 'nowpayments_payment_id' })
             .select('id')
             .single()
 
-        // Auto-provision
+        // Auto-provision (pass packageId so it overrides the plan default)
         if (upsertedSub) {
-            await autoProvision(upsertedSub.id, planId, userId)
+            await autoProvision(upsertedSub.id, planId, userId, packageId ?? undefined)
         }
 
         return new NextResponse('OK', { status: 200 })

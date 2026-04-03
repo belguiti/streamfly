@@ -30,6 +30,7 @@ export async function POST(req: Request) {
         const priceAmount = discountedCents / 100
 
         const deviceType = (formData.get('deviceType') as string) || 'none'
+        const packageId  = (formData.get('packageId')  as string) || 'none'
         const isRenewal = formData.get('isRenewal') === 'true'
 
         // Find existing subscription (for renewal tracking)
@@ -47,7 +48,8 @@ export async function POST(req: Request) {
         }
 
         // Encode metadata in order_id (__ separated)
-        const orderId = `${user.id}__${planId}__${deviceType}__${isRenewal}__${existingSubId}__${Date.now()}`
+        // Format: userId__planId__deviceType__isRenewal__existingSubId__packageId__timestamp
+        const orderId = `${user.id}__${planId}__${deviceType}__${isRenewal}__${existingSubId}__${packageId}__${Date.now()}`
 
         const invoice = await createInvoice({
             priceAmount,

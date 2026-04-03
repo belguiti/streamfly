@@ -34,8 +34,19 @@ const DEVICES = [
     { id: 'other', label: 'Other', icon: '🔌' },
 ]
 
+const PACKAGES = [
+    { id: '65410', label: 'USA + Sport', flag: '🇺🇸', desc: 'USA channels with all sports & PPV' },
+    { id: '65507', label: 'USA / Canada', flag: '🇨🇦', desc: 'US & Canadian channels' },
+    { id: '65435', label: 'Morocco', flag: '🇲🇦', desc: 'Moroccan & Arabic channels' },
+    { id: '65504', label: 'France', flag: '🇫🇷', desc: 'French channels & TNT' },
+    { id: '65505', label: 'Germany', flag: '🇩🇪', desc: 'German channels & Bundesliga' },
+    { id: '65506', label: 'Portugal', flag: '🇵🇹', desc: 'Portuguese & Brazilian channels' },
+    { id: '65508', label: 'Spain', flag: '🇪🇸', desc: 'Spanish channels & La Liga' },
+]
+
 export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect, isRenewal = false }: PromoCheckoutCardProps) {
     const [selectedDevice, setSelectedDevice] = useState<string | null>(null)
+    const [selectedPackage, setSelectedPackage] = useState<string | null>(null)
     const [promoInput, setPromoInput] = useState('')
     const [promoLoading, setPromoLoading] = useState(false)
     const [promoError, setPromoError] = useState<string | null>(null)
@@ -176,7 +187,7 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect, isRenewal =
                     </div>
                 )}
 
-                {/* Device Selection */}
+                {/* Step 1 — Device Selection */}
                 {isLoggedIn && (
                     <div className="space-y-3">
                         <p className="text-xs font-bold text-[#8899aa] uppercase tracking-wider">Step 1 — Select your device</p>
@@ -200,15 +211,45 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect, isRenewal =
                     </div>
                 )}
 
+                {/* Step 2 — Package Selection */}
+                {isLoggedIn && selectedDevice && (
+                    <div className="space-y-3">
+                        <p className="text-xs font-bold text-[#8899aa] uppercase tracking-wider">Step 2 — Choose your channel package</p>
+                        <div className="space-y-2">
+                            {PACKAGES.map(pkg => (
+                                <button
+                                    key={pkg.id}
+                                    type="button"
+                                    onClick={() => setSelectedPackage(pkg.id)}
+                                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-all ${
+                                        selectedPackage === pkg.id
+                                            ? 'border-[#a855f7] bg-[#a855f7]/10 text-white'
+                                            : 'border-white/10 bg-white/5 text-[#8899aa] hover:border-white/25 hover:text-white'
+                                    }`}
+                                >
+                                    <span className="text-xl flex-shrink-0">{pkg.flag}</span>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="font-bold text-sm leading-tight">{pkg.label}</p>
+                                        <p className="text-[10px] text-[#555] leading-tight mt-0.5">{pkg.desc}</p>
+                                    </div>
+                                    {selectedPackage === pkg.id && (
+                                        <Check className="w-4 h-4 text-[#a855f7] flex-shrink-0" />
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
                 {/* Payment Options */}
                 <div className="space-y-4">
                     {isLoggedIn ? (
                         <>
-                            {selectedDevice && (
+                            {selectedDevice && selectedPackage && (
                             <>
                             <div className="flex items-center gap-2 mb-2">
                                 <Lock className="w-3.5 h-3.5 text-[#00e5a0]" />
-                                <span className="text-xs text-[#8899aa] font-semibold">Step 2 — AES-256 Encrypted Payment</span>
+                                <span className="text-xs text-[#8899aa] font-semibold">Step 3 — AES-256 Encrypted Payment</span>
                             </div>
 
                             {/* PayPal */}
@@ -216,6 +257,7 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect, isRenewal =
                                 <form action="/api/paypal/checkout" method="POST" className="w-full">
                                     <input type="hidden" name="planId" value={plan.id} />
                                     <input type="hidden" name="deviceType" value={selectedDevice ?? ''} />
+                                    <input type="hidden" name="packageId" value={selectedPackage ?? ''} />
                                     <input type="hidden" name="isRenewal" value={String(isRenewal)} />
                                     {appliedPromo && (
                                         <>
@@ -238,6 +280,7 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect, isRenewal =
                             <form action="/api/nowpayments/checkout" method="POST" className="w-full">
                                 <input type="hidden" name="planId" value={plan.id} />
                                 <input type="hidden" name="deviceType" value={selectedDevice ?? ''} />
+                                <input type="hidden" name="packageId" value={selectedPackage ?? ''} />
                                 <input type="hidden" name="isRenewal" value={String(isRenewal)} />
                                 {appliedPromo && (
                                     <input type="hidden" name="discountPercent" value={appliedPromo.discountPercent} />
@@ -253,6 +296,11 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect, isRenewal =
                                 <p className="text-[10px] text-center text-[#555] mt-2">BTC, ETH, USDT, LTC & 100+ coins</p>
                             </form>
                             </>
+                            )}
+                            {selectedDevice && !selectedPackage && (
+                                <p className="text-xs text-center text-[#8899aa] py-2">
+                                    ↑ Choose your channel package above to continue
+                                </p>
                             )}
                             {!selectedDevice && (
                                 <p className="text-xs text-center text-[#8899aa] py-2">

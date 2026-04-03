@@ -59,7 +59,7 @@ export async function POST(req: Request) {
                     customData = JSON.parse(ppSub.custom_id || '{}')
                 }
 
-                const { userId, planId, deviceType, isRenewal, existingSubId } = customData as any
+                const { userId, planId, deviceType, isRenewal, existingSubId, packageId } = customData as any
                 if (!userId || !planId) {
                     console.error('PayPal webhook: missing custom_id metadata')
                     break
@@ -101,11 +101,12 @@ export async function POST(req: Request) {
                         ? new Date(resource.billing_info.next_billing_time).toISOString()
                         : null,
                     device_type: deviceType ?? null,
+                    provider_pack_id: packageId ?? null,
                 }, { onConflict: 'paypal_subscription_id' }).select('id').single()
 
-                // Attempt auto-provisioning
+                // Attempt auto-provisioning (pass packageId to override plan default)
                 if (upsertedSub) {
-                    await autoProvision(upsertedSub.id, planId, userId)
+                    await autoProvision(upsertedSub.id, planId, userId, packageId ?? undefined)
                 }
 
                 break

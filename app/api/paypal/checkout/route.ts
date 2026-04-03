@@ -13,8 +13,9 @@ export async function POST(req: Request) {
         }
 
         const formData = await req.formData()
-        const planId = formData.get('planId') as string
+        const planId    = formData.get('planId')    as string
         const deviceType = (formData.get('deviceType') as string) || null
+        const packageId  = (formData.get('packageId')  as string) || null
         const isRenewal = formData.get('isRenewal') === 'true'
 
         if (!planId) throw new Error('Plan ID is required')
@@ -45,6 +46,7 @@ export async function POST(req: Request) {
             deviceType,
             isRenewal,
             existingSub?.id ?? null,
+            packageId,
         )
 
         return NextResponse.redirect(approvalUrl, 303)

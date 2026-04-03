@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
     title: 'Sitemap | Streamtly IPTV',
     description: 'Browse all pages on Streamtly — setup guides, pricing plans, blog articles, reviews, and support.',
-    alternates: { canonical: `${SITE_URL}/sitemap` },
+    alternates: { canonical: `${SITE_URL}/site-index` },
     robots: { index: true, follow: true },
 }
 

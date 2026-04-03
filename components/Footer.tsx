@@ -128,7 +128,7 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/sitemap" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
+                                <Link href="/site-index" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA]/40"></span>
                                     Sitemap
                                 </Link>
