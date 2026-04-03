@@ -1,16 +1,15 @@
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
-import { ShieldCheck, Zap, Headphones, Globe, ArrowLeft, Star } from 'lucide-react'
+import { ShieldCheck, Zap, Headphones, Globe, ArrowLeft, Star, Ban } from 'lucide-react'
 import Link from 'next/link'
 import { PromoCheckoutCard } from '@/components/pricing/PromoCheckoutCard'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
 
 interface PageProps {
-    params: {
-        id: string
-    }
+    params: { id: string }
+    searchParams: { renew?: string }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -47,8 +46,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
 }
 
-export default async function PlanDetailsPage({ params }: PageProps) {
+export default async function PlanDetailsPage({ params, searchParams }: PageProps) {
     const { id } = await params
+    const { renew } = await searchParams
     const supabase = await createClient()
 
     const [{ data: plan, error }, { data: { user } }] = await Promise.all([
@@ -61,6 +61,7 @@ export default async function PlanDetailsPage({ params }: PageProps) {
     }
 
     const isLoggedIn = !!user
+    const isRenewal = renew === 'true'
     const loginRedirect = `/sign-in?next=/pricing/${id}`
 
     return (
@@ -95,6 +96,7 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                         {[
                             { icon: Globe, title: 'Global Access', desc: 'Stream from anywhere in the world on any device.', color: '#00d4ff' },
                             { icon: Zap, title: 'Instant Activation', desc: 'Codes delivered instantly to your dashboard.', color: '#00e5a0' },
+                            { icon: Ban, title: 'No Adult Content', desc: 'All packages are family-friendly — no adult content included.', color: '#22c55e' },
                             { icon: Headphones, title: '24/7 Expert Support', desc: 'Our team is here to help you around the clock.', color: '#a855f7' },
                             { icon: ShieldCheck, title: 'Money-Back Guarantee', desc: 'Not satisfied? Get a full refund within 14 days.', color: '#fbbf24' },
                         ].map((item) => (
@@ -144,6 +146,7 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                         plan={plan}
                         isLoggedIn={isLoggedIn}
                         loginRedirect={loginRedirect}
+                        isRenewal={isRenewal}
                     />
                 </div>
 

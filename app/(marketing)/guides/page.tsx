@@ -1,145 +1,142 @@
-'use client'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
+import type { Metadata } from 'next'
+import { SITE_URL } from '@/lib/site-config'
 
-import { useState } from 'react'
-import { ChevronDown, Smartphone, Tv, Monitor, Tablet, Laptop } from 'lucide-react'
+export const metadata: Metadata = {
+    title: 'IPTV Setup Guides — Smart TV, Firestick, Android, iOS & More | Streamtly',
+    description: 'Free step-by-step IPTV setup guides for every device. Smart TV, Firestick, Android Box, iPhone, iPad, Windows, Mac, MAG, and Enigma2. Get streaming in under 5 minutes.',
+    keywords: ['IPTV setup guide', 'how to install IPTV', 'IPTV tutorial', 'IPTV Firestick setup', 'IPTV Smart TV setup', 'IPTV Android setup', 'IPTV iPhone setup', 'MAG IPTV setup'],
+    alternates: { canonical: `${SITE_URL}/guides` },
+    openGraph: {
+        title: 'IPTV Setup Guides — Smart TV, Firestick, Android, iOS & More | Streamtly',
+        description: 'Free step-by-step IPTV setup guides for every device. Get streaming in under 5 minutes.',
+        url: `${SITE_URL}/guides`,
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary',
+        title: 'IPTV Setup Guides — All Devices | Streamtly',
+        description: 'Step-by-step IPTV setup for Smart TV, Firestick, Android, iPhone, MAG and more.',
+    },
+}
 
-const guides = [
+const DEVICE_GUIDES = [
     {
-        icon: Tv,
-        device: 'Amazon Firestick',
-        color: '#ff9900',
-        steps: [
-            'From your Firestick home screen, go to Settings → My Fire TV → Developer Options.',
-            'Enable "Apps from Unknown Sources" (or "Install Unknown Apps").',
-            'Search for "Downloader" in the Amazon App Store and install it.',
-            'Open Downloader and enter the app download URL provided in your dashboard.',
-            'Install the downloaded APK and open the app.',
-            'Enter your username and password from your activation email.',
-            'Enjoy streaming! Your channel list will load automatically.',
-        ],
-    },
-    {
-        icon: Smartphone,
-        device: 'Android TV / Android Box',
-        color: '#3ddc84',
-        steps: [
-            'Go to Settings → Security → Enable "Unknown Sources".',
-            'Open the built-in web browser or install "Downloader" from Google Play.',
-            'Navigate to the app download URL provided in your dashboard.',
-            'Download and install the APK file.',
-            'Open the app and enter your login credentials.',
-            'Your channels and VOD library will appear instantly.',
-        ],
-    },
-    {
-        icon: Monitor,
-        device: 'Samsung / LG Smart TV',
+        slug: 'smart-tv',
+        emoji: '📺',
+        title: 'Smart TV',
+        subtitle: 'Samsung, LG, Hisense, Sony',
+        desc: 'Use IPTV Smarters or Smart IPTV with Xtream Codes.',
         color: '#1428a0',
-        steps: [
-            'From your Smart TV, open the built-in app store (Samsung: Smart Hub, LG: LG Content Store).',
-            'Search for "IPTV Smarters" or "Smart IPTV" and install it.',
-            'Open the app and select "Xtream Codes API" as the login type.',
-            'Enter your server URL, username, and password from your activation email.',
-            'Wait for the channel list to load (this may take 1-2 minutes on first launch).',
-            'Start streaming! Use the EPG guide to browse by category.',
-        ],
     },
     {
-        icon: Tablet,
-        device: 'iOS / iPhone / iPad',
+        slug: 'android',
+        emoji: '📦',
+        title: 'Android Box & Firestick',
+        subtitle: 'Android TV, Firestick, Android Phone',
+        desc: 'TiviMate or IPTV Smarters — best experience on Android.',
+        color: '#3ddc84',
+    },
+    {
+        slug: 'ios',
+        emoji: '🍎',
+        title: 'iPhone & iPad',
+        subtitle: 'iOS 14 and above',
+        desc: 'IPTV Smarters Pro or GSE Smart IPTV from the App Store.',
         color: '#007aff',
-        steps: [
-            'Open the App Store on your iOS device.',
-            'Search for "IPTV Smarters Pro" or "GSE Smart IPTV" and install it.',
-            'Open the app and tap "Add New User" or the "+" icon.',
-            'Select "Xtream Codes API" login type.',
-            'Enter your server URL, username, and password from your activation email.',
-            'Your channel list and VOD library will load automatically.',
-            'Enjoy streaming on the go!',
-        ],
     },
     {
-        icon: Laptop,
-        device: 'Windows / Mac / PC',
+        slug: 'windows',
+        emoji: '💻',
+        title: 'Windows & Mac',
+        subtitle: 'Desktop & Laptop',
+        desc: 'VLC, IPTV Smarters, or Kodi with PVR add-on.',
         color: '#00d4ff',
-        steps: [
-            'Download the recommended player from the link in your dashboard (VLC or our custom app).',
-            'Install and open the application.',
-            'Go to Media → Open Network Stream (VLC) or enter credentials (custom app).',
-            'Enter the M3U URL or Xtream Codes details from your activation email.',
-            'Wait for the playlist to load — this may take a moment for the full library.',
-            'Browse channels by category and start watching!',
-        ],
+    },
+    {
+        slug: 'mag',
+        emoji: '📡',
+        title: 'MAG Device',
+        subtitle: 'MAG 250 / 254 / 256 / 322 / 420+',
+        desc: 'Portal URL setup — no extra app required.',
+        color: '#f59e0b',
+    },
+    {
+        slug: 'enigma2',
+        emoji: '🛰️',
+        title: 'Enigma2 / Satellite',
+        subtitle: 'Dreambox, Vu+, Zgemma, Octagon',
+        desc: 'E2M3U2Bouquet plugin for bouquets & EPG.',
+        color: '#8b5cf6',
     },
 ]
 
 export default function GuidesPage() {
-    const [openGuide, setOpenGuide] = useState<number | null>(0)
-
     return (
-        <div className="container mx-auto px-4 py-16 md:py-24 max-w-4xl">
+        <div className="container mx-auto px-4 py-16 md:py-24 max-w-5xl">
+
+            {/* Header */}
             <div className="text-center mb-14">
                 <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
                     Installation <span className="gradient-text">Guides</span>
                 </h1>
                 <p className="text-lg text-[#8899aa] max-w-xl mx-auto">
-                    Get set up in under 5 minutes. Choose your device below for step-by-step instructions.
+                    Get set up in under 5 minutes. Pick your device below for step-by-step instructions.
                 </p>
             </div>
 
-            <div className="space-y-4">
-                {guides.map((guide, i) => (
-                    <div
-                        key={guide.device}
-                        className="rounded-xl border border-white/5 bg-[#111827] overflow-hidden transition-colors hover:border-white/10"
+            {/* Device grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+                {DEVICE_GUIDES.map(device => (
+                    <Link
+                        key={device.slug}
+                        href={`/guides/${device.slug}`}
+                        className="group relative p-6 rounded-2xl bg-[#111827] border border-white/5 hover:border-white/15 transition-all hover:-translate-y-1 hover:shadow-xl flex flex-col gap-4"
                     >
-                        <button
-                            onClick={() => setOpenGuide(openGuide === i ? null : i)}
-                            className="w-full flex items-center gap-4 p-5 text-left"
-                        >
-                            <div
-                                className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                                style={{ background: `${guide.color}15` }}
-                            >
-                                <guide.icon className="w-5 h-5" style={{ color: guide.color }} />
-                            </div>
-                            <span className="font-semibold text-white flex-1">{guide.device}</span>
-                            <ChevronDown
-                                className={`w-5 h-5 text-[#00d4ff] flex-shrink-0 transition-transform duration-300 ${openGuide === i ? 'rotate-180' : ''
-                                    }`}
-                            />
-                        </button>
+                        {/* Icon */}
                         <div
-                            className={`transition-all duration-300 ease-in-out overflow-hidden ${openGuide === i ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
-                                }`}
+                            className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
+                            style={{ background: `${device.color}15` }}
                         >
-                            <div className="px-5 pb-5">
-                                <ol className="space-y-3 ml-2">
-                                    {guide.steps.map((step, j) => (
-                                        <li key={j} className="flex gap-3 text-sm text-[#8899aa]">
-                                            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#00d4ff]/10 text-[#00d4ff] flex items-center justify-center text-xs font-bold">
-                                                {j + 1}
-                                            </span>
-                                            <span className="leading-relaxed pt-0.5">{step}</span>
-                                        </li>
-                                    ))}
-                                </ol>
-                            </div>
+                            {device.emoji}
                         </div>
-                    </div>
+
+                        {/* Text */}
+                        <div className="flex-1">
+                            <h2 className="font-bold text-white text-base mb-0.5">{device.title}</h2>
+                            <p className="text-xs text-[#555] mb-2">{device.subtitle}</p>
+                            <p className="text-sm text-[#8899aa] leading-relaxed">{device.desc}</p>
+                        </div>
+
+                        {/* Arrow */}
+                        <div
+                            className="flex items-center gap-1 text-xs font-bold transition-colors"
+                            style={{ color: device.color }}
+                        >
+                            View Guide
+                            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                        </div>
+
+                        {/* Accent bar */}
+                        <div
+                            className="absolute bottom-0 left-6 right-6 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                            style={{ background: device.color }}
+                        />
+                    </Link>
                 ))}
             </div>
 
             {/* Help CTA */}
-            <div className="mt-12 text-center p-8 rounded-2xl bg-[#111827] border border-white/5">
+            <div className="text-center p-8 rounded-2xl bg-[#111827] border border-white/5">
                 <h3 className="text-xl font-bold text-white mb-3">Need Help With Setup?</h3>
-                <p className="text-[#8899aa] mb-6">Our 24/7 support team can walk you through the installation on any device.</p>
-                <a
+                <p className="text-[#8899aa] mb-6">Our 24/7 support team can walk you through installation on any device.</p>
+                <Link
                     href="/contact"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#00d4ff] to-[#00e5a0] text-[#0a0f1a] font-bold text-sm hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all hover:scale-105"
                 >
                     Contact Support
-                </a>
+                </Link>
             </div>
         </div>
     )

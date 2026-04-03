@@ -1,4 +1,24 @@
 import { Star, Quote } from 'lucide-react'
+import type { Metadata } from 'next'
+import { SITE_URL } from '@/lib/site-config'
+
+export const metadata: Metadata = {
+    title: 'Customer Reviews & Ratings | Streamtly IPTV',
+    description: 'Read verified customer reviews of Streamtly IPTV. Rated 4.9/5 by thousands of users. Real testimonials from Smart TV, Firestick, Android, iPhone and MAG users worldwide.',
+    keywords: ['Streamtly reviews', 'IPTV reviews', 'Streamtly rating', 'IPTV service reviews', 'best IPTV testimonials', 'IPTV customer reviews 2025'],
+    alternates: { canonical: `${SITE_URL}/reviews` },
+    openGraph: {
+        title: 'Customer Reviews & Ratings | Streamtly IPTV',
+        description: 'Rated 4.9/5 by thousands of users. Read verified Streamtly customer reviews.',
+        url: `${SITE_URL}/reviews`,
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary',
+        title: 'Customer Reviews & Ratings | Streamtly IPTV',
+        description: 'Rated 4.9/5 by thousands of users. Read verified customer reviews.',
+    },
+}
 
 const reviews = [
     {
@@ -70,6 +90,28 @@ function StarRating({ rating }: { rating: number }) {
     )
 }
 
+const aggregateRatingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'Streamtly IPTV Service',
+    description: 'Premium IPTV subscription with 35,000+ live channels and 150,000+ movies & series.',
+    aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        reviewCount: '50000',
+        bestRating: '5',
+        worstRating: '1',
+    },
+    review: reviews.map(r => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name: r.name },
+        reviewRating: { '@type': 'Rating', ratingValue: String(r.rating), bestRating: '5' },
+        name: r.title,
+        reviewBody: r.review,
+        datePublished: r.date,
+    })),
+}
+
 export default function ReviewsPage() {
     const avgRating = (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1)
 
@@ -127,6 +169,12 @@ export default function ReviewsPage() {
                     View Plans & Get Started
                 </a>
             </div>
+
+            {/* AggregateRating JSON-LD */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }}
+            />
         </div>
     )
 }

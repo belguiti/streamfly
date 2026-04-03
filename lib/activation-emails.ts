@@ -317,6 +317,64 @@ export async function sendActivationDelayEmail(
     })
 }
 
+/** Email to client when admin activates a renewal */
+export async function sendRenewalConfirmationEmail(
+    toEmail: string,
+    userName: string,
+    planName: string,
+    newPeriodEnd: string,
+) {
+    const header = `
+      <span style="display:inline-block;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.4);color:#4ADE80;font-size:11px;font-weight:700;letter-spacing:2px;padding:6px 18px;border-radius:100px;text-transform:uppercase;">
+        &#10003;&nbsp; Subscription Renewed
+      </span>`
+
+    const body = `
+      <p style="margin:0 0 8px;font-size:20px;font-weight:700;color:#ffffff;">Hi ${userName} &#128075;</p>
+      <p style="margin:0 0 28px;font-size:14px;color:#64748B;">Great news — your Streamtly subscription has been successfully renewed!</p>
+
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+        <tr>
+          <td style="background:#0d1f12;border:1px solid rgba(34,197,94,0.2);border-left:4px solid #22C55E;border-radius:8px;padding:24px 28px;">
+            <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#22C55E;text-transform:uppercase;">Plan Renewed</p>
+            <p style="margin:0 0 16px;font-size:18px;font-weight:700;color:#ffffff;">${planName}</p>
+            <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#22C55E;text-transform:uppercase;">Active Until</p>
+            <p style="margin:0;font-size:16px;font-weight:700;color:#ffffff;">${newPeriodEnd}</p>
+          </td>
+        </tr>
+      </table>
+
+      <p style="margin:0 0 28px;font-size:14px;color:#64748B;line-height:1.7;">
+        Your existing credentials remain the same — no changes needed. Simply continue streaming as before.
+      </p>
+
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
+        <tr>
+          <td align="center">
+            <a href="${SITE_URL}/app" style="display:inline-block;background:linear-gradient(135deg,#166534 0%,#15803d 100%);color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;padding:14px 40px;border-radius:10px;letter-spacing:0.5px;">
+              Go to My Dashboard &rarr;
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+        <tr><td style="height:1px;background:linear-gradient(90deg,transparent,rgba(99,102,241,0.25),transparent);"></td></tr>
+      </table>
+
+      <p style="margin:0;font-size:13px;color:#475569;line-height:1.7;text-align:center;">
+        Need help? Contact us at
+        <a href="mailto:support@streamtly.com" style="color:#818CF8;text-decoration:none;">support@streamtly.com</a>
+      </p>`
+
+    await resend.emails.send({
+        from: FROM,
+        to: [toEmail],
+        subject: '🎉 Your Streamtly Subscription Has Been Renewed!',
+        html: baseLayout(header, body),
+    })
+}
+
 /** Alert email to admin when activation pool is empty */
 export async function sendAdminPoolEmptyAlert(planName: string, customerEmail: string) {
     const header = `

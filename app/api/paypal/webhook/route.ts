@@ -59,22 +59,36 @@ export async function POST(req: Request) {
                     customData = JSON.parse(ppSub.custom_id || '{}')
                 }
 
-                const { userId, planId } = customData
+                const { userId, planId, deviceType, isRenewal, existingSubId } = customData as any
                 if (!userId || !planId) {
                     console.error('PayPal webhook: missing custom_id metadata')
                     break
                 }
 
                 // Insert order
-                await supabaseAdmin.from('orders').insert({
+                const { data: insertedOrder } = await supabaseAdmin.from('orders').insert({
                     user_id: userId,
                     plan_id: planId,
                     provider: 'paypal',
                     status: 'paid',
-                    amount_cents: 0, // PayPal doesn't break down nicely; plan price is the source of truth
+                    amount_cents: 0,
                     currency: 'USD',
                     paypal_order_id: resource.id,
-                })
+                    order_type: isRenewal ? 'renewal' : 'new',
+                }).select('id').single()
+
+                if (isRenewal && existingSubId) {
+                    // Renewal: insert into renewals table, keep subscription as-is
+                    await supabaseAdmin.from('renewals').insert({
+                        user_id: userId,
+                        subscription_id: existingSubId,
+                        plan_id: planId,
+                        order_id: insertedOrder?.id ?? null,
+                        provider: 'paypal',
+                        status: 'pending',
+                    })
+                    break
+                }
 
                 // Upsert subscription
                 const { data: upsertedSub } = await supabaseAdmin.from('subscriptions').upsert({
@@ -86,6 +100,7 @@ export async function POST(req: Request) {
                     current_period_end: resource.billing_info?.next_billing_time
                         ? new Date(resource.billing_info.next_billing_time).toISOString()
                         : null,
+                    device_type: deviceType ?? null,
                 }, { onConflict: 'paypal_subscription_id' }).select('id').single()
 
                 // Attempt auto-provisioning

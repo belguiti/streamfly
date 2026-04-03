@@ -15,12 +15,12 @@ export async function GET(req: Request) {
     const DISCOUNT_PERCENT = 10
     const PROMO_EXPIRES_DAYS = 30
 
-    // Find subscriptions expiring in 6–8 days (centered on 7)
+    // Find subscriptions expiring in 2–4 days (centered on 3)
     const now = new Date()
     const windowStart = new Date(now)
-    windowStart.setDate(windowStart.getDate() + 6)
+    windowStart.setDate(windowStart.getDate() + 2)
     const windowEnd = new Date(now)
-    windowEnd.setDate(windowEnd.getDate() + 8)
+    windowEnd.setDate(windowEnd.getDate() + 4)
 
     const { data: subs, error } = await supabaseAdmin
         .from('subscriptions')
@@ -80,7 +80,7 @@ export async function GET(req: Request) {
             const { error: emailError } = await resend.emails.send({
                 from: FROM,
                 to: profile.email,
-                subject: `⚡ Your Streamtly subscription expires in 7 days — ${DISCOUNT_PERCENT}% renewal offer inside`,
+                subject: `⚡ Your Streamtly subscription expires in 3 days — ${DISCOUNT_PERCENT}% renewal offer inside`,
                 html: renewalEmailHtml({
                     userName: profile.full_name?.split(' ')[0] ?? 'there',
                     planName: plan?.name ?? 'Premium',

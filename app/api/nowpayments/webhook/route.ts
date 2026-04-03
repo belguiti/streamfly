@@ -29,10 +29,16 @@ export async function POST(req: Request) {
         return new NextResponse('OK', { status: 200 })
     }
 
-    // Parse userId and planId from order_id (format: "userId__planId__timestamp")
+    // Parse metadata from order_id
+    // Formats:
+    //   legacy: "userId__planId__timestamp"
+    //   new:    "userId__planId__deviceType__isRenewal__existingSubId__timestamp"
     const parts = orderId.split('__')
     const userId = parts[0]
     const planId = parts[1]
+    const deviceType = parts.length >= 6 ? (parts[2] === 'none' ? null : parts[2]) : null
+    const isRenewal = parts.length >= 6 ? parts[3] === 'true' : false
+    const existingSubId = parts.length >= 6 && parts[4] !== 'null' ? parts[4] : null
 
     if (!userId || !planId) {
         console.error('NOWPayments IPN: cannot parse userId/planId from order_id', orderId)
@@ -54,7 +60,7 @@ export async function POST(req: Request) {
         const amountCents = Math.round((event.price_amount ?? 0) * 100)
 
         // Insert order
-        await supabaseAdmin.from('orders').insert({
+        const { data: insertedOrder } = await supabaseAdmin.from('orders').insert({
             user_id: userId,
             plan_id: planId,
             provider: 'nowpayments',
@@ -62,7 +68,21 @@ export async function POST(req: Request) {
             amount_cents: amountCents,
             currency: 'USD',
             nowpayments_payment_id: paymentId,
-        })
+            order_type: isRenewal ? 'renewal' : 'new',
+        }).select('id').single()
+
+        if (isRenewal && existingSubId) {
+            // Renewal: insert into renewals table, keep subscription as-is
+            await supabaseAdmin.from('renewals').insert({
+                user_id: userId,
+                subscription_id: existingSubId,
+                plan_id: planId,
+                order_id: insertedOrder?.id ?? null,
+                provider: 'nowpayments',
+                status: 'pending',
+            })
+            return new NextResponse('OK', { status: 200 })
+        }
 
         // Upsert subscription
         const { data: upsertedSub } = await supabaseAdmin
@@ -72,6 +92,7 @@ export async function POST(req: Request) {
                 plan_id: planId,
                 status: 'pending_activation',
                 nowpayments_payment_id: paymentId,
+                device_type: deviceType,
             }, { onConflict: 'nowpayments_payment_id' })
             .select('id')
             .single()

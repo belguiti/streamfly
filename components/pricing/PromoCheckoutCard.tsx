@@ -20,9 +20,22 @@ interface PromoCheckoutCardProps {
     plan: Plan
     isLoggedIn: boolean
     loginRedirect: string
+    isRenewal?: boolean
 }
 
-export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect }: PromoCheckoutCardProps) {
+const DEVICES = [
+    { id: 'smart_tv', label: 'Smart TV', icon: '📺' },
+    { id: 'android_box', label: 'Android Box', icon: '📦' },
+    { id: 'android_phone', label: 'Android Phone', icon: '📱' },
+    { id: 'iphone_ipad', label: 'iPhone / iPad', icon: '🍎' },
+    { id: 'windows_mac', label: 'Windows / Mac', icon: '💻' },
+    { id: 'mag_device', label: 'MAG Device', icon: '📡' },
+    { id: 'enigma2', label: 'Enigma2 / Sat', icon: '🛰️' },
+    { id: 'other', label: 'Other', icon: '🔌' },
+]
+
+export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect, isRenewal = false }: PromoCheckoutCardProps) {
+    const [selectedDevice, setSelectedDevice] = useState<string | null>(null)
     const [promoInput, setPromoInput] = useState('')
     const [promoLoading, setPromoLoading] = useState(false)
     const [promoError, setPromoError] = useState<string | null>(null)
@@ -163,19 +176,47 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect }: PromoChec
                     </div>
                 )}
 
+                {/* Device Selection */}
+                {isLoggedIn && (
+                    <div className="space-y-3">
+                        <p className="text-xs font-bold text-[#8899aa] uppercase tracking-wider">Step 1 — Select your device</p>
+                        <div className="grid grid-cols-4 gap-2">
+                            {DEVICES.map(d => (
+                                <button
+                                    key={d.id}
+                                    type="button"
+                                    onClick={() => setSelectedDevice(d.id)}
+                                    className={`flex flex-col items-center gap-1 p-2 rounded-xl border text-center transition-all ${
+                                        selectedDevice === d.id
+                                            ? 'border-[#00d4ff] bg-[#00d4ff]/10 text-white'
+                                            : 'border-white/10 bg-white/5 text-[#8899aa] hover:border-white/30'
+                                    }`}
+                                >
+                                    <span className="text-lg">{d.icon}</span>
+                                    <span className="text-[9px] font-semibold leading-tight">{d.label}</span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
                 {/* Payment Options */}
                 <div className="space-y-4">
                     {isLoggedIn ? (
                         <>
+                            {selectedDevice && (
+                            <>
                             <div className="flex items-center gap-2 mb-2">
                                 <Lock className="w-3.5 h-3.5 text-[#00e5a0]" />
-                                <span className="text-xs text-[#8899aa] font-semibold">AES-256 Encrypted Payment</span>
+                                <span className="text-xs text-[#8899aa] font-semibold">Step 2 — AES-256 Encrypted Payment</span>
                             </div>
 
                             {/* PayPal */}
                             {plan.paypal_plan_id && (
                                 <form action="/api/paypal/checkout" method="POST" className="w-full">
                                     <input type="hidden" name="planId" value={plan.id} />
+                                    <input type="hidden" name="deviceType" value={selectedDevice ?? ''} />
+                                    <input type="hidden" name="isRenewal" value={String(isRenewal)} />
                                     {appliedPromo && (
                                         <>
                                             <input type="hidden" name="promoId" value={appliedPromo.promoId} />
@@ -196,6 +237,11 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect }: PromoChec
                             {/* Crypto — NOWPayments */}
                             <form action="/api/nowpayments/checkout" method="POST" className="w-full">
                                 <input type="hidden" name="planId" value={plan.id} />
+                                <input type="hidden" name="deviceType" value={selectedDevice ?? ''} />
+                                <input type="hidden" name="isRenewal" value={String(isRenewal)} />
+                                {appliedPromo && (
+                                    <input type="hidden" name="discountPercent" value={appliedPromo.discountPercent} />
+                                )}
                                 <Button
                                     type="submit"
                                     className="w-full h-14 text-base font-black bg-[#1a1a2e] hover:bg-[#16213e] text-white border border-[#f7931a]/40 hover:border-[#f7931a]/80 transition-all transform hover:scale-[1.02] active:scale-[0.98] rounded-xl shadow-[0_4px_20px_rgba(247,147,26,0.15)]"
@@ -206,6 +252,13 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect }: PromoChec
                                 </Button>
                                 <p className="text-[10px] text-center text-[#555] mt-2">BTC, ETH, USDT, LTC & 100+ coins</p>
                             </form>
+                            </>
+                            )}
+                            {!selectedDevice && (
+                                <p className="text-xs text-center text-[#8899aa] py-2">
+                                    ↑ Select your device above to continue
+                                </p>
+                            )}
                         </>
                     ) : (
                         <div className="space-y-3">

@@ -1,98 +1,162 @@
 import { supabaseAdmin } from '@/lib/supabase/server'
 import {
     sendActivationSuccessEmail,
-    sendActivationDelayEmail,
     sendAdminPoolEmptyAlert,
 } from '@/lib/activation-emails'
+import {
+    createM3uDevice,
+    createMagDevice,
+    durationToSub,
+    getResellerInfo,
+} from '@/lib/provider-api'
 
 /**
- * Auto-provision a subscription by assigning an unused activation code from the pool.
- * Sends email to the client (and admin if pool is empty).
+ * Auto-provision a subscription via the Gold Panel API.
+ * Called immediately after a successful payment webhook.
  */
-export async function autoProvision(subscriptionId: string, planId: string, userId: string): Promise<boolean> {
-    // Fetch user info
+export async function autoProvision(
+    subscriptionId: string,
+    planId: string,
+    userId: string,
+): Promise<boolean> {
+    // ── 1. Load user info ─────────────────────────────────────────────────────
     const { data: { user } } = await supabaseAdmin.auth.admin.getUserById(userId)
     const userEmail = user?.email ?? ''
-    const userName = (user?.user_metadata?.full_name as string | undefined)
+    const userName  = (user?.user_metadata?.full_name as string | undefined)
         ?? user?.email?.split('@')[0]
         ?? 'Customer'
 
-    // Fetch plan info (name + duration)
-    const { data: planData } = await supabaseAdmin
+    // ── 2. Load plan (needs provider_pack_id, duration_months, provider_country) ──
+    const { data: plan } = await supabaseAdmin
         .from('plans')
-        .select('name, duration_months')
+        .select('name, duration_months, provider_pack_id, provider_country')
         .eq('id', planId)
         .single()
-    const planName = planData?.name ?? 'Streamtly Plan'
-    const durationMonths = planData?.duration_months ?? 1
 
-    // 1. Find an unused activation code for the given plan
-    const { data: poolEntry, error: poolError } = await supabaseAdmin
-        .from('activation_pool')
-        .select('*')
-        .eq('plan_id', planId)
-        .eq('is_used', false)
-        .is('assigned_to', null)
-        .limit(1)
+    const planName      = plan?.name             ?? 'Streamtly Plan'
+    const durationMonths = plan?.duration_months ?? 1
+    const packId        = plan?.provider_pack_id ?? null
+    const country       = (plan?.provider_country ?? 'ALL').trim()
+
+    if (!packId) {
+        console.error(`[AutoProvision] Plan ${planId} has no provider_pack_id configured`)
+        try { await sendAdminPoolEmptyAlert(planName, userEmail) } catch {}
+        return false
+    }
+
+    // ── 3. Check reseller credits ─────────────────────────────────────────────
+    try {
+        const info = await getResellerInfo()
+        if (info.credits <= 0) {
+            console.error('[AutoProvision] No reseller credits remaining!')
+            try {
+                await Promise.all([
+                    sendAdminPoolEmptyAlert(planName, userEmail),
+                ])
+            } catch {}
+            return false
+        }
+        console.log(`[AutoProvision] Reseller credits remaining: ${info.credits}`)
+    } catch (err) {
+        console.error('[AutoProvision] Could not check reseller credits:', err)
+        // Continue anyway — don't block the customer
+    }
+
+    // ── 4. Load subscription to check device type and MAG MAC ────────────────
+    const { data: sub } = await supabaseAdmin
+        .from('subscriptions')
+        .select('device_type, provider_mac')
+        .eq('id', subscriptionId)
         .single()
 
-    if (poolError || !poolEntry) {
-        console.log(`[AutoProvision] No available codes for plan ${planId}. Manual activation required.`)
+    const deviceType = sub?.device_type ?? 'm3u'
+    const mac        = sub?.provider_mac ?? null
+    const isMag      = deviceType === 'mag_device' && !!mac
+    const sub_param  = durationToSub(durationMonths)
 
-        // Notify admin + client
-        try {
-            await Promise.all([
-                sendAdminPoolEmptyAlert(planName, userEmail),
-                userEmail ? sendActivationDelayEmail(userEmail, userName, planName) : Promise.resolve(),
-            ])
-        } catch (emailErr) {
-            console.error('[AutoProvision] Failed to send pool-empty emails:', emailErr)
+    // ── 5. Call provider API ──────────────────────────────────────────────────
+    let activationType  = 'account'
+    let activationValue = ''
+    let providerUserId  = ''
+    let providerUsername = ''
+    let providerPassword = ''
+    let providerType     = 'm3u'
+
+    try {
+        if (isMag) {
+            const mag = await createMagDevice({
+                mac,
+                packId,
+                sub: sub_param,
+                country,
+                notes: userEmail,
+            })
+            activationType  = 'portal'
+            activationValue = mag.portalUrl
+            providerUserId  = mag.userId
+            providerType    = 'mag'
+            console.log(`[AutoProvision] MAG device created: user_id=${mag.userId}`)
+        } else {
+            const m3u = await createM3uDevice({
+                packId,
+                sub: sub_param,
+                country,
+                notes: userEmail,
+            })
+            activationType   = 'account'
+            activationValue  = m3u.xtreamValue   // "serverUrl|username|password"
+            providerUserId   = m3u.userId
+            providerUsername = m3u.username
+            providerPassword = m3u.password
+            providerType     = 'm3u'
+            console.log(`[AutoProvision] M3U device created: user=${m3u.username}`)
         }
-
+    } catch (apiErr: any) {
+        console.error('[AutoProvision] Provider API error:', apiErr.message)
+        try { await sendAdminPoolEmptyAlert(planName, userEmail) } catch {}
         return false
     }
 
-    // 2. Delete the pool entry (remove after use)
-    const { error: deletePoolError } = await supabaseAdmin
-        .from('activation_pool')
-        .delete()
-        .eq('id', poolEntry.id)
-        .eq('is_used', false) // Optimistic concurrency: avoid double-assigning
-
-    if (deletePoolError) {
-        console.error('[AutoProvision] Failed to claim pool entry:', deletePoolError)
-        return false
-    }
-
-    // 3. Create an activation record
+    // ── 6. Store activation record ────────────────────────────────────────────
     await supabaseAdmin.from('activations').insert({
         subscription_id: subscriptionId,
-        type: poolEntry.type,
-        value: poolEntry.value,
+        type:            activationType,
+        value:           activationValue,
     })
 
-    // 4. Update subscription to active + set start/end dates
+    // ── 7. Update subscription: active + provider credentials ─────────────────
     const startDate = new Date()
-    const endDate = new Date(startDate)
+    const endDate   = new Date(startDate)
     endDate.setMonth(endDate.getMonth() + durationMonths)
 
     await supabaseAdmin
         .from('subscriptions')
         .update({
-            status: 'active',
-            start_date: startDate.toISOString(),
-            end_date: endDate.toISOString(),
+            status:              'active',
+            start_date:          startDate.toISOString(),
+            end_date:            endDate.toISOString(),
+            current_period_end:  endDate.toISOString(),
+            provider_user_id:    providerUserId,
+            provider_username:   providerUsername,
+            provider_password:   providerPassword,
+            provider_type:       providerType,
         })
         .eq('id', subscriptionId)
 
-    console.log(`[AutoProvision] Successfully provisioned subscription ${subscriptionId}`)
+    console.log(`[AutoProvision] Subscription ${subscriptionId} activated successfully`)
 
-    // 5. Send activation code to client
+    // ── 8. Send activation email ──────────────────────────────────────────────
     if (userEmail) {
         try {
-            await sendActivationSuccessEmail(userEmail, userName, planName, poolEntry.value, poolEntry.type)
+            await sendActivationSuccessEmail(
+                userEmail,
+                userName,
+                planName,
+                activationValue,
+                activationType,
+            )
         } catch (emailErr) {
-            console.error('[AutoProvision] Failed to send success email:', emailErr)
+            console.error('[AutoProvision] Email send failed:', emailErr)
         }
     }
 

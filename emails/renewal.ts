@@ -275,14 +275,14 @@ export function renewalEmailHtml({
 
   <!-- Body -->
   <div class="body">
-    <h1>Hey ${userName}, your subscription ends in 7 days!</h1>
+    <h1>Hey ${userName}, your subscription ends in 3 days!</h1>
     <p style="font-size:15px; line-height:1.7; color:#8899aa; margin-bottom:8px;">
       We hope you've been enjoying Streamtly. Your <strong style="color:#fff">${planName}</strong> plan
       expires on <strong style="color:#f87171">${endDate}</strong>.
     </p>
     <p style="font-size:15px; line-height:1.7; color:#8899aa;">
-      Renew today and enjoy <strong style="color:#00e5a0">${discountPercent}% off</strong> your next
-      subscription — as a thank you for being a valued member.
+      Renew today with <strong style="color:#00e5a0">crypto and save ${discountPercent}%</strong> —
+      as a thank you for being a valued member.
     </p>
 
     <!-- Plan Info -->
@@ -296,16 +296,16 @@ export function renewalEmailHtml({
         <span class="plan-value danger">${endDate}</span>
       </div>
       <div class="plan-row">
-        <span class="plan-label">Your Loyalty Discount</span>
-        <span class="plan-value" style="color:#00e5a0;">${discountPercent}% OFF</span>
+        <span class="plan-label">Crypto Discount</span>
+        <span class="plan-value" style="color:#00e5a0;">${discountPercent}% OFF (crypto only)</span>
       </div>
     </div>
 
     <!-- Promo Code -->
     <div class="promo-box">
-      <div class="promo-label">Your exclusive renewal code</div>
+      <div class="promo-label">₿ Exclusive crypto renewal code</div>
       <div class="promo-code">${promoCode}</div>
-      <div class="promo-discount">Save ${discountPercent}% on any plan</div>
+      <div class="promo-discount">Save ${discountPercent}% — valid for crypto payments only</div>
     </div>
 
     <!-- CTA -->
@@ -322,16 +322,16 @@ export function renewalEmailHtml({
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div class="step-text">Choose any subscription plan and proceed to checkout</div>
+        <div class="step-text">Choose any plan and select <strong style="color:#fff">Pay with Crypto</strong> at checkout</div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div class="step-text">Enter <strong style="color:#00d4ff; font-family:monospace; letter-spacing:2px">${promoCode}</strong> in the promo code field</div>
+        <div class="step-text">Enter <strong style="color:#00d4ff; font-family:monospace; letter-spacing:2px">${promoCode}</strong> in the promo code field — discount applies to crypto payments only</div>
       </div>
     </div>
 
     <p style="font-size:12px; color:#555; text-align:center; margin-top:24px;">
-      This code expires 30 days from today. One use per account.
+      This code expires 30 days from today. One use per account. Valid for crypto payments only — PayPal price remains unchanged.
     </p>
   </div>
 
@@ -356,9 +356,11 @@ export function renewalEmailText({
 
 Your Streamtly ${planName} subscription expires on ${endDate}.
 
-Renew now and save ${discountPercent}% with your exclusive code:
+Renew with crypto and save ${discountPercent}% using your exclusive code:
 
   ${promoCode}
+
+Important: This discount applies to crypto payments only. PayPal price remains unchanged.
 
 Visit ${renewUrl} to renew your subscription.
 

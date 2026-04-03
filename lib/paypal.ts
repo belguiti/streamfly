@@ -34,7 +34,10 @@ export async function createPayPalSubscription(
     planId: string,
     email: string,
     returnUrl: string,
-    cancelUrl: string
+    cancelUrl: string,
+    deviceType: string | null = null,
+    isRenewal: boolean = false,
+    existingSubId: string | null = null,
 ): Promise<{ approvalUrl: string; subscriptionId: string }> {
     const token = await getAccessToken()
 
@@ -49,7 +52,7 @@ export async function createPayPalSubscription(
             subscriber: {
                 email_address: email,
             },
-            custom_id: JSON.stringify({ userId, planId }),
+            custom_id: JSON.stringify({ userId, planId, deviceType, isRenewal, existingSubId }),
             application_context: {
                 brand_name: 'Streamtly',
                 locale: 'en-US',

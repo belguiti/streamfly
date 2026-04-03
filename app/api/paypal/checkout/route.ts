@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { supabaseAdmin } from '@/lib/supabase/server'
 import { createPayPalSubscription } from '@/lib/paypal'
 import { NextResponse } from 'next/server'
 
@@ -13,6 +14,8 @@ export async function POST(req: Request) {
 
         const formData = await req.formData()
         const planId = formData.get('planId') as string
+        const deviceType = (formData.get('deviceType') as string) || null
+        const isRenewal = formData.get('isRenewal') === 'true'
 
         if (!planId) throw new Error('Plan ID is required')
 
@@ -20,7 +23,17 @@ export async function POST(req: Request) {
         if (!plan) throw new Error('Invalid plan')
         if (!plan.paypal_plan_id) throw new Error('PayPal is not configured for this plan')
 
-        const baseUrl = 'https://www.streamtly.com'
+        // Find existing subscription (for renewal tracking)
+        const { data: existingSub } = await supabaseAdmin
+            .from('subscriptions')
+            .select('id')
+            .eq('user_id', user.id)
+            .eq('plan_id', planId)
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .single()
+
+        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.streamtly.com').replace(/\/$/, '')
 
         const { approvalUrl } = await createPayPalSubscription(
             plan.paypal_plan_id,
@@ -28,7 +41,10 @@ export async function POST(req: Request) {
             plan.id,
             user.email ?? '',
             `${baseUrl}/app?success=true&provider=paypal`,
-            `${baseUrl}/pricing?canceled=true`
+            `${baseUrl}/pricing?canceled=true`,
+            deviceType,
+            isRenewal,
+            existingSub?.id ?? null,
         )
 
         return NextResponse.redirect(approvalUrl, 303)

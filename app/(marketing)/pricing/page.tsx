@@ -1,11 +1,30 @@
 import { createClient } from '@/lib/supabase/server'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Check, ShieldCheck, RotateCcw, Zap } from 'lucide-react'
+import { Check, ShieldCheck, RotateCcw, Zap, Ban } from 'lucide-react'
 import Link from 'next/link'
+import type { Metadata } from 'next'
+import { SITE_URL } from '@/lib/site-config'
 
-// We need to disable caching for the pricing page to get the latest plans when changed
 export const revalidate = 0
+
+export const metadata: Metadata = {
+    title: 'IPTV Subscription Plans & Pricing | Streamtly',
+    description: 'Choose your Streamtly IPTV plan. Monthly, 3-month, 6-month & 12-month subscriptions. 35,000+ live channels, 150,000+ movies, 4K quality, instant activation. Family-friendly — no adult content.',
+    keywords: ['IPTV pricing', 'IPTV plans', 'buy IPTV subscription', 'cheap IPTV', 'best IPTV price', 'IPTV monthly plan', 'IPTV annual plan', 'no adult IPTV'],
+    alternates: { canonical: `${SITE_URL}/pricing` },
+    openGraph: {
+        title: 'IPTV Subscription Plans & Pricing | Streamtly',
+        description: 'Streamtly IPTV plans from 1 to 12 months. 35,000+ channels, 150,000+ VODs, 4K quality, instant activation.',
+        url: `${SITE_URL}/pricing`,
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary',
+        title: 'IPTV Subscription Plans & Pricing | Streamtly',
+        description: 'Choose your Streamtly plan. 35,000+ channels, 4K quality, instant activation.',
+    },
+}
 
 export default async function PricingPage() {
     const supabase = await createClient()
@@ -130,6 +149,10 @@ export default async function PricingPage() {
                 <div className="flex items-center gap-2">
                     <Zap className="w-5 h-5 text-white" />
                     <span className="text-white font-semibold text-sm">Instant Setup</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <Ban className="w-5 h-5 text-white" />
+                    <span className="text-white font-semibold text-sm">No Adult Content</span>
                 </div>
             </div>
         </div>

@@ -30,31 +30,31 @@ export default function Footer() {
                         <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Device Setup</h3>
                         <ul className="space-y-2.5 text-sm text-[#94A3B8] inline-block text-left">
                             <li>
-                                <Link href="/guides" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
+                                <Link href="/guides/android" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA]/40"></span>
                                     Amazon Firestick
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/guides" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
+                                <Link href="/guides/android" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA]/40"></span>
                                     Android TV / Box
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/guides" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
+                                <Link href="/guides/smart-tv" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA]/40"></span>
                                     Samsung / LG Smart TVs
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/guides" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
+                                <Link href="/guides/ios" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA]/40"></span>
                                     iOS / iPhone / iPad
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/guides" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
+                                <Link href="/guides/windows" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA]/40"></span>
                                     Windows / Mac / PC
                                 </Link>
@@ -125,6 +125,12 @@ export default function Footer() {
                                 <Link href="/reviews" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA]/40"></span>
                                     Reviews
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/sitemap" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA]/40"></span>
+                                    Sitemap
                                 </Link>
                             </li>
                         </ul>

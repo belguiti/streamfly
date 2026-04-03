@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient, supabaseAdmin } from '@/lib/supabase/server'
 import { createInvoice } from '@/lib/nowpayments'
 import { NextResponse } from 'next/server'
 
@@ -22,11 +22,32 @@ export async function POST(req: Request) {
             .single()
         if (!plan) throw new Error('Invalid plan')
 
-        const baseUrl = 'https://www.streamtly.com'
-        const priceAmount = plan.price_cents / 100
+        const discountPercent = parseInt(formData.get('discountPercent') as string || '0', 10)
+        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.streamtly.com').replace(/\/$/, '')
+        const discountedCents = discountPercent > 0
+            ? Math.round(plan.price_cents * (1 - discountPercent / 100))
+            : plan.price_cents
+        const priceAmount = discountedCents / 100
 
-        // Encode userId + planId in the order_id (separated by __ for safe splitting)
-        const orderId = `${user.id}__${planId}__${Date.now()}`
+        const deviceType = (formData.get('deviceType') as string) || 'none'
+        const isRenewal = formData.get('isRenewal') === 'true'
+
+        // Find existing subscription (for renewal tracking)
+        let existingSubId = 'null'
+        if (isRenewal) {
+            const { data: existingSub } = await supabaseAdmin
+                .from('subscriptions')
+                .select('id')
+                .eq('user_id', user.id)
+                .eq('plan_id', planId)
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .single()
+            existingSubId = existingSub?.id ?? 'null'
+        }
+
+        // Encode metadata in order_id (__ separated)
+        const orderId = `${user.id}__${planId}__${deviceType}__${isRenewal}__${existingSubId}__${Date.now()}`
 
         const invoice = await createInvoice({
             priceAmount,

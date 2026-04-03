@@ -409,9 +409,14 @@ export function AuthForm({ mode, message, next: nextProp }: AuthFormProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="password" className="text-xs font-bold text-[#8899aa] uppercase tracking-wider">
-                            Password
-                        </Label>
+                        <div className="flex justify-between items-center">
+                            <Label htmlFor="password" className="text-xs font-bold text-[#8899aa] uppercase tracking-wider">
+                                Password
+                            </Label>
+                            <Link href="/forgot-password" className="text-xs text-[#00d4ff] hover:underline">
+                                Forgot password?
+                            </Link>
+                        </div>
                         <div className="relative">
                             <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#555]" />
                             <Input

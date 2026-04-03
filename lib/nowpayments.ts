@@ -1,7 +1,7 @@
 import crypto from 'crypto'
 
 const BASE_URL = 'https://api.nowpayments.io/v1'
-const API_KEY = process.env.NOWPAYMENTS_API_KEY ?? ''
+const API_KEY = (process.env.NOWPAYMENTS_API_KEY ?? '').trim()
 
 export interface NowPaymentsInvoice {
     id: string
@@ -48,7 +48,7 @@ export async function createInvoice(params: {
 
 /** Verify IPN signature: HMAC-SHA512(sortedJsonBody, IPN_SECRET) == x-nowpayments-sig */
 export function verifyIpnSignature(rawBody: string, signature: string): boolean {
-    const secret = process.env.NOWPAYMENTS_IPN_SECRET ?? ''
+    const secret = (process.env.NOWPAYMENTS_IPN_SECRET ?? '').trim()
     if (!secret) return false
 
     // Sort JSON keys alphabetically as required by NOWPayments
