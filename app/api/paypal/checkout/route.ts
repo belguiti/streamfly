@@ -34,7 +34,7 @@ export async function POST(req: Request) {
             .limit(1)
             .single()
 
-        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.streamtly.com').replace(/\/$/, '')
+        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.streamtly.com').trim().replace(/\/$/, '')
 
         const { approvalUrl } = await createPayPalSubscription(
             plan.paypal_plan_id,

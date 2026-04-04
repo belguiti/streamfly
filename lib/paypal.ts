@@ -53,7 +53,9 @@ export async function createPayPalSubscription(
             subscriber: {
                 email_address: email,
             },
-            custom_id: JSON.stringify({ userId, planId, deviceType, isRenewal, existingSubId, packageId }),
+            // Compact pipe-separated format to stay under PayPal's 127-char custom_id limit
+            // Format: userId|planId|deviceType|isRenewal|existingSubId|packageId
+            custom_id: [userId, planId, deviceType ?? 'none', isRenewal ? '1' : '0', existingSubId ?? 'null', packageId ?? 'none'].join('|').slice(0, 127),
             application_context: {
                 brand_name: 'Streamtly',
                 locale: 'en-US',

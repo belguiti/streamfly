@@ -23,7 +23,7 @@ export async function POST(req: Request) {
         if (!plan) throw new Error('Invalid plan')
 
         const discountPercent = parseInt(formData.get('discountPercent') as string || '0', 10)
-        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.streamtly.com').replace(/\/$/, '')
+        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.streamtly.com').trim().replace(/\/$/, '')
         const discountedCents = discountPercent > 0
             ? Math.round(plan.price_cents * (1 - discountPercent / 100))
             : plan.price_cents

@@ -59,7 +59,25 @@ export async function POST(req: Request) {
                     customData = JSON.parse(ppSub.custom_id || '{}')
                 }
 
-                const { userId, planId, deviceType, isRenewal, existingSubId, packageId } = customData as any
+                // Support both old JSON format and new pipe-separated format
+                let userId: string, planId: string, deviceType: string | null,
+                    isRenewal: boolean, existingSubId: string | null, packageId: string | null
+                const raw = typeof customData === 'string' ? customData : JSON.stringify(customData)
+                if (raw.includes('|')) {
+                    const p = raw.split('|')
+                    userId = p[0]; planId = p[1]
+                    deviceType    = p[2] !== 'none' ? p[2] : null
+                    isRenewal     = p[3] === '1'
+                    existingSubId = p[4] !== 'null' ? p[4] : null
+                    packageId     = p[5] && p[5] !== 'none' ? p[5] : null
+                } else {
+                    const d = customData as any
+                    userId = d.userId; planId = d.planId
+                    deviceType    = d.deviceType ?? null
+                    isRenewal     = !!d.isRenewal
+                    existingSubId = d.existingSubId ?? null
+                    packageId     = d.packageId ?? null
+                }
                 if (!userId || !planId) {
                     console.error('PayPal webhook: missing custom_id metadata')
                     break
