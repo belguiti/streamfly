@@ -38,7 +38,33 @@ export default async function PricingPage() {
         console.error('Error fetching plans:', error)
     }
 
+    const offerSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Streamtly IPTV Subscription Plans',
+        itemListElement: (plans ?? []).map((plan, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            item: {
+                '@type': 'Product',
+                name: plan.name,
+                description: `Streamtly IPTV ${plan.name} — ${plan.duration_months} month subscription with 35,000+ channels and 150,000+ VODs.`,
+                url: `${SITE_URL}/pricing/${plan.id}`,
+                brand: { '@type': 'Brand', name: 'Streamtly' },
+                offers: {
+                    '@type': 'Offer',
+                    price: (plan.price_cents / 100).toFixed(2),
+                    priceCurrency: 'USD',
+                    availability: 'https://schema.org/InStock',
+                    url: `${SITE_URL}/pricing/${plan.id}`,
+                },
+            },
+        })),
+    }
+
     return (
+        <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(offerSchema) }} />
         <div className="container mx-auto px-4 py-16 md:py-24 max-w-6xl">
             {/* Header */}
             <div className="text-center mb-16">
@@ -156,5 +182,6 @@ export default async function PricingPage() {
                 </div>
             </div>
         </div>
+        </>
     )
 }

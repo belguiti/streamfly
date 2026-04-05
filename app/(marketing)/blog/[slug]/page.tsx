@@ -31,11 +31,13 @@ export async function generateMetadata(
             type: 'article',
             publishedTime: post.date,
             authors: [post.author],
+            images: [{ url: `${SITE_URL}/og-image.jpg`, width: 1200, height: 630, alt: post.metaTitle }],
         },
         twitter: {
             card: 'summary_large_image',
             title: post.metaTitle,
             description: post.metaDescription,
+            images: [`${SITE_URL}/og-image.jpg`],
         },
     }
 }
@@ -49,6 +51,16 @@ export default async function BlogPostPage(
     if (!post) notFound()
 
     /* ── JSON-LD ── */
+    const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+            { '@type': 'ListItem', position: 3, name: post.title, item: `${SITE_URL}/blog/${post.slug}` },
+        ],
+    }
+
     const articleSchema = {
         '@context': 'https://schema.org',
         '@type': 'Article',
@@ -80,6 +92,7 @@ export default async function BlogPostPage(
     return (
         <>
             {/* Structured data */}
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}

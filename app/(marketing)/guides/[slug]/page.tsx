@@ -445,6 +445,17 @@ export default async function GuideSlugPage({ params }: { params: { slug: string
     if (!guide) notFound()
 
     const faqs = GUIDE_FAQS[slug] ?? []
+
+    const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+            { '@type': 'ListItem', position: 2, name: 'Setup Guides', item: `${SITE_URL}/guides` },
+            { '@type': 'ListItem', position: 3, name: guide.title, item: `${SITE_URL}/guides/${slug}` },
+        ],
+    }
+
     const faqSchema = faqs.length > 0 ? {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
@@ -589,7 +600,8 @@ export default async function GuideSlugPage({ params }: { params: { slug: string
                 </Link>
             </div>
 
-            {/* FAQ JSON-LD */}
+            {/* BreadcrumbList + FAQ JSON-LD */}
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
             {faqSchema && (
                 <script
                     type="application/ld+json"

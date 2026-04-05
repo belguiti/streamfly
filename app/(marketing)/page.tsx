@@ -515,11 +515,27 @@ export default async function LandingPage() {
                         </div>
                     </div>
 
-                    <div className="text-center mt-10">
-                        <Link href="/guides" className="inline-flex items-center gap-2 text-[#4338CA] font-semibold hover:underline text-sm">
-                            View step-by-step installation guides for all devices
-                            <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                        </Link>
+                    {/* Direct guide links for SEO internal linking */}
+                    <div className="container mx-auto px-4 max-w-4xl mt-10">
+                        <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
+                            {[
+                                { href: '/guides/smart-tv',  label: 'Smart TV',          emoji: '📺' },
+                                { href: '/guides/android',   label: 'Firestick & Android', emoji: '📦' },
+                                { href: '/guides/ios',       label: 'iPhone & iPad',      emoji: '🍎' },
+                                { href: '/guides/windows',   label: 'Windows & Mac',      emoji: '💻' },
+                                { href: '/guides/mag',       label: 'MAG Box',            emoji: '📡' },
+                                { href: '/guides/enigma2',   label: 'Enigma2 / Sat',      emoji: '🛰️' },
+                            ].map(g => (
+                                <Link
+                                    key={g.href}
+                                    href={g.href}
+                                    className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/5 border border-white/8 hover:border-[#4338CA]/40 hover:bg-[#4338CA]/8 transition-all text-center group"
+                                >
+                                    <span className="text-2xl">{g.emoji}</span>
+                                    <span className="text-[10px] font-semibold text-[#8899aa] group-hover:text-white transition-colors leading-tight">{g.label}</span>
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </section>
 
