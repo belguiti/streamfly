@@ -216,7 +216,7 @@ export default async function ArticlePage(
                         <div className="relative">
                             <h3 className="text-2xl font-extrabold text-white mb-2">Ready to Start Streaming?</h3>
                             <p className="text-[#94a3b8] mb-6 max-w-md mx-auto">
-                                Get instant access to 35,000+ live channels, 150,000+ movies &amp; series — starting from £9.99/month.
+                                Get instant access to 35,000+ live channels, 150,000+ movies &amp; series — starting from $13/month.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-3 justify-center">
                                 <Link

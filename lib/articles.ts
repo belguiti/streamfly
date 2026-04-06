@@ -110,7 +110,7 @@ export const articles: Article[] = [
                     'TNT — Tuesday and Thursday night NBA doubleheaders',
                     'ABC — weekend primetime and playoff games',
                     'NBA TV — additional games, classic replays, and analysis',
-                    'Streamtly IPTV — all channels above included from £9.99/month',
+                    'Streamtly IPTV — all channels above included from $13/month',
                 ],
             },
             {
@@ -124,7 +124,7 @@ export const articles: Article[] = [
         faqs: [
             {
                 q: 'Where can I watch Lakers vs Dallas Mavericks?',
-                a: 'The game is broadcast on ESPN, TNT, or ABC depending on the schedule slot. With a Streamtly IPTV subscription you get all these channels plus NBA TV from £9.99/month with instant activation.',
+                a: 'The game is broadcast on ESPN, TNT, or ABC depending on the schedule slot. With a Streamtly IPTV subscription you get all these channels plus NBA TV from $13/month with instant activation.',
             },
             {
                 q: 'What are Cooper Flagg\'s stats this season?',
@@ -140,7 +140,7 @@ export const articles: Article[] = [
             },
             {
                 q: 'How do I watch NBA games without cable?',
-                a: 'IPTV is the most popular cable-free solution. Streamtly gives you full access to ESPN, TNT, ABC, and NBA TV on any device — Smart TV, Firestick, Android, iPhone — starting at £9.99/month.',
+                a: 'IPTV is the most popular cable-free solution. Streamtly gives you full access to ESPN, TNT, ABC, and NBA TV on any device — Smart TV, Firestick, Android, iPhone — starting at $13/month.',
             },
         ],
         conclusion: 'The Lakers vs Mavericks matchup is everything that makes the NBA great in 2026 — generational talent, star power, and high playoff stakes. Cooper Flagg is the future of Dallas, LeBron James is still defying time, and every game between these two franchises is appointment viewing. If you want to catch the next Lakers vs Mavs game live — and every other NBA matchup this season — Streamtly IPTV has you covered with all the channels you need, on any device, from anywhere in the world.',
@@ -239,7 +239,7 @@ export const articles: Article[] = [
                     'ESPN — primary broadcaster for marquee matchups',
                     'ABC — Saturday/Sunday primetime and all NBA Finals games',
                     'NBA TV — live games, classic replays, pre/post-game shows',
-                    'Streamtly IPTV — all channels from £9.99/month, works on every device',
+                    'Streamtly IPTV — all channels from $13/month, works on every device',
                 ],
             },
         ],
@@ -254,7 +254,7 @@ export const articles: Article[] = [
             },
             {
                 q: 'Where can I watch the Warriors game today?',
-                a: 'Warriors games are broadcast on TNT, ESPN, and ABC. With Streamtly IPTV you get all three channels plus NBA TV, on any device, from £9.99/month with no cable subscription needed.',
+                a: 'Warriors games are broadcast on TNT, ESPN, and ABC. With Streamtly IPTV you get all three channels plus NBA TV, on any device, from $13/month with no cable subscription needed.',
             },
             {
                 q: 'How is Alperen Sengun performing this season?',
@@ -265,7 +265,7 @@ export const articles: Article[] = [
                 a: 'Most Rockets vs Warriors games are on TNT or ESPN. Streamtly IPTV carries both channels along with 35,000+ others for full live sports coverage on any device.',
             },
         ],
-        conclusion: 'The Rockets vs Warriors matchup in 2026 is a collision of generations — Stephen Curry\'s Golden State legacy against Houston\'s hungry young core led by Alperen Sengun and Reed Sheppard. With Warriors standings tight and the Rockets pushing for a top seed, every game between these teams matters enormously. Want to watch every single game live without a cable subscription? Streamtly IPTV has every NBA channel — TNT, ESPN, ABC, and NBA TV — on any device, activated instantly, starting at £9.99/month.',
+        conclusion: 'The Rockets vs Warriors matchup in 2026 is a collision of generations — Stephen Curry\'s Golden State legacy against Houston\'s hungry young core led by Alperen Sengun and Reed Sheppard. With Warriors standings tight and the Rockets pushing for a top seed, every game between these teams matters enormously. Want to watch every single game live without a cable subscription? Streamtly IPTV has every NBA channel — TNT, ESPN, ABC, and NBA TV — on any device, activated instantly, starting at $13/month.',
     },
 
 ]
