@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_URL } from '@/lib/site-config'
 import { blogPosts } from '@/lib/blog-posts'
+import { articles } from '@/lib/articles'
 import {
     Home, Tag, BookOpen, Star, Phone, FileText, ShieldCheck, RotateCcw,
-    Tv, Smartphone, Monitor, Satellite, Box, Tablet,
+    Tv, Smartphone, Monitor, Satellite, Box, Tablet, TrendingUp,
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ const mainPages = [
     { href: '/pricing', label: 'Pricing & Plans', icon: Tag, desc: 'Monthly, 3-month, 6-month & annual subscriptions' },
     { href: '/reviews', label: 'Customer Reviews', icon: Star, desc: 'Verified reviews from thousands of subscribers' },
     { href: '/blog', label: 'IPTV Blog', icon: BookOpen, desc: 'Guides, tutorials, and streaming tips' },
+    { href: '/articles', label: 'Trending Articles', icon: TrendingUp, desc: 'Hot topics in streaming, sports & entertainment' },
     { href: '/guides', label: 'Setup Guides', icon: Monitor, desc: 'Step-by-step installation guides for every device' },
     { href: '/contact', label: 'Contact Support', icon: Phone, desc: '24/7 support by email and live chat' },
 ]
@@ -140,6 +142,26 @@ export default function SitemapPage() {
                     })}
                 </div>
             </section>
+
+            {/* Trending Articles */}
+            {articles.length > 0 && (
+                <section className="mb-14">
+                    <h2 className="text-xs font-bold text-[#8899aa] uppercase tracking-widest mb-5">Trending Articles</h2>
+                    <ul className="space-y-2 pl-4">
+                        {articles.map(article => (
+                            <li key={article.slug}>
+                                <Link
+                                    href={`/articles/${article.slug}`}
+                                    className="text-sm text-[#8899aa] hover:text-[#EC4899] transition-colors flex items-center gap-2"
+                                >
+                                    <TrendingUp className="w-3 h-3 text-[#EC4899] flex-shrink-0" />
+                                    {article.title}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            )}
 
             {/* Legal Pages */}
             <section>

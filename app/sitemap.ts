@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { supabaseAdmin } from '@/lib/supabase/server'
 import { blogPosts } from '@/lib/blog-posts'
+import { articles } from '@/lib/articles'
 import { SITE_URL } from '@/lib/site-config'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -40,6 +41,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: new Date(),
             changeFrequency: 'monthly' as const,
             priority: 0.75,
+        })),
+        { url: `${SITE_URL}/articles`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.80 },
+        ...articles.map(a => ({
+            url: `${SITE_URL}/articles/${a.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly' as const,
+            priority: 0.85,
         })),
         { url: `${SITE_URL}/contact`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.55 },
         { url: `${SITE_URL}/terms`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.30 },

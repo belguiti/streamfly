@@ -110,6 +110,12 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
+                                <Link href="/articles" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#EC4899]/40"></span>
+                                    Articles
+                                </Link>
+                            </li>
+                            <li>
                                 <Link href="/guides" className="hover:text-[#4338CA] transition-colors inline-flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA]/40"></span>
                                     Installation Guides
