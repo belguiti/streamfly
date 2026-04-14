@@ -259,26 +259,6 @@ export function PromoCheckoutCard({ plan, isLoggedIn, loginRedirect, isRenewal =
                                 <span className="text-xs text-[#8899aa] font-semibold">Step 3 — AES-256 Encrypted Payment</span>
                             </div>
 
-                            {/* Stripe Card */}
-                            <form action="/api/stripe/checkout" method="POST" className="w-full">
-                                <input type="hidden" name="priceId" value={plan.stripe_price_id} />
-                                <input type="hidden" name="deviceType" value={selectedDevice ?? ''} />
-                                <input type="hidden" name="packageId" value={selectedPackage ?? ''} />
-                                {appliedPromo && (
-                                    <>
-                                        <input type="hidden" name="promoId" value={appliedPromo.promoId} />
-                                        <input type="hidden" name="discountPercent" value={appliedPromo.discountPercent} />
-                                    </>
-                                )}
-                                <Button
-                                    type="submit"
-                                    className="w-full h-14 text-base font-black text-white transition-all transform hover:scale-[1.02] active:scale-[0.98] rounded-xl shadow-[0_4px_20px_rgba(99,102,241,0.25)]"
-                                    style={{ background: 'linear-gradient(135deg, #2563eb, #7c3aed)' }}
-                                >
-                                    Pay ${priceTotal} with Card
-                                </Button>
-                            </form>
-
                             {/* PayPal */}
                             {plan.paypal_plan_id && (
                                 <form action="/api/paypal/checkout" method="POST" className="w-full">
