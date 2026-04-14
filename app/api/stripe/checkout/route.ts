@@ -20,6 +20,8 @@ export async function POST(req: Request) {
         const priceId = formData.get('priceId') as string
         const promoId = formData.get('promoId') as string | null
         const discountPercent = parseInt(formData.get('discountPercent') as string || '0', 10)
+        const deviceType = (formData.get('deviceType') as string) || null
+        const packageId = (formData.get('packageId') as string) || null
 
         if (!priceId) throw new Error('Price ID is required')
 
@@ -80,6 +82,8 @@ export async function POST(req: Request) {
                 userId: user.id,
                 planId: plan.id,
                 ...(promoId ? { promoId } : {}),
+                ...(deviceType ? { deviceType } : {}),
+                ...(packageId ? { packageId } : {}),
             },
             ...(appliedDiscount ? { discounts: appliedDiscount } : {}),
         }
