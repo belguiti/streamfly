@@ -77,6 +77,7 @@ export default async function AdminStatsPage() {
     // ── Revenue by provider ──────────────────────────────────
     const stripeRev = paidOrders.filter(o => o.provider === 'stripe').reduce((s, o) => s + (o.amount_cents ?? 0), 0)
     const paypalRev = paidOrders.filter(o => o.provider === 'paypal').reduce((s, o) => s + (o.amount_cents ?? 0), 0)
+    const cryptoRev = paidOrders.filter(o => o.provider === 'nowpayments').reduce((s, o) => s + (o.amount_cents ?? 0), 0)
 
     // ── Revenue last 6 months ────────────────────────────────
     const monthlyRevenue: { label: string; value: number }[] = []
@@ -202,17 +203,19 @@ export default async function AdminStatsPage() {
                 <Card className="bg-[#111827] border-white/10">
                     <CardHeader>
                         <CardTitle className="text-white text-base">Revenue by Provider</CardTitle>
-                        <CardDescription className="text-[#8899aa]">Stripe vs PayPal</CardDescription>
+                        <CardDescription className="text-[#8899aa]">Stripe vs PayPal vs Crypto</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
                         <DonutStat items={[
                             { label: 'Stripe', value: Math.round(stripeRev / 100), color: 'bg-[#635bff]' },
                             { label: 'PayPal', value: Math.round(paypalRev / 100), color: 'bg-[#009cde]' },
+                            { label: 'Crypto', value: Math.round(cryptoRev / 100), color: 'bg-[#f7931a]' },
                         ]} />
-                        <div className="grid grid-cols-2 gap-3 pt-2">
+                        <div className="grid grid-cols-3 gap-3 pt-2">
                             {[
                                 { label: 'Stripe', value: `$${(stripeRev / 100).toFixed(2)}`, color: 'text-[#635bff]' },
                                 { label: 'PayPal', value: `$${(paypalRev / 100).toFixed(2)}`, color: 'text-[#009cde]' },
+                                { label: 'Crypto', value: `$${(cryptoRev / 100).toFixed(2)}`, color: 'text-[#f7931a]' },
                             ].map(({ label, value, color }) => (
                                 <div key={label} className="p-3 rounded-xl bg-white/5 text-center">
                                     <p className={`text-lg font-bold ${color}`}>{value}</p>
