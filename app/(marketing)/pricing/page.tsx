@@ -170,7 +170,7 @@ export default async function PricingPage() {
                 </div>
                 <div className="flex items-center gap-2">
                     <RotateCcw className="w-5 h-5 text-white" />
-                    <span className="text-white font-semibold text-sm">14-Day Money Back</span>
+                    <span className="text-white font-semibold text-sm">7-Day Money Back</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <Zap className="w-5 h-5 text-white" />

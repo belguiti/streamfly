@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const price = (plan.price_cents / 100).toFixed(2)
     const monthly = (plan.price_cents / 100 / plan.duration_months).toFixed(2)
     const title = `${plan.name} – $${price} for ${plan.duration_months} Month${plan.duration_months !== 1 ? 's' : ''}`
-    const description = `Get the Streamtly ${plan.name} IPTV subscription for $${price} (just $${monthly}/month). Access 35,000+ live channels, 150,000+ movies & series, and all PPV events for ${plan.duration_months} month${plan.duration_months !== 1 ? 's' : ''}. Instant activation, 14-day money-back guarantee.`
+    const description = `Get the Streamtly ${plan.name} IPTV subscription for $${price} (just $${monthly}/month). Access 35,000+ live channels, 150,000+ movies & series, and all PPV events for ${plan.duration_months} month${plan.duration_months !== 1 ? 's' : ''}. Instant activation, 7-day money-back guarantee.`
 
     return {
         title,
@@ -98,7 +98,7 @@ export default async function PlanDetailsPage({ params, searchParams }: PageProp
                             { icon: Zap, title: 'Instant Activation', desc: 'Codes delivered instantly to your dashboard.', color: '#00e5a0' },
                             { icon: Ban, title: 'No Adult Content', desc: 'All packages are family-friendly — no adult content included.', color: '#22c55e' },
                             { icon: Headphones, title: '24/7 Expert Support', desc: 'Our team is here to help you around the clock.', color: '#a855f7' },
-                            { icon: ShieldCheck, title: 'Money-Back Guarantee', desc: 'Not satisfied? Get a full refund within 14 days.', color: '#fbbf24' },
+                            { icon: ShieldCheck, title: 'Money-Back Guarantee', desc: 'Not satisfied? Get a full refund within 7 days.', color: '#fbbf24' },
                         ].map((item) => (
                             <div key={item.title} className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
                                 <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: `${item.color}15` }}>

@@ -96,10 +96,10 @@ export default function RefundPageClient() {
             <div className="mb-10 p-6 rounded-2xl bg-gradient-to-r from-[#00e5a0]/10 to-[#00d4ff]/10 border border-[#00e5a0]/20 text-center animate-fade-in" style={{ animationDelay: '0.3s' }}>
                 <div className="flex items-center justify-center gap-3 mb-2">
                     <CheckCircle className="w-6 h-6 text-[#00e5a0]" />
-                    <h2 className="text-xl font-bold text-white">14-Day Money-Back Guarantee</h2>
+                    <h2 className="text-xl font-bold text-white">7-Day Money-Back Guarantee</h2>
                 </div>
                 <p className="text-sm text-[#8899aa]">
-                    Not satisfied within the first 14 days? Contact us for a hassle-free full refund — no questions asked.
+                    Not satisfied within the first 7 days? Contact us for a hassle-free full refund — no questions asked.
                 </p>
             </div>
 

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: 'Streamtly | Premium IPTV – 35,000+ Live Channels & 150,000+ VODs',
     description:
-        'Streamtly is the #1 premium IPTV service with 35,000+ live channels, 150,000+ movies & series, and every PPV event in 4K quality. Instant activation. 24/7 support. 14-day money-back guarantee.',
+        'Streamtly is the #1 premium IPTV service with 35,000+ live channels, 150,000+ movies & series, and every PPV event in 4K quality. Instant activation. 24/7 support. 7-day money-back guarantee.',
     keywords: [
         'IPTV service', 'best IPTV', 'premium IPTV', 'live TV streaming',
         '4K IPTV', 'IPTV subscription', 'IPTV Firestick', 'IPTV Android TV',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         siteName: 'Streamtly',
         title: 'Streamtly | Premium IPTV – 35,000+ Live Channels & 150,000+ VODs',
         description:
-            'Streamtly delivers 35,000+ live TV channels, 150,000+ movies and series, and every PPV event in stunning 4K quality. Instant activation. 14-day money-back guarantee.',
+            'Streamtly delivers 35,000+ live TV channels, 150,000+ movies and series, and every PPV event in stunning 4K quality. Instant activation. 7-day money-back guarantee.',
         images: [{ url: `${SITE_URL}/og-image.jpg`, width: 1200, height: 630, alt: 'Streamtly Premium IPTV' }],
     },
     twitter: {
@@ -84,7 +84,7 @@ const faqItems = [
     { q: 'Do I need a VPN to use Streamtly?', a: 'No. A VPN is not required. Our servers use advanced encryption and security protocols that keep your connection private and secure. You may optionally use a VPN for additional privacy, but Streamtly works flawlessly without one.' },
     { q: 'What video quality can I expect?', a: 'Streamtly streams in 4K Ultra HD, Full HD (1080p), and HD (720p) depending on your internet connection and channel source. Our adaptive bitrate technology automatically adjusts quality to ensure smooth, buffer-free playback on any connection speed.' },
     { q: 'Are sports and PPV events included in the subscription?', a: "Yes! Every Streamtly subscription includes access to all major live sports events — NFL, NBA, Premier League, Champions League, UFC, and Boxing — plus all Pay-Per-View (PPV) events at no extra cost. You'll never pay separately for a PPV fight again." },
-    { q: 'What is the refund policy?', a: "We offer a 14-day full money-back guarantee on all plans. If you're not completely satisfied within the first 14 days, contact our support team and we'll issue a prompt, no-questions-asked refund." },
+    { q: 'What is the refund policy?', a: "We offer a 7-day full money-back guarantee on all plans. If you're not completely satisfied within the first 7 days, contact our support team and we'll issue a prompt, no-questions-asked refund." },
     { q: 'How many devices can I stream on simultaneously?', a: 'Standard plans include one simultaneous connection, allowing streaming on one device at a time. Multi-connection plans allow two or more devices to stream simultaneously. You can always upgrade your plan for additional connections.' },
 ]
 
@@ -117,7 +117,7 @@ const FEATURES = [
     { icon: Play, title: '150,000+ VOD Library', desc: 'New theatrical releases, award-winning series, classic films, and documentaries — all on demand, zero ads, instant playback.', color: '#22C55E' },
     { icon: Award, title: 'All PPV Events Included', desc: 'UFC, boxing, NFL, NBA, Premier League, Formula 1 — every Pay-Per-View event is included in every plan at absolutely no extra cost.', color: '#F59E0B' },
     { icon: Zap, title: '4K Ultra HD Quality', desc: 'Crystal-clear 4K, FHD, and HD streams with adaptive bitrate technology that automatically adjusts to your connection speed.', color: '#8B5CF6' },
-    { icon: Shield, title: '14-Day Money-Back Guarantee', desc: "Try Streamtly completely risk-free. If you're not satisfied within the first 14 days, we'll issue a full refund — no questions asked.", color: '#22C55E' },
+    { icon: Shield, title: '7-Day Money-Back Guarantee', desc: "Try Streamtly completely risk-free. If you're not satisfied within the first 7 days, we'll issue a full refund — no questions asked.", color: '#22C55E' },
     { icon: Headphones, title: '24/7 Expert Support', desc: 'Our dedicated support team is available around the clock via live chat, email, and ticket system to resolve any issue quickly.', color: '#4338CA' },
     { icon: Clock, title: 'Instant Activation', desc: 'Receive your subscription credentials and setup instructions the moment your payment is confirmed. Start streaming in under 5 minutes.', color: '#F59E0B' },
     { icon: RefreshCw, title: 'Weekly Content Updates', desc: 'New channels, movies, and series are added every week. Your library keeps growing automatically — no manual updates needed.', color: '#8B5CF6' },
@@ -139,7 +139,7 @@ const TESTIMONIALS = [
     { name: 'James T.', location: 'United Kingdom', rating: 5, text: "Cancelled my cable and saving $120 a month. The channel selection is insane — sports, movies, international. Nothing compares." },
     { name: 'Maria L.', location: 'Canada', rating: 5, text: "Setup took 5 minutes on my Firestick. The support team walked me through everything on live chat. Best streaming service I've used." },
     { name: 'David K.', location: 'Australia', rating: 5, text: "150,000+ VOD titles and I'm always finding something new. Found rare films here I couldn't locate anywhere else. Incredible library." },
-    { name: 'Chen W.', location: 'Singapore', rating: 5, text: "Asian channels in perfect quality alongside international content. Replaced 3 subscriptions with just one. The 14-day guarantee made it easy to try." },
+    { name: 'Chen W.', location: 'Singapore', rating: 5, text: "Asian channels in perfect quality alongside international content. Replaced 3 subscriptions with just one. The 7-day guarantee made it easy to try." },
     { name: 'Fatima R.', location: 'UAE', rating: 5, text: "Arabic channels, sports, and international content all in one place. Streamtly replaced multiple subscriptions for our whole family." },
 ]
 
@@ -166,7 +166,7 @@ const PLAN_INCLUDED = [
     'Anti-buffering technology',
     'Instant delivery to email & dashboard',
     '24/7 expert customer support',
-    '14-day money-back guarantee',
+    '7-day money-back guarantee',
 ]
 
 const WHY_US = [
@@ -246,7 +246,7 @@ export default async function LandingPage() {
                         {/* Trust pills */}
                         <div className="flex flex-wrap items-center justify-center gap-3 mb-7">
                             {[
-                                { icon: Shield, label: '14-Day Money-Back', color: '#22C55E' },
+                                { icon: Shield, label: '7-Day Money-Back', color: '#22C55E' },
                                 { icon: Zap, label: 'Instant Activation', color: '#4338CA' },
                                 { icon: Star, label: '4.9/5 Rating', color: '#F59E0B' },
                                 { icon: Globe, label: 'Worldwide Access', color: '#8B5CF6' },
@@ -414,7 +414,7 @@ export default async function LandingPage() {
                         <p className="text-center text-[#475569] text-xs mt-10">
                             All prices in USD · Secure payment via Stripe &amp; PayPal · No recurring charges ·{' '}
                             <Link href="/refund" className="text-[#94A3B8] hover:text-[#4338CA] underline underline-offset-2 transition-colors">
-                                14-day refund policy
+                                7-day refund policy
                             </Link>
                         </p>
                     </div>
@@ -727,7 +727,7 @@ export default async function LandingPage() {
 
                         <p className="text-lg text-[#94A3B8] mb-3 max-w-xl mx-auto leading-relaxed">
                             Join 50,000+ satisfied subscribers. Start streaming in under 5 minutes
-                            with instant activation. Protected by our 14-day money-back guarantee.
+                            with instant activation. Protected by our 7-day money-back guarantee.
                         </p>
                         <p className="text-sm text-[#475569] mb-10">
                             No contract · Cancel anytime · All PPV events included · 24/7 support
@@ -753,7 +753,7 @@ export default async function LandingPage() {
                         {/* Trust badges */}
                         <div className="flex flex-wrap items-center justify-center gap-5">
                             {[
-                                { icon: Shield, label: '14-Day Guarantee', color: '#22C55E' },
+                                { icon: Shield, label: '7-Day Guarantee', color: '#22C55E' },
                                 { icon: Zap, label: 'Instant Setup', color: '#4338CA' },
                                 { icon: Star, label: '4.9★ Rated', color: '#F59E0B' },
                                 { icon: Globe, label: 'Global Access', color: '#8B5CF6' },

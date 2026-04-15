@@ -861,14 +861,14 @@ export const blogPosts: BlogPost[] = [
                 heading: `#1 — ${SITE}: Best Overall IPTV Service 2026`,
                 body: [
                     `${SITE} tops our rankings for 2026 with the most complete package available. 35,000+ live channels from 100+ countries, a 150,000+ VOD library updated weekly, every PPV event included, and enterprise-grade infrastructure that delivers 99.9% uptime.`,
-                    `What sets ${SITE} apart is the combination of quality and price. 4K streaming, instant activation, 14-day money-back guarantee, and 24/7 support — all at a starting price that\'s less than a single month of cable TV.`,
+                    `What sets ${SITE} apart is the combination of quality and price. 4K streaming, instant activation, 7-day money-back guarantee, and 24/7 support — all at a starting price that\'s less than a single month of cable TV.`,
                 ],
                 list: [
                     '✅ 35,000+ live channels',
                     '✅ 150,000+ VOD titles',
                     '✅ All PPV events included',
                     '✅ 4K Ultra HD streaming',
-                    '✅ 14-day money-back guarantee',
+                    '✅ 7-day money-back guarantee',
                     '✅ 24/7 customer support',
                 ],
             },
@@ -883,14 +883,14 @@ export const blogPosts: BlogPost[] = [
                 heading: 'Free Trial vs Paid Subscription',
                 body: [
                     'Most reputable IPTV providers offer either a free 24-hour trial or a money-back guarantee. This allows you to test streams, channel quality, and app compatibility on your specific devices before committing.',
-                    `${SITE} offers a 14-day money-back guarantee on all plans — the most generous in the industry. This gives you two full weeks to test every feature risk-free.`,
+                    `${SITE} offers a 7-day money-back guarantee on all plans — the most generous in the industry. This gives you 7 days to test every feature risk-free.`,
                 ],
             },
         ],
         faqs: [
             { q: 'Are cheap IPTV services worth it?', a: 'Ultra-cheap services ($5/month or less) typically have poor uptime, frequent server crashes, and disappear after a few months. Paying $15–$25/month for a premium service ensures stability, quality, and ongoing support.' },
             { q: 'How do I know if an IPTV service is reliable?', a: 'Look for: money-back guarantee, verifiable uptime statistics, established presence (1+ years in business), responsive support, and reviews from long-term subscribers.' },
-            { q: 'Can I try an IPTV service before paying for a full month?', a: 'Yes. Streamtly offers a 14-day money-back guarantee, effectively making it a risk-free trial. Sign up, test thoroughly, and request a refund within 14 days if unsatisfied.' },
+            { q: 'Can I try an IPTV service before paying for a full month?', a: 'Yes. Streamtly offers a 7-day money-back guarantee, effectively making it a risk-free trial. Sign up, test thoroughly, and request a refund within 7 days if unsatisfied.' },
         ],
         conclusion: 'In the crowded IPTV market, quality and reliability separate the best from the rest. Streamtly delivers the most complete package in 2026: the most channels, the best VOD library, all PPV events, and the reliability of enterprise-grade infrastructure. Try it risk-free today.',
     },
