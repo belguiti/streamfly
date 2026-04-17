@@ -11,6 +11,7 @@ const poppins = Poppins({
 })
 
 import { SITE_URL } from '@/lib/site-config'
+import ChatWidget from '@/components/ChatWidget'
 
 export const viewport: Viewport = {
     themeColor: '#0F0F23',
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </head>
             <body className={`${poppins.variable} font-sans min-h-screen flex flex-col antialiased`}>
                 {children}
+                <ChatWidget />
             </body>
         </html>
     )
