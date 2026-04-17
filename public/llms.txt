@@ -1,0 +1,81 @@
+# Streamtly — Premium IPTV Service
+> Professional-grade streaming solution for global live TV and on-demand entertainment.
+
+## What is Streamtly?
+Streamtly is a premium IPTV (Internet Protocol Television) subscription service that delivers 35,000+ live TV channels and 150,000+ movies & series in 4K Ultra HD quality over the internet. No satellite dish or cable box required. Instant activation upon payment.
+
+## Core Service Features
+- **Live Channels:** 35,000+ global live TV channels (UK, USA, CA, FR, DE, ES, AR, MA and more)
+- **VOD Library:** 150,000+ movies and series updated daily
+- **Sports & PPV:** All major live sports (NFL, NBA, Premier League, Champions League, UFC, Boxing) and every Pay-Per-View event included at no extra cost
+- **Video Quality:** 4K Ultra HD, Full HD (1080p), HD (720p) with adaptive bitrate switching
+- **Technology:** H.264/H.265 (HEVC) compression, anti-freeze buffering, 99.9% server uptime
+- **EPG:** Full Electronic Program Guide with 7-day schedule
+- **Compatibility:** M3U playlist, Xtream Codes API, MAG portal, Enigma2
+
+## Compatible Devices
+- Amazon Firestick & Fire TV
+- Android TV, Google TV, Android Box
+- Samsung Smart TV, LG Smart TV, Hisense, Sony
+- iPhone & iPad (iOS 14+)
+- Android smartphones & tablets
+- Windows PC & Mac (any browser or VLC/IPTV player)
+- MAG Box (250, 254, 256, 322, 420+)
+- Enigma2 / Satellite receivers (Dreambox, Vu+, Zgemma, Octagon)
+
+## Pricing (USD)
+- 1 Month: $13.00
+- 3 Months: $29.00 ($9.67/month)
+- 6 Months: $49.00 ($8.17/month) — Most Popular
+- 12 Months: $69.00 ($5.75/month) — Best Value
+
+## Technical Specifications
+- **Streaming Protocol:** HLS (HTTP Live Streaming) over HTTPS
+- **Codec Support:** H.264, H.265/HEVC, VP9
+- **Minimum Internet Speed:** 10 Mbps for HD, 25 Mbps for 4K
+- **Simultaneous Connections:** 1 per standard subscription
+- **Server Infrastructure:** Multiple redundant servers across Europe and North America
+- **Uptime SLA:** 99.9% guaranteed
+
+## Trust & Guarantees
+- 7-day money-back guarantee on all plans
+- No contracts — cancel anytime
+- 24/7 customer support via email and live chat
+- SSL-encrypted secure payment processing
+- 50,000+ active subscribers worldwide
+- 4.9/5 average customer rating
+
+## Key Pages
+- [Homepage](https://streamtly.com/)
+- [Pricing & Plans](https://streamtly.com/pricing)
+- [Setup Guides](https://streamtly.com/guides)
+- [Firestick Setup Guide](https://streamtly.com/guides/android)
+- [Smart TV Setup Guide](https://streamtly.com/guides/smart-tv)
+- [iOS Setup Guide](https://streamtly.com/guides/ios)
+- [Windows & Mac Setup Guide](https://streamtly.com/guides/windows)
+- [MAG Box Setup Guide](https://streamtly.com/guides/mag)
+- [Enigma2 Setup Guide](https://streamtly.com/guides/enigma2)
+- [Blog & Guides](https://streamtly.com/blog)
+- [Trending Articles](https://streamtly.com/articles)
+- [Customer Reviews](https://streamtly.com/reviews)
+- [Contact Support](https://streamtly.com/contact)
+- [Refund Policy](https://streamtly.com/refund)
+
+## Frequently Asked Questions
+**Q: What is IPTV?**
+IPTV (Internet Protocol Television) delivers live TV channels and VOD content over the internet instead of via satellite or cable. It works on any internet-connected device.
+
+**Q: What internet speed do I need?**
+Minimum 10 Mbps for HD streaming. 25 Mbps recommended for 4K Ultra HD. Streamtly's adaptive bitrate technology auto-adjusts quality to match your connection.
+
+**Q: How quickly is activation after payment?**
+Instant. Credentials are delivered to your email and dashboard within seconds of payment confirmation.
+
+**Q: Does Streamtly work with VPN?**
+Yes. Streamtly works with or without a VPN. No VPN is required for standard use.
+
+**Q: Are sports and PPV events included?**
+Yes. All live sports and PPV events are included in every subscription at no extra cost.
+
+**Q: What is the refund policy?**
+7-day full money-back guarantee. No questions asked.
