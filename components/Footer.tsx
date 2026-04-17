@@ -85,6 +85,17 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
+                                <a
+                                    href="https://www.trustpilot.com/review/streamtly.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-[#00b67a] transition-colors inline-flex items-center gap-2"
+                                >
+                                    <span className="w-3.5 h-3.5 rounded-sm bg-[#00b67a] flex items-center justify-center text-[8px] font-black text-white flex-shrink-0">★</span>
+                                    Trustpilot Reviews
+                                </a>
+                            </li>
+                            <li>
                                 <span className="inline-flex items-center gap-2 text-[#94A3B8]">
                                     <Shield className="w-3.5 h-3.5 text-[#22C55E]" />
                                     DMCA Protected
