@@ -170,6 +170,28 @@ export default async function ArticlePage(
                                             ))}
                                         </ul>
                                     )}
+                                    {section.table && (
+                                        <div className="mt-4 overflow-x-auto rounded-xl border border-white/10">
+                                            <table className="w-full text-sm">
+                                                <thead>
+                                                    <tr style={{ background: 'linear-gradient(135deg, rgba(236,72,153,0.15), rgba(139,92,246,0.15))' }}>
+                                                        {section.table.headers.map((h, k) => (
+                                                            <th key={k} className="px-4 py-3 text-left font-bold text-white border-b border-white/10">{h}</th>
+                                                        ))}
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {section.table.rows.map((row, k) => (
+                                                        <tr key={k} className={k % 2 === 0 ? 'bg-white/[0.02]' : 'bg-transparent'}>
+                                                            {row.map((cell, l) => (
+                                                                <td key={l} className="px-4 py-3 text-[#94a3b8] border-b border-white/5 last:border-b-0">{cell}</td>
+                                                            ))}
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    )}
                                 </div>
                             </section>
                         ))}
