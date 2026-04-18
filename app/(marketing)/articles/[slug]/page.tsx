@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Clock, User, Tag, ArrowLeft, CheckCircle2, ChevronDown, TrendingUp } from 'lucide-react'
-import { articles, getArticle } from '@/lib/articles'
+import { articles, getArticle, Article } from '@/lib/articles'
 import { SITE_URL } from '@/lib/site-config'
 
 export function generateStaticParams() {
@@ -45,6 +45,13 @@ export default async function ArticlePage(
     const { slug } = await params
     const article = getArticle(slug)
     if (!article) notFound()
+
+    const related = articles
+        .filter(a => a.slug !== slug && (
+            a.category === article.category ||
+            a.secondaryKeywords.some(k => article.secondaryKeywords.includes(k))
+        ))
+        .slice(0, 3)
 
     const breadcrumbSchema = {
         '@context': 'https://schema.org',
@@ -221,6 +228,26 @@ export default async function ArticlePage(
                                             <p className="text-[#94a3b8] text-sm leading-relaxed">{faq.a}</p>
                                         </div>
                                     </details>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Related Articles */}
+                    {related.length > 0 && (
+                        <div className="mt-12">
+                            <h2 className="text-xl font-bold text-white mb-5">Related Articles</h2>
+                            <div className="grid gap-4 sm:grid-cols-3">
+                                {related.map(r => (
+                                    <Link
+                                        key={r.slug}
+                                        href={`/articles/${r.slug}`}
+                                        className="group p-4 rounded-xl bg-[#111827] border border-white/5 hover:border-[#EC4899]/30 transition-all"
+                                    >
+                                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#EC4899] mb-2 block">{r.category}</span>
+                                        <p className="text-sm font-semibold text-white group-hover:text-[#F9A8D4] transition-colors leading-snug line-clamp-3">{r.title}</p>
+                                        <p className="text-[11px] text-[#555] mt-2">{r.readTime} · {r.date}</p>
+                                    </Link>
                                 ))}
                             </div>
                         </div>
