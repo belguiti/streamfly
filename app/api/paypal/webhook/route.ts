@@ -1,6 +1,7 @@
 import { supabaseAdmin } from '@/lib/supabase/server'
 import { verifyWebhookSignature, getPayPalSubscription } from '@/lib/paypal'
 import { autoProvision } from '@/lib/provisioning'
+import { sendNewSubscriptionAlert } from '@/lib/telegram'
 import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
@@ -121,6 +122,23 @@ export async function POST(req: Request) {
                     device_type: deviceType ?? null,
                     provider_pack_id: packageId ?? null,
                 }, { onConflict: 'paypal_subscription_id' }).select('id').single()
+
+                // Telegram alert
+                try {
+                    const [{ data: planData }, { data: { user: tgUser } }] = await Promise.all([
+                        supabaseAdmin.from('plans').select('name, price_cents').eq('id', planId).single(),
+                        supabaseAdmin.auth.admin.getUserById(userId),
+                    ])
+                    await sendNewSubscriptionAlert({
+                        userEmail:   tgUser?.email ?? userId,
+                        planName:    planData?.name ?? planId,
+                        amountCents: planData?.price_cents ?? 0,
+                        provider:    'paypal',
+                        status:      'pending_activation',
+                        expiresAt:   resource.billing_info?.next_billing_time ?? null,
+                        deviceType:  deviceType ?? null,
+                    })
+                } catch {}
 
                 // Attempt auto-provisioning (pass packageId to override plan default)
                 if (upsertedSub) {

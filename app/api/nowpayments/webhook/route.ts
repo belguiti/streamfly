@@ -1,6 +1,7 @@
 import { supabaseAdmin } from '@/lib/supabase/server'
 import { verifyIpnSignature, PAID_STATUSES } from '@/lib/nowpayments'
 import { autoProvision } from '@/lib/provisioning'
+import { sendNewSubscriptionAlert } from '@/lib/telegram'
 import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
@@ -99,6 +100,22 @@ export async function POST(req: Request) {
             }, { onConflict: 'nowpayments_payment_id' })
             .select('id')
             .single()
+
+        // Telegram alert
+        try {
+            const [{ data: planData }, { data: { user: tgUser } }] = await Promise.all([
+                supabaseAdmin.from('plans').select('name, price_cents').eq('id', planId).single(),
+                supabaseAdmin.auth.admin.getUserById(userId),
+            ])
+            await sendNewSubscriptionAlert({
+                userEmail:   tgUser?.email ?? userId,
+                planName:    planData?.name ?? planId,
+                amountCents,
+                provider:    'nowpayments',
+                status:      'pending_activation',
+                deviceType:  deviceType ?? null,
+            })
+        } catch {}
 
         // Auto-provision (pass packageId so it overrides the plan default)
         if (upsertedSub) {

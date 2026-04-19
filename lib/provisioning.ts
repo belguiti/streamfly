@@ -9,6 +9,7 @@ import {
     durationToSub,
     getResellerInfo,
 } from '@/lib/provider-api'
+import { sendNewSubscriptionAlert, sendProvisionFailedAlert } from '@/lib/telegram'
 
 /**
  * Auto-provision a subscription via the Gold Panel API.
@@ -118,6 +119,7 @@ export async function autoProvision(
     } catch (apiErr: any) {
         console.error('[AutoProvision] Provider API error:', apiErr.message)
         try { await sendAdminPoolEmptyAlert(planName, userEmail) } catch {}
+        try { await sendProvisionFailedAlert({ userEmail, planName, provider: 'unknown', error: apiErr.message }) } catch {}
         return false
     }
 
@@ -162,6 +164,22 @@ export async function autoProvision(
         } catch (emailErr) {
             console.error('[AutoProvision] Email send failed:', emailErr)
         }
+    }
+
+    // ── 9. Telegram admin alert ───────────────────────────────────────────────
+    try {
+        await sendNewSubscriptionAlert({
+            userEmail,
+            planName,
+            amountCents: 0,
+            provider:    'unknown',
+            status:      'active',
+            expiresAt:   endDate.toISOString(),
+            deviceType:  deviceType ?? null,
+            providerUsername: providerUsername || null,
+        })
+    } catch (tgErr) {
+        console.error('[AutoProvision] Telegram alert failed:', tgErr)
     }
 
     return true
