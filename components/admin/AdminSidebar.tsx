@@ -15,11 +15,13 @@ import {
     Tag,
     MessageSquare,
     RefreshCw,
+    Users,
 } from 'lucide-react'
 
 const navItems = [
-    { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
-    { href: '/admin/orders', label: 'Orders', icon: ClipboardList, exact: false },
+    { href: '/admin',       label: 'Dashboard',      icon: LayoutDashboard, exact: true  },
+    { href: '/admin/users', label: 'Users',           icon: Users,           exact: false },
+    { href: '/admin/orders', label: 'Orders',         icon: ClipboardList,   exact: false },
     { href: '/admin/renewals', label: 'Renewals', icon: RefreshCw, exact: false },
     { href: '/admin/pool', label: 'Activation Pool', icon: Database, exact: false },
     { href: '/admin/promo', label: 'Promo Codes', icon: Tag, exact: false },
