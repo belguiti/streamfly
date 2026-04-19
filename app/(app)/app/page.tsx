@@ -275,6 +275,40 @@ export default async function DashboardPage() {
                 </div>
             )}
 
+            {/* ── Test Your Stream ─────────────────────────────────────────── */}
+            {currentSub?.status === 'active' && creds && (
+                <div className="mb-8">
+                    <h2 className="text-xl font-bold mb-4">Test &amp; Download Players</h2>
+                    <div className="grid sm:grid-cols-3 gap-3">
+                        <a
+                            href="http://8k.webplayer-only.com"
+                            target="_blank" rel="noopener noreferrer"
+                            className="flex flex-col gap-1 p-4 rounded-xl bg-green-950/30 border border-green-500/30 hover:border-green-400/60 transition-all group"
+                        >
+                            <span className="text-lg">🌐</span>
+                            <span className="font-semibold text-white text-sm group-hover:text-green-400 transition-colors">Test in Browser</span>
+                            <span className="text-xs text-muted-foreground">No install — paste your M3U and test instantly</span>
+                        </a>
+                        <a
+                            href="/guides/players"
+                            className="flex flex-col gap-1 p-4 rounded-xl bg-indigo-950/30 border border-indigo-500/30 hover:border-indigo-400/60 transition-all group"
+                        >
+                            <span className="text-lg">📥</span>
+                            <span className="font-semibold text-white text-sm group-hover:text-indigo-400 transition-colors">Download Players</span>
+                            <span className="text-xs text-muted-foreground">8K Player, TiviMate — all devices</span>
+                        </a>
+                        <a
+                            href="/guides"
+                            className="flex flex-col gap-1 p-4 rounded-xl bg-purple-950/30 border border-purple-500/30 hover:border-purple-400/60 transition-all group"
+                        >
+                            <span className="text-lg">📖</span>
+                            <span className="font-semibold text-white text-sm group-hover:text-purple-400 transition-colors">Setup Guides</span>
+                            <span className="text-xs text-muted-foreground">Step-by-step for every device</span>
+                        </a>
+                    </div>
+                </div>
+            )}
+
             {/* ── Setup Guides ─────────────────────────────────────────────── */}
             {(deviceGuides.length > 0 || currentSub?.status === 'active') && (
                 <div className="mb-8">

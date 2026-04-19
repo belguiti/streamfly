@@ -60,54 +60,59 @@ const GUIDES: Record<string, GuideData> = {
         color: '#3ddc84',
         description: 'Install and configure IPTV on Android Box, Firestick, Android phones and tablets.',
         apps: [
-            { name: 'TiviMate', platform: 'Android TV / Box', note: 'Best overall experience — highly recommended', url: null },
+            { name: '8K Player Plus', platform: 'Firestick / Android TV', note: '⭐ Recommended — optimized for 8K/4K IPTV. Code: 1240465', url: 'https://bit.ly/4muCvw4' },
+            { name: 'TiviMate 8K', platform: 'Firestick / Android TV', note: 'Best EPG guide experience. Code: 1969685', url: 'http://aftv.news/1969685' },
             { name: 'IPTV Smarters Pro', platform: 'All Android', note: 'Works on phone, tablet, box & Firestick', url: null },
-            { name: 'Perfect Player', platform: 'Android TV / Box', note: 'Lightweight alternative', url: null },
+            { name: '8K Player Vip+', platform: 'Firestick / Android TV', note: 'Premium version. Code: 6883465', url: 'https://bit.ly/4myPgGi' },
+            { name: '8K Player Prime', platform: 'Firestick / Android TV', note: 'Advanced features. Code: 1050263', url: 'https://bit.ly/3ID17VG' },
+            { name: 'TiviMate', platform: 'Android TV / Box', note: 'Standard version — Google Play', url: null },
         ],
         sections: [
             {
-                title: 'Method 1 — TiviMate (Best Experience)',
+                title: 'Method 1 — 8K Player (Recommended for Firestick)',
                 color: '#00d4ff',
                 steps: [
-                    'Open Google Play Store on your Android device.',
-                    'Search for "TiviMate IPTV Player" and install it.',
-                    'Open TiviMate and tap "Add Playlist".',
+                    'On your Firestick: Settings → My Fire TV → Developer Options → Apps from Unknown Sources: ON.',
+                    'Install the "Downloader" app from the Amazon App Store (it\'s free).',
+                    'Open Downloader and enter code: 1240465 (8K Player Plus) or go to bit.ly/4muCvw4.',
+                    'Download and install the 8K Player APK.',
+                    'Open 8K Player and tap "Add Playlist" or "M3U".',
                     'Select "Xtream Codes" and enter your Server URL, Username, and Password from your dashboard.',
-                    'Tap "Next" — TiviMate will fetch your full channel list.',
-                    'In the EPG settings, paste your EPG URL from the dashboard.',
-                    'Enjoy a full TV-like guide experience!',
+                    'Your full channel list and VOD will load automatically. Enjoy!',
                 ],
             },
             {
-                title: 'Method 2 — IPTV Smarters Pro',
+                title: 'Method 2 — TiviMate 8K (Best EPG Experience)',
+                color: '#ff9900',
+                steps: [
+                    'On your Firestick, open the Downloader app.',
+                    'Enter code: 1969685 or go to http://aftv.news/1969685.',
+                    'Download and install TiviMate 8K.',
+                    'Open TiviMate and tap "Add Playlist".',
+                    'Select "Xtream Codes" — enter your Server URL, Username, and Password.',
+                    'Go to Settings → EPG and paste your EPG URL from the dashboard.',
+                    'Enjoy a full TV-guide interface with 7-day schedule.',
+                ],
+            },
+            {
+                title: 'Method 3 — IPTV Smarters Pro (Android Phone/Tablet)',
                 color: '#00e5a0',
                 steps: [
                     'Install "IPTV Smarters Pro" from the Google Play Store.',
                     'Open the app and tap "Add New User".',
                     'Choose "Xtream Codes API" as login type.',
-                    'Enter your Server URL, Username, and Password.',
+                    'Enter your Server URL, Username, and Password from your dashboard.',
                     'Tap "Add User" — channels load automatically.',
                     'Use the EPG tab to see the TV guide.',
                 ],
             },
-            {
-                title: 'Firestick — Sideloading via Downloader',
-                color: '#ff9900',
-                steps: [
-                    'On your Firestick: Settings → My Fire TV → Developer Options → Apps from Unknown Sources: ON.',
-                    'Install the "Downloader" app from the Amazon App Store.',
-                    'Open Downloader and enter: https://www.troypoint.com/tivimate (or the IPTV Smarters APK URL from your dashboard).',
-                    'Install the downloaded APK.',
-                    'Open the app and enter your Xtream Codes credentials from your dashboard.',
-                    'Your channels and VOD will appear within a few seconds.',
-                ],
-            },
         ],
         tips: [
-            'TiviMate gives the best Smart TV-like interface with a proper EPG guide.',
+            '8K Player is specifically optimized for high-quality IPTV streams — use it for Firestick.',
+            'TiviMate 8K gives the best Smart TV-like EPG guide with a proper 7-day schedule.',
             'For Firestick, press the menu button (≡) on the remote to access player options.',
-            'If the app is not on Play Store, download the APK from the app\'s official site.',
-            'Enable "Hardware Decoding" in app settings for smoother 4K playback.',
+            'Enable "Hardware Decoding" in app settings for smoother 4K and 8K playback.',
+            'Use the Downloader codes (e.g. 1240465) for the fastest Firestick installation.',
         ],
     },
 
@@ -165,41 +170,57 @@ const GUIDES: Record<string, GuideData> = {
         color: '#00d4ff',
         description: 'Stream IPTV on your Windows PC or Mac using VLC, IPTV Smarters, or a dedicated player.',
         apps: [
-            { name: 'VLC Media Player', platform: 'Windows & Mac', note: 'Free, open-source — use M3U URL', url: 'https://www.videolan.org/vlc/' },
-            { name: 'IPTV Smarters Pro', platform: 'Windows', note: 'Full-featured desktop app', url: null },
-            { name: 'Kodi + PVR IPTV Add-on', platform: 'Windows & Mac', note: 'Advanced setup with EPG', url: 'https://kodi.tv/download' },
+            { name: '8K Player (Windows 11)', platform: 'Windows 11', note: '⭐ Recommended — dedicated IPTV player', url: 'http://download.exchange-cdn.com/apk_8k_win/8K.Player.Setup.0.2.0.Windows11.exe' },
+            { name: '8K Player (Windows 10)', platform: 'Windows 10', note: '⭐ Recommended — dedicated IPTV player', url: 'http://download.exchange-cdn.com/apk_8k_win/8K.Player.Setup.0.2.0.Windows10.exe' },
+            { name: '8K Player (macOS)', platform: 'macOS', note: 'Native Mac IPTV app', url: 'http://download.best-ott.me/apk_gold/8k.PLAYER.OS-1.0.0.dmg' },
+            { name: '4K Player (macOS)', platform: 'macOS', note: 'Upload playlist via billing system. Code: 9285892', url: 'http://aftv.news/9285892' },
+            { name: 'VLC Media Player', platform: 'Windows & Mac', note: 'Free, open-source — paste M3U URL directly', url: 'https://www.videolan.org/vlc/' },
+            { name: 'Kodi + PVR IPTV', platform: 'Windows & Mac', note: 'Advanced setup with full EPG', url: 'https://kodi.tv/download' },
         ],
         sections: [
             {
-                title: 'Method 1 — VLC Media Player (Quickest)',
+                title: 'Method 1 — 8K Player for Windows (Recommended)',
+                color: '#00d4ff',
+                steps: [
+                    'Download 8K Player for your Windows version — Windows 10 or Windows 11 (see download buttons above).',
+                    'Run the installer and complete the setup.',
+                    'Open 8K Player and click "Add Playlist" or the + button.',
+                    'Select "Xtream Codes" login type.',
+                    'Enter your Server URL, Username, and Password from your dashboard.',
+                    'Click Confirm — your full channel list and VOD library will load.',
+                    'Use the EPG section to see the full 7-day TV guide.',
+                ],
+            },
+            {
+                title: 'Method 2 — 8K Player for macOS',
+                color: '#a78bfa',
+                steps: [
+                    'Download the 8K Player .dmg file for macOS (link above).',
+                    'Open the .dmg and drag 8K Player to your Applications folder.',
+                    'Open 8K Player. If macOS blocks it: System Preferences → Security → "Open Anyway".',
+                    'Click "Add Playlist" and select "Xtream Codes".',
+                    'Enter your Server URL, Username, and Password from your dashboard.',
+                    'Your channels will load. Use EPG for the full TV guide.',
+                ],
+            },
+            {
+                title: 'Method 3 — VLC Media Player (Quick Test)',
                 color: '#ff8800',
                 steps: [
-                    'Download and install VLC from videolan.org (free).',
+                    'Download and install VLC from videolan.org (free, Windows & Mac).',
                     'Open VLC and go to Media → Open Network Stream (Ctrl+N on Windows, Cmd+N on Mac).',
-                    'Paste your M3U or M3U Plus URL from the dashboard and click Play.',
-                    'VLC will load your channel list in the playlist panel.',
-                    'To see the playlist, go to View → Playlist.',
+                    'Paste your M3U Plus URL from the dashboard and click Play.',
+                    'VLC will load your full channel list in the playlist panel.',
+                    'Go to View → Playlist to browse channels.',
                     'Double-click any channel to start watching.',
                 ],
             },
             {
-                title: 'Method 2 — IPTV Smarters for Windows',
-                color: '#00d4ff',
-                steps: [
-                    'Download IPTV Smarters Pro from the Microsoft Store or the official website.',
-                    'Install and open the application.',
-                    'Click "Add New User" and select "Xtream Codes API".',
-                    'Enter your Server URL, Username, and Password from the dashboard.',
-                    'Click "Add User" — your full channel list and VOD library will load.',
-                    'Use the EPG tab for the TV programme guide.',
-                ],
-            },
-            {
-                title: 'Method 3 — Kodi with PVR IPTV Simple Client',
+                title: 'Method 4 — Kodi with PVR IPTV (Advanced)',
                 color: '#00e5a0',
                 steps: [
                     'Download and install Kodi from kodi.tv.',
-                    'Open Kodi → Settings (cog icon) → Add-ons → Install from repository.',
+                    'Open Kodi → Settings → Add-ons → Install from repository.',
                     'Go to Kodi Add-on repository → PVR Clients → PVR IPTV Simple Client → Install.',
                     'After installation, go to Settings → PVR IPTV Simple Client → General.',
                     'Set M3U playlist URL to your M3U Plus URL from the dashboard.',
@@ -209,11 +230,11 @@ const GUIDES: Record<string, GuideData> = {
             },
         ],
         tips: [
-            'VLC is the fastest way to start — just paste the M3U URL and play.',
-            'For the best experience, download IPTV Smarters which includes an EPG guide.',
-            'Mac users: VLC is fully compatible with macOS. Download from videolan.org.',
-            'If using Kodi, install the "Electronic Programme Guide" skin for a TV-like interface.',
-            'Ensure your internet connection is at least 20 Mbps for 4K streams.',
+            '8K Player is the recommended app — it\'s optimized for high-quality IPTV streams on Windows and Mac.',
+            'VLC is the fastest way to test — just paste the M3U URL and play instantly.',
+            'macOS users: if the .dmg is blocked, go to System Preferences → Security & Privacy → Open Anyway.',
+            'Use the Web TV player at http://8k.webplayer-only.com for instant browser-based testing.',
+            'Ensure your internet connection is at least 25 Mbps for stable 4K streams.',
         ],
     },
 
@@ -322,6 +343,83 @@ const GUIDES: Record<string, GuideData> = {
     },
 }
 
+    'players': {
+        title: 'Recommended IPTV Players',
+        subtitle: 'Best apps for every device — Windows, Mac, Firestick, Android, iOS',
+        emoji: '🎬',
+        color: '#00d4ff',
+        description: 'The best IPTV players recommended by Streamtly. Download links, Firestick codes, and setup instructions for all devices.',
+        apps: [
+            { name: '8K Player Plus (Firestick)', platform: 'Firestick / Android TV', note: 'Code: 1240465 — bit.ly/4muCvw4', url: 'https://bit.ly/4muCvw4' },
+            { name: '8K Player Vip+ (Firestick)', platform: 'Firestick / Android TV', note: 'Code: 6883465 — Premium version', url: 'https://bit.ly/4myPgGi' },
+            { name: '8K Player Prime (Firestick)', platform: 'Firestick / Android TV', note: 'Code: 1050263 — Advanced features', url: 'https://bit.ly/3ID17VG' },
+            { name: 'TiviMate 8K (Firestick)', platform: 'Firestick / Android TV', note: 'Code: 1969685 — Best EPG guide', url: 'http://aftv.news/1969685' },
+            { name: '8K Player (Windows 11)', platform: 'Windows 11', note: 'Direct installer download', url: 'http://download.exchange-cdn.com/apk_8k_win/8K.Player.Setup.0.2.0.Windows11.exe' },
+            { name: '8K Player (Windows 10)', platform: 'Windows 10', note: 'Direct installer download', url: 'http://download.exchange-cdn.com/apk_8k_win/8K.Player.Setup.0.2.0.Windows10.exe' },
+            { name: '8K Player (macOS)', platform: 'macOS', note: '.dmg download', url: 'http://download.best-ott.me/apk_gold/8k.PLAYER.OS-1.0.0.dmg' },
+            { name: '4K Player (macOS)', platform: 'macOS', note: 'Code: 9285892 — Upload playlist via billing', url: 'http://aftv.news/9285892' },
+            { name: 'Web TV Player', platform: 'Any Browser', note: 'No install — test instantly in browser', url: 'http://8k.webplayer-only.com' },
+            { name: 'VLC Media Player', platform: 'Windows & Mac', note: 'Free, open-source — paste M3U URL', url: 'https://www.videolan.org/vlc/' },
+        ],
+        sections: [
+            {
+                title: 'Firestick & Android TV — Install via Downloader',
+                color: '#ff9900',
+                steps: [
+                    'On Firestick: Settings → My Fire TV → Developer Options → Apps from Unknown Sources: ON.',
+                    'Install the "Downloader" app from the Amazon App Store.',
+                    'Open Downloader and enter one of these codes:',
+                    '1240465 → 8K Player Plus (recommended)',
+                    '1969685 → TiviMate 8K (best EPG)',
+                    '6883465 → 8K Player Vip+',
+                    '1050263 → 8K Player Prime',
+                    'Install the app and enter your Xtream Codes credentials from your dashboard.',
+                ],
+            },
+            {
+                title: 'Windows — 8K Player Setup',
+                color: '#00d4ff',
+                steps: [
+                    'Download 8K Player for Windows 10 or Windows 11 using the links above.',
+                    'Run the installer — it takes under 1 minute.',
+                    'Open 8K Player and click "Add Playlist".',
+                    'Choose "Xtream Codes" and enter your Server URL, Username, and Password.',
+                    'Your full channel list and VOD library loads automatically.',
+                ],
+            },
+            {
+                title: 'macOS — 8K Player Setup',
+                color: '#a78bfa',
+                steps: [
+                    'Download the 8K Player .dmg for macOS using the link above.',
+                    'Open the .dmg and drag 8K Player to Applications.',
+                    'If macOS blocks it: System Preferences → Security → "Open Anyway".',
+                    'Open 8K Player → Add Playlist → Xtream Codes.',
+                    'Enter your Server URL, Username, and Password from the dashboard.',
+                ],
+            },
+            {
+                title: 'Quick Test — Web TV Player (Any Device)',
+                color: '#00e5a0',
+                steps: [
+                    'Open http://8k.webplayer-only.com in any browser.',
+                    'Click "Add Playlist" or the M3U option.',
+                    'Paste your M3U Plus URL from your dashboard.',
+                    'Your channels will load instantly — no installation required.',
+                    'Use this to verify your subscription is working before installing an app.',
+                ],
+            },
+        ],
+        tips: [
+            '8K Player is the provider-recommended app for the best stream quality.',
+            'Use the Web TV Player at 8k.webplayer-only.com to instantly test your credentials in the browser.',
+            'Always use M3U Plus (not basic M3U) for better compatibility and EPG data.',
+            'For Firestick, codes via Downloader are faster than browsing for APKs manually.',
+            'TiviMate 8K is best if you want a proper TV-guide (EPG) with 7-day schedule.',
+        ],
+    },
+}
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 interface App {
@@ -361,6 +459,7 @@ const GUIDE_KEYWORDS: Record<string, string[]> = {
     'windows': ['IPTV Windows PC', 'IPTV VLC setup', 'IPTV Mac setup', 'IPTV on computer', 'how to watch IPTV on PC', 'IPTV Kodi setup'],
     'mag': ['MAG IPTV setup', 'MAG box portal URL', 'MAG 254 IPTV', 'MAG 322 setup', 'how to set up MAG box'],
     'enigma2': ['Enigma2 IPTV setup', 'Dreambox IPTV', 'Vu+ IPTV', 'Zgemma IPTV', 'E2M3U2Bouquet', 'OpenPLi IPTV setup'],
+    'players': ['best IPTV player', '8K Player download', 'TiviMate Firestick', 'IPTV player Windows', 'IPTV player Mac', 'IPTV Firestick code', '8K Player Firestick code'],
 }
 
 const GUIDE_FAQS: Record<string, Array<{ q: string; a: string }>> = {
@@ -415,6 +514,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
         'windows': 'How to Watch IPTV on Windows & Mac',
         'mag': 'How to Set Up IPTV on MAG Box',
         'enigma2': 'How to Set Up IPTV on Enigma2 Receiver',
+        'players': 'Best IPTV Players — Download Links & Firestick Codes',
     }
     const seoTitle = titleMap[slug] ? `${titleMap[slug]} | Streamtly` : `${guide.title} | Streamtly`
 

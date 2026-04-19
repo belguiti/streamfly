@@ -70,6 +70,14 @@ const DEVICE_GUIDES = [
         desc: 'E2M3U2Bouquet plugin for bouquets & EPG.',
         color: '#8b5cf6',
     },
+    {
+        slug: 'players',
+        emoji: '🎬',
+        title: 'Recommended Players',
+        subtitle: 'All devices — download links & codes',
+        desc: '8K Player, TiviMate 8K, Firestick codes, Web TV player.',
+        color: '#00d4ff',
+    },
 ]
 
 export default function GuidesPage() {

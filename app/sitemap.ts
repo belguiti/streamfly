@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${SITE_URL}/guides/windows`,                lastModified: new Date('2026-04-01'), changeFrequency: 'monthly', priority: 0.88 },
         { url: `${SITE_URL}/guides/mag`,                    lastModified: new Date('2026-04-01'), changeFrequency: 'monthly', priority: 0.88 },
         { url: `${SITE_URL}/guides/enigma2`,                lastModified: new Date('2026-04-01'), changeFrequency: 'monthly', priority: 0.88 },
+        { url: `${SITE_URL}/guides/players`,               lastModified: new Date('2026-04-19'), changeFrequency: 'monthly', priority: 0.88 },
         { url: `${SITE_URL}/guides/iptv-architecture`,      lastModified: new Date('2026-03-01'), changeFrequency: 'monthly', priority: 0.75 },
         { url: `${SITE_URL}/guides/xtream-vs-m3u`,          lastModified: new Date('2026-03-01'), changeFrequency: 'monthly', priority: 0.75 },
         { url: `${SITE_URL}/guides/isp-throttling-vpn`,     lastModified: new Date('2026-03-01'), changeFrequency: 'monthly', priority: 0.75 },
