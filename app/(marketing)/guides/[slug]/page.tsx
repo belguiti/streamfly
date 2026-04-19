@@ -341,7 +341,6 @@ const GUIDES: Record<string, GuideData> = {
             'Zgemma and Octagon boxes running OpenATV/OpenPLi work best with E2M3U2Bouquet.',
         ],
     },
-}
 
     'players': {
         title: 'Recommended IPTV Players',
