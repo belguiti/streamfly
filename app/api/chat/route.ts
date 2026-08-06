@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import { searchKB } from '@/lib/chatbot-kb'
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 const SYSTEM_PROMPT = `You are the Streamtly Technical Assistant — an expert in IPTV technology and customer support for streamtly.com.
 
@@ -27,6 +26,15 @@ STREAMTLY FACTS:
 
 export async function POST(req: NextRequest) {
     try {
+        const apiKey = process.env.OPENAI_API_KEY?.trim()
+        if (!apiKey) {
+            return NextResponse.json(
+                { error: 'Chat is not configured' },
+                { status: 503 }
+            )
+        }
+
+        const openai = new OpenAI({ apiKey })
         const { messages } = await req.json()
         if (!messages || !Array.isArray(messages)) {
             return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
