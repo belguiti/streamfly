@@ -1,3 +1,5 @@
+import { blogPostsBatch2 } from './blog-posts-batch2'
+
 export interface BlogSection {
     heading: string
     body: string[]
@@ -5207,6 +5209,7 @@ export const blogPosts: BlogPost[] = [
         ],
         conclusion: `IPTV in 2026 delivers a TV experience that surpasses traditional cable and satellite in both value and content breadth. With 35,000+ live channels, 150,000+ VOD titles, multi-device support, and 4K quality — all at a fraction of the cost of Sky or Virgin Media — ${SITE} represents the future of home television. Start with our free trial and discover why hundreds of thousands of households have made the switch.`,
     },
+    ...blogPostsBatch2,
 ]
 
 // ─── Helper ───────────────────────────────────────────────────────────────────
