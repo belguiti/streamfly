@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { supabaseAdmin } from '@/lib/supabase/server'
 import { resend } from '@/lib/resend'
+import { SITE_URL } from '@/lib/site-config'
 
 const FROM = `${process.env.RESEND_FROM_NAME ?? 'Streamtly'} <${process.env.RESEND_FROM_EMAIL ?? 'support@streamtly.com'}>`
 
 function buildEmailHtml(toName: string, body: string, subject: string): string {
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.streamtly.com'
     const year = new Date().getFullYear()
     const safeBody = body
         .replace(/&/g, '&amp;')
@@ -72,7 +72,7 @@ function buildEmailHtml(toName: string, body: string, subject: string): string {
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
                 <tr>
                   <td align="center">
-                    <a href="${siteUrl}" style="display:inline-block;background:linear-gradient(135deg,#4338CA 0%,#5B50E8 100%);color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;padding:14px 40px;border-radius:10px;letter-spacing:0.5px;">
+                    <a href="${SITE_URL}" style="display:inline-block;background:linear-gradient(135deg,#4338CA 0%,#5B50E8 100%);color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;padding:14px 40px;border-radius:10px;letter-spacing:0.5px;">
                       Visit Streamtly &rarr;
                     </a>
                   </td>
@@ -119,11 +119,11 @@ function buildEmailHtml(toName: string, body: string, subject: string): string {
                 &copy; ${year} Streamtly. All rights reserved.
               </p>
               <p style="margin:0;font-size:12px;">
-                <a href="${siteUrl}/privacy" style="color:#4338CA;text-decoration:none;margin:0 8px;">Privacy</a>
+                <a href="${SITE_URL}/privacy" style="color:#4338CA;text-decoration:none;margin:0 8px;">Privacy</a>
                 <span style="color:#1E293B;">&middot;</span>
-                <a href="${siteUrl}/terms" style="color:#4338CA;text-decoration:none;margin:0 8px;">Terms</a>
+                <a href="${SITE_URL}/terms" style="color:#4338CA;text-decoration:none;margin:0 8px;">Terms</a>
                 <span style="color:#1E293B;">&middot;</span>
-                <a href="${siteUrl}/contact" style="color:#4338CA;text-decoration:none;margin:0 8px;">Contact</a>
+                <a href="${SITE_URL}/contact" style="color:#4338CA;text-decoration:none;margin:0 8px;">Contact</a>
               </p>
             </td>
           </tr>

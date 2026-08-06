@@ -1,6 +1,7 @@
 import { createClient, supabaseAdmin } from '@/lib/supabase/server'
 import { createInvoice } from '@/lib/nowpayments'
 import { NextResponse } from 'next/server'
+import { SITE_URL } from '@/lib/site-config'
 
 export async function POST(req: Request) {
     try {
@@ -23,7 +24,7 @@ export async function POST(req: Request) {
         if (!plan) throw new Error('Invalid plan')
 
         const discountPercent = parseInt(formData.get('discountPercent') as string || '0', 10)
-        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.streamtly.com').trim().replace(/\/$/, '')
+        const baseUrl = SITE_URL
         const discountedCents = discountPercent > 0
             ? Math.round(plan.price_cents * (1 - discountPercent / 100))
             : plan.price_cents

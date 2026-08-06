@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle2, Tv, Shield, Zap } from 'lucide-react'
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
+import { SITE_URL } from '@/lib/site-config'
 
 // ─── SEO Metadata 2026 ─────────────────────────────────────────────────────────
 export const metadata: Metadata = {

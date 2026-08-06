@@ -3,6 +3,7 @@ import { supabaseAdmin } from '@/lib/supabase/server'
 import { stripe } from '@/lib/stripe'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
+import { SITE_URL } from '@/lib/site-config'
 
 export async function POST(req: Request) {
     try {
@@ -76,8 +77,8 @@ export async function POST(req: Request) {
             customer_email: profile.email,
             line_items: [{ price: priceId, quantity: 1 }],
             mode: 'subscription',
-            success_url: process.env.STRIPE_SUCCESS_URL || `${process.env.NEXT_PUBLIC_SITE_URL}/app?success=true`,
-            cancel_url: process.env.STRIPE_CANCEL_URL || `${process.env.NEXT_PUBLIC_SITE_URL}/pricing?canceled=true`,
+            success_url: process.env.STRIPE_SUCCESS_URL || `${SITE_URL}/app?success=true`,
+            cancel_url: process.env.STRIPE_CANCEL_URL || `${SITE_URL}/pricing?canceled=true`,
             metadata: {
                 userId: user.id,
                 planId: plan.id,

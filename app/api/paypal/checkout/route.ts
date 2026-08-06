@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { supabaseAdmin } from '@/lib/supabase/server'
 import { createPayPalSubscription } from '@/lib/paypal'
 import { NextResponse } from 'next/server'
+import { SITE_URL } from '@/lib/site-config'
 
 export async function POST(req: Request) {
     try {
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
             .limit(1)
             .single()
 
-        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.streamtly.com').trim().replace(/\/$/, '')
+        const baseUrl = SITE_URL
 
         const { approvalUrl } = await createPayPalSubscription(
             plan.paypal_plan_id,

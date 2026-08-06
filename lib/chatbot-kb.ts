@@ -35,7 +35,7 @@ Payment methods: PayPal, Crypto (BTC, ETH, USDT and 100+ coins).
 7. Select your channel package and start streaming
 
 **Pro Tip:** Use a 5GHz Wi-Fi band or Ethernet adapter for buffer-free 4K streaming.
-Full guide: https://streamtly.com/guides/android
+Full guide: https://www.streamtly.com/guides/android
 `,
     },
     {
@@ -51,7 +51,7 @@ Full guide: https://streamtly.com/guides/android
 6. All your channels and VOD will load automatically
 
 **Pro Tip:** TiviMate Premium gives the best EPG experience with a 7-day schedule grid.
-Full guide: https://streamtly.com/guides/android
+Full guide: https://www.streamtly.com/guides/android
 `,
     },
     {
@@ -72,7 +72,7 @@ Full guide: https://streamtly.com/guides/android
 2. Enter your Streamtly credentials (username, password, server URL from your dashboard)
 3. Wait for the channel list to load (30–60 seconds first time)
 
-Full guide: https://streamtly.com/guides/smart-tv
+Full guide: https://www.streamtly.com/guides/smart-tv
 `,
     },
     {
@@ -87,7 +87,7 @@ Full guide: https://streamtly.com/guides/smart-tv
 5. Browse the EPG guide and start watching
 
 **Pro Tip:** GSE Smart IPTV supports PiP (Picture-in-Picture) mode — watch while using other apps.
-Full guide: https://streamtly.com/guides/ios
+Full guide: https://www.streamtly.com/guides/ios
 `,
     },
     {
@@ -109,7 +109,7 @@ Full guide: https://streamtly.com/guides/ios
 1. Download from the Microsoft Store
 2. Enter Xtream Codes credentials
 
-Full guide: https://streamtly.com/guides/windows
+Full guide: https://www.streamtly.com/guides/windows
 `,
     },
     {
@@ -124,7 +124,7 @@ Full guide: https://streamtly.com/guides/windows
 
 **Supported MAG models:** 250, 254, 256, 322, 420 and newer
 **Note:** Ensure your MAG box MAC address is registered — contact support if activation fails.
-Full guide: https://streamtly.com/guides/mag
+Full guide: https://www.streamtly.com/guides/mag
 `,
     },
     {
@@ -138,7 +138,7 @@ Full guide: https://streamtly.com/guides/mag
 4. Restart the receiver — Streamtly channels appear in your bouquet list
 
 **Supported devices:** Dreambox, Vu+, Zgemma, Octagon, Mut@nt
-Full guide: https://streamtly.com/guides/enigma2
+Full guide: https://www.streamtly.com/guides/enigma2
 `,
     },
     {
@@ -260,7 +260,7 @@ Streamtly offers a **7-day money-back guarantee** on all plans.
 2. Include your order email and reason
 3. Refunds processed within 3–5 business days
 
-Full policy: https://streamtly.com/refund
+Full policy: https://www.streamtly.com/refund
 `,
     },
     {

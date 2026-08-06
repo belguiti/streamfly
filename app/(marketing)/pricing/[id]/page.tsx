@@ -4,8 +4,7 @@ import { notFound } from 'next/navigation'
 import { ShieldCheck, Zap, Headphones, Globe, ArrowLeft, Star, Ban } from 'lucide-react'
 import Link from 'next/link'
 import { PromoCheckoutCard } from '@/components/pricing/PromoCheckoutCard'
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
+import { SITE_URL } from '@/lib/site-config'
 
 interface PageProps {
     params: { id: string }

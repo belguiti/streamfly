@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Wifi, Settings } from 'lucide-react'
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
+import { SITE_URL } from '@/lib/site-config'
 
 export const metadata: Metadata = {
     title: 'Router QoS Configuration for IPTV: Eliminate Buffer Bloat',

@@ -3,8 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Clock, User, Tag, ArrowLeft, CheckCircle2, ChevronDown } from 'lucide-react'
 import { blogPosts, getPost } from '@/lib/blog-posts'
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
+import { SITE_URL } from '@/lib/site-config'
 
 /* ─── Static params ──────────────────────────────────────────────────────── */
 export function generateStaticParams() {

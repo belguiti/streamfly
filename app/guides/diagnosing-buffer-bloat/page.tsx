@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, AlertTriangle, Cpu } from 'lucide-react'
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
+import { SITE_URL } from '@/lib/site-config'
 
 export const metadata: Metadata = {
     title: 'Diagnosing Device-Level Buffer Bloat for IPTV',

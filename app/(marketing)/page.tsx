@@ -8,11 +8,10 @@ import {
 import FAQAccordion from '@/components/marketing/FAQAccordion'
 import { Particles } from '@/components/ui/particles'
 import { SpotlightCard } from '@/components/ui/spotlight-card'
+import { SITE_URL } from '@/lib/site-config'
 
 // ─── ISR: revalidate every hour ───────────────────────────────────────────────
 export const revalidate = 3600
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://streamtly.com'
 
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {

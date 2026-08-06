@@ -2,6 +2,7 @@ import { supabaseAdmin } from '@/lib/supabase/server'
 import { resend } from '@/lib/resend'
 import { renewalEmailHtml, renewalEmailText } from '@/emails/renewal'
 import { NextResponse } from 'next/server'
+import { SITE_URL } from '@/lib/site-config'
 
 // Called daily by Vercel Cron — secured by CRON_SECRET header
 export async function GET(req: Request) {
@@ -10,7 +11,6 @@ export async function GET(req: Request) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.streamtly.com'
     const FROM = `${process.env.RESEND_FROM_NAME ?? 'Streamtly'} <${process.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev'}>`
     const DISCOUNT_PERCENT = 10
     const PROMO_EXPIRES_DAYS = 30
